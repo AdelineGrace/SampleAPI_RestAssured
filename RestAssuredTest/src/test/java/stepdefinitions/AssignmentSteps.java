@@ -2,11 +2,12 @@ package stepdefinitions;
 
 import java.util.List;
 
-import apiEngine.endpoints.AssignmentEndpoints;
 import apiEngine.model.response.Assignment;
+import apiEngine.routes.AssignmentRoutes;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -22,13 +23,15 @@ public class AssignmentSteps {
 	@Given("User creates GET Request for the LMS API endpoint")
 	public void user_creates_get_request_for_the_lms_api_endpoint() 
 	{
-		request = AssignmentEndpoints.createBaseRequest();
+		RestAssured.baseURI = baseUrl;
+		
+		request = RestAssured.given();
 	}
 
 	@When("User sends HTTPS Request")
 	public void user_sends_https_request() 
 	{
-		response = AssignmentEndpoints.GetAssignments(request);
+		response = request.get(AssignmentRoutes.getAssignments());
 	}
 
 	@Then("User receives OK Status with response body.")
@@ -36,6 +39,7 @@ public class AssignmentSteps {
 	{
 		
 		System.out.println(response.getStatusCode());
+		System.out.println(response.asPrettyString());
 		
 		JsonPath jsonPathEvaluator = response.jsonPath();
 		List<Assignment> assignmentList = jsonPathEvaluator.getList("", Assignment.class);
