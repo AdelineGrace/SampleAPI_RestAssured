@@ -1,4 +1,4 @@
-package api.model;
+package apiEngine.model.response;
 
 public class Assignment {
 	
@@ -10,5 +10,5 @@ public class Assignment {
 	public Integer batchId;
 	public String createdBy;
 	public String graderId;
+
 }
-	
