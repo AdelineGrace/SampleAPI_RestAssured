@@ -23,7 +23,10 @@
                 "type": "string"
             },
             "comments": {
-                "type": "null"
+                "type": [
+                    "null",
+                    "string"
+                ]
             },
             "dueDate": {
                 "type": "string"
@@ -35,6 +38,21 @@
                 "type": "string"
             },
             "graderId": {
+                "type": "string"
+            },
+            "pathAttachment1": {
+                "type": "string"
+            },
+            "pathAttachment2": {
+                "type": "string"
+            },
+            "pathAttachment3": {
+                "type": "string"
+            },
+            "pathAttachment4": {
+                "type": "string"
+            },
+            "pathAttachment5": {
                 "type": "string"
             }
         }
