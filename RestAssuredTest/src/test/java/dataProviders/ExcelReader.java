@@ -1,8 +1,6 @@
 package dataProviders;
 
-<<<<<<< HEAD
-=======
-import java.io.File;
+ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import utilities.LoggerLoad;
 
 
->>>>>>> branch 'preetha' of https://github.com/twinklejain22/Team2_TestingTurtles.git
+//>>>>>>> branch 'preetha' of https://github.com/twinklejain22/Team2_TestingTurtles.git
 
 public class ExcelReader {
 	

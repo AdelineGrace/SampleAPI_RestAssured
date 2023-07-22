@@ -52,7 +52,7 @@
 			<scope>test</scope>
 		</dependency>
 
-<<<<<<< HEAD
+
 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
@@ -78,7 +78,7 @@
     <version>0.4</version>
 </dependency>
 
-=======
+
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -104,7 +104,6 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.2.2</version>
 		</dependency>
->>>>>>> branch 'preetha' of https://github.com/twinklejain22/Team2_TestingTurtles.git
 
 
 	</dependencies>
