@@ -10,9 +10,9 @@ import java.util.Properties;
 public class ConfigReader {
 
 	private static Properties properties;
-	private final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
+	private static final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
 
-	public ConfigReader() 
+	public static void loadProperty() 
 	{
 		BufferedReader reader;
 		try 
@@ -34,6 +34,10 @@ public class ConfigReader {
 			e.printStackTrace();
 			throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
 		}
+	}
+	
+	public static String getProperty( String key) {
+		return properties.getProperty(key);
 	}
 
 }

@@ -1,0 +1,60 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "required": [
+            "assignmentId",
+            "assignmentName",
+            "assignmentDescription",
+            "comments",
+            "dueDate",
+            "batchId",
+            "createdBy",
+            "graderId"
+        ],
+        "properties": {
+            "assignmentId": {
+                "type": "integer"
+            },
+            "assignmentName": {
+                "type": "string"
+            },
+            "assignmentDescription": {
+                "type": "string"
+            },
+            "comments": {
+                "type": [
+                    "null",
+                    "string"
+                ]
+            },
+            "dueDate": {
+                "type": "string"
+            },
+            "batchId": {
+                "type": "integer"
+            },
+            "createdBy": {
+                "type": "string"
+            },
+            "graderId": {
+                "type": "string"
+            },
+            "pathAttachment1": {
+                "type": "string"
+            },
+            "pathAttachment2": {
+                "type": "string"
+            },
+            "pathAttachment3": {
+                "type": "string"
+            },
+            "pathAttachment4": {
+                "type": "string"
+            },
+            "pathAttachment5": {
+                "type": "string"
+            }
+        }
+    }
+}
