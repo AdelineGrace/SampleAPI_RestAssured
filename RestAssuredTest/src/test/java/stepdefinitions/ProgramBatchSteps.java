@@ -288,7 +288,8 @@ public class ProgramBatchSteps {
 				 
 				 AddBatchRequest batch = new AddBatchRequest(dynamicBatchname, BatchStatus, BatchDescription,NoOfClasses, Programid);
 				 response = request.body(batch).post();
-				 System.out.println("response - " + response.asPrettyString());
+				 //System.out.println("response - " + response.asPrettyString());
+				 response.then().log().all();
 				 Batch resBatch = response.getBody().as(Batch.class);
 				 System.out.println(resBatch.batchId);
 				
@@ -304,6 +305,14 @@ public class ProgramBatchSteps {
 
 	@Then("User receives Status with response body for post {string} with {string}")
 	public void user_receives_status_code_with_response_body_for_post(String sheetName, String dataKey) {
-		
+		response.then().log().all();
+		response= response.then().log().all().extract().response();	
+		if(dataKey.equals("Post_Batch_Valid")) {
+			response.then().statusCode(201);
+			JsonPath js = response.jsonPath();
+			int batchId = js.getInt("batchId");
+			System.out.println("Response BatchId"+batchId);
+			ConfigReader.setProperty("e2e.batchid", Integer.toString(batchId));
+		}
 	}
 }
