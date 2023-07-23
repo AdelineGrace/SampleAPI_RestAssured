@@ -18,7 +18,16 @@
 #Sample Feature Definition Template
 @ProgramBatch
 Feature: Program Batch
-  
+  @AddBatch
+  Scenario Outline: Check if user able to add a record with "<dataKey>" endpoint and request body (non existing values)
+    Given User creates POST Request for the LMS API "batchModule"
+    When User sends POST Request with mandatory and additional fields  "<sheetName>" with "<dataKey>"
+    Then User receives Status with response body for post "<sheetName>" with "<dataKey>"
+        Examples: 
+      | dataKey | sheetName|
+      | Post_Batch_Valid |batch|
+      |Post_Batch_Existing |batch|
+      |Post_Batch_Missing_BatchStatus|batch|
 
   @Get_All_001
   Scenario Outline: Check if user able to retrieve all batches with "<dataKey>" endpoint
@@ -62,15 +71,7 @@ Feature: Program Batch
       | Get_ByProgramId_Valid   |batch|
       | Get_ByProgramId_Invalid |batch|
       
-  @AddBatch
-  Scenario Outline: Check if user able to add a record with "<dataKey>" endpoint and request body (non existing values)
-    Given User creates POST Request for the LMS API "batchModule"
-    When User sends POST Request with mandatory and additional fields  "<sheetName>" with "<dataKey>"
-    Then User receives Status with response body for post "<sheetName>" with "<dataKey>"
-        Examples: 
-      | dataKey | sheetName|
-      | Post_Batch_Valid |batch|
-      
+  
       
       
       

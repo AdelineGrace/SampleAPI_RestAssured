@@ -1,5 +1,7 @@
 package apiEngine.model.request;
 
+import utilities.LoggerLoad;
+
 public class AddBatchRequest {
 	
 	public String batchDescription;
@@ -15,6 +17,7 @@ public class AddBatchRequest {
         this.batchDescription = batchDescription;
         this.batchNoOfClasses = batchNoOfClasses;
         this.programId = programId;
+        LoggerLoad.logInfo("batchName: "+batchName+"batchStatus: "+batchStatus+"batchDescription: "+batchDescription+"batchNoOfClasses: "+batchNoOfClasses+"programId: "+programId);
     }
 
 }

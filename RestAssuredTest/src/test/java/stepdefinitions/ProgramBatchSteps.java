@@ -3,6 +3,7 @@ package stepdefinitions;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -273,21 +274,33 @@ public class ProgramBatchSteps {
 			
 			excelDataMap = ExcelReader.getData(dataKey,sheetName);
 			if(null != excelDataMap && excelDataMap.size() > 0 ) {
-				 if(dataKey.equals("existing")) {
+				 if(dataKey.equals("Post_Batch_Existing")) {
 					 dynamicBatchname = ConfigReader.getProperty("e2e.existingbatchname");
-				 }else {
+					 LoggerLoad.logDebug("existing");
+				 }else{
+					 LoggerLoad.logDebug("New");
 				 Batchname = excelDataMap.get("BatchName");
+				 LoggerLoad.logDebug("Batchname: "+Batchname);
 				 String generateinvalidID=RandomStringUtils.randomNumeric(3);
 				 dynamicBatchname = "Jul23-TestingTurtles-" +ConfigReader.getProperty("e2e.programname")+"-"+Batchname+"-"+generateinvalidID;
+				 LoggerLoad.logInfo("dynamicBatchname"+dynamicBatchname);
 				 }
+				 
 				 Programid = Integer.parseInt(ConfigReader.getProperty("e2e.programid"));
-				 BatchStatus = excelDataMap.get("BatchStatus");
+				 if(!excelDataMap.get("BatchStatus").isBlank()) {
+				  BatchStatus = excelDataMap.get("BatchStatus");
+				 }
+				 LoggerLoad.logDebug("BatchStatus: "+BatchStatus);
 				 NoOfClasses = Integer.parseInt(excelDataMap.get("NoOfClasses"));
+				 LoggerLoad.logDebug("NoOfClasses: "+NoOfClasses);
 				 BatchDescription = excelDataMap.get("BatchDescription");
+				 LoggerLoad.logDebug("NoOfClasses: "+NoOfClasses);
 				 
 				 
 				 AddBatchRequest batch = new AddBatchRequest(dynamicBatchname, BatchStatus, BatchDescription,NoOfClasses, Programid);
 				 response = request.body(batch).post();
+				 int Statuscode400 = response.getStatusCode();
+					System.out.println("Statuscode400:" +Statuscode400);
 				 //System.out.println("response - " + response.asPrettyString());
 				 response.then().log().all();
 				 Batch resBatch = response.getBody().as(Batch.class);
@@ -296,6 +309,7 @@ public class ProgramBatchSteps {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		
@@ -304,15 +318,37 @@ public class ProgramBatchSteps {
 	
 
 	@Then("User receives Status with response body for post {string} with {string}")
-	public void user_receives_status_code_with_response_body_for_post(String sheetName, String dataKey) {
+	public void user_receives_status_code_with_response_body_for_post(String sheetName, String dataKey) throws IOException {
 		response.then().log().all();
 		response= response.then().log().all().extract().response();	
 		if(dataKey.equals("Post_Batch_Valid")) {
 			response.then().statusCode(201);
 			JsonPath js = response.jsonPath();
 			int batchId = js.getInt("batchId");
+			String batchName = js.getString("batchName");
 			System.out.println("Response BatchId"+batchId);
 			ConfigReader.setProperty("e2e.batchid", Integer.toString(batchId));
+			ConfigReader.setProperty("e2e.batchname", batchName);
+			ConfigReader.setProperty("e2e.existingbatchname", batchName);
+		    response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getbatchbyidjsonschema.json")));
 		}
+		else if(dataKey.equals("Post_Batch_Existing")) {
+			response.then().statusCode(400);
+			
+		response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
+			System.out.println("FAIL");
+			
+		}
+		else if(dataKey.equals("Post_Batch_Missing_BatchStatus")) {
+			response.then().statusCode(400);
+			
+			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
+				System.out.println("FAIL");
+			
+		}
+		else {
+			assertTrue(false);
+		}
+		
 	}
 }
