@@ -1,0 +1,39 @@
+{
+    "type": "object",
+    "required": [
+        "assignmentId",
+        "assignmentName",
+        "assignmentDescription",
+        "comments",
+        "dueDate",
+        "batchId",
+        "createdBy",
+        "graderId"
+    ],
+    "properties": {
+        "assignmentId": {
+            "type": "integer"
+        },
+        "assignmentName": {
+            "type": "string"
+        },
+        "assignmentDescription": {
+            "type": "string"
+        },
+        "comments": {
+            "type": "null"
+        },
+        "dueDate": {
+            "type": "string"
+        },
+        "batchId": {
+            "type": "integer"
+        },
+        "createdBy": {
+            "type": "string"
+        },
+        "graderId": {
+            "type": "string"
+        }
+    }
+}
