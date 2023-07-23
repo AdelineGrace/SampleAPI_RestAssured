@@ -42,7 +42,7 @@ public class ConfigReader {
 		return properties.getProperty(key);
 	}
 	
-	public static void setProperty(String key, String value) {
+	public static void setProperty(String key, String value) throws IOException {
 		
 		FileOutputStream out;
 		try {
@@ -50,9 +50,6 @@ public class ConfigReader {
 			properties.setProperty(key, value);;
 			properties.store(out, null);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
