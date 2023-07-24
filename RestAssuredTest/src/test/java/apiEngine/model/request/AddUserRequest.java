@@ -1,5 +1,6 @@
 package apiEngine.model.request;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddUserRequest {
@@ -31,6 +32,7 @@ public class AddUserRequest {
 		this.userMiddleName = userMiddleName;
 		this.userPhoneNumber = userPhoneNumber;
 		UserRoleMap userRoleMap = new UserRoleMap(roleId, userRoleStatus);
+		this.userRoleMaps = new ArrayList<UserRoleMap>();
 		this.userRoleMaps.add(userRoleMap);
 		this.userTimeZone = userTimeZone;
 		this.userVisaStatus = userVisaStatus;

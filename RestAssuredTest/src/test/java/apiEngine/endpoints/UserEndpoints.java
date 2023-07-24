@@ -1,8 +1,6 @@
 package apiEngine.endpoints;
 
 import apiEngine.model.request.AddUserRequest;
-import apiEngine.model.response.User;
-import apiEngine.response.RestResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -16,7 +14,7 @@ public class UserEndpoints {
 		this.baseUrl = baseUrl;
 	}
 
-	public RestResponse<User> CreateUser(AddUserRequest userReq) 
+	public Response CreateUser(AddUserRequest userReq) 
 	{
 		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
@@ -24,9 +22,7 @@ public class UserEndpoints {
 		
 		Response response = request.body(userReq).post("/users/users/roleStatus");
 		System.out.println("response - " + response.asPrettyString());
-		User userRes = response.getBody().as(User.class);
-		System.out.println(userRes.userId);
 		
-		return new RestResponse<User>(User.class, response);
+		return response;
 	}
 }
