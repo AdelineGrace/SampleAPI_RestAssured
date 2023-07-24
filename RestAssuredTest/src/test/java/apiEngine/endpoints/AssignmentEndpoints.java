@@ -1,48 +1,45 @@
 package apiEngine.endpoints;
 
-import apiEngine.model.request.AddProgramRequest;
-import apiEngine.model.response.Program;
+import java.util.List;
+
+import apiEngine.model.request.AddAssignmentRequest;
+import apiEngine.model.response.Assignment;
 import apiEngine.routes.AssignmentRoutes;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class AssignmentEndpoints {
-
-	private static final String BASE_URL = "https://bookstore.toolsqa.com";
-
-	public static RequestSpecification createBaseRequest() 
+	
+	String baseUrl;
+	
+	public AssignmentEndpoints(String baseUrl)
 	{
-		RestAssured.baseURI = BASE_URL;
-		RequestSpecification request = RestAssured.given();
-		
-		return request;
+		this.baseUrl = baseUrl;
 	}
 	
-	public static Response GetAssignments(RequestSpecification request)
+	public Response CreateAssignment(AddAssignmentRequest assignmentReq)
 	{
-		Response response = request.get(AssignmentRoutes.getAllAssignments());
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		Response response = request.body(assignmentReq).post(AssignmentRoutes.createAssignment());
+		System.out.println("response - " + response.asPrettyString());
 		
 		return response;
 	}
 	
-	
-	public static Program CreateProgram()
+	public void GetAllAssignments()
 	{
-		AddProgramRequest program = new AddProgramRequest("TestingTurtles_54781", "Active", "testing");
-		
-		RestAssured.baseURI = BASE_URL;
+		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
+		Response response = request.get(AssignmentRoutes.getAllAssignments());
+		System.out.println(response.getStatusCode());
+		System.out.println(response.asPrettyString());
 		
-		request.header("Content-Type", "application/json");
-		Response response = request.body("\"programName\": \"Jun23-APICollectors-SDET-332\",\n"
-				+ "    \"programDescription\": \"DA\",\n"
-				+ "    \"programStatus\": \"Active\"").post("/saveprogram");
-		System.out.println("response - " + response.asPrettyString());
-
-		Program resProgram = response.getBody().as(Program.class);
-		
-		return resProgram;
+		JsonPath jsonPathEvaluator = response.jsonPath();
+		List<Assignment> assignmentList = jsonPathEvaluator.getList("", Assignment.class);
+		System.out.print(assignmentList.get(0).assignmentId);
 	}
-	
 }

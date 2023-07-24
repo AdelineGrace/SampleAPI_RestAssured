@@ -1,5 +1,4 @@
 package dataProviders;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,8 +16,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import utilities.LoggerLoad;
 
 
+//>>>>>>> branch 'preetha' of https://github.com/twinklejain22/Team2_TestingTurtles.git
 
 public class ExcelReader {
+	
+
 
 	private static XSSFSheet excelSheet;
 	private static XSSFWorkbook excelWorkbook;
@@ -81,8 +83,8 @@ public class ExcelReader {
 		}
 	}
 
-	public static Map getData(String dataKey, String sheetName) throws Exception {
-		Map dataMap = new HashMap<String, String>();
+	public static Map<String, String> getData(String dataKey, String sheetName) throws Exception {
+		Map<String, String> dataMap = new HashMap<String, String>();
 			setExcelFile(sheetName);
 			int dataRow = getDataRow(dataKey.trim(), 0);
 			//LoggerLoad.logInfo("Test Data Found in Row: "+dataRow);
@@ -104,6 +106,7 @@ public class ExcelReader {
 		return dataMap;
 	}
 
+	
 	public static void main(String []args) throws Exception {
 		Map<String,String> dataMap = new HashMap<String, String>();
 		dataMap = getData("updateBooking21","sheet1");

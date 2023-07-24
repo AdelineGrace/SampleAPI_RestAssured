@@ -2,6 +2,11 @@ package apiEngine.routes;
 
 public class AssignmentRoutes {
 	
+	public static String createAssignment()
+	{
+		return "/assignments";
+	}
+	
 	public static String getAllAssignments()
 	{
 		return "/assignments";
@@ -10,6 +15,11 @@ public class AssignmentRoutes {
 	public static String getAssignmentByAssignmentId(Integer assignmentId)
 	{
 		return "/assignments/" + assignmentId;
+	}
+	
+	public static String deleteAssignmentById(Integer assignmentId)
+	{
+		return "assignments/" + assignmentId;
 	}
 
 }
