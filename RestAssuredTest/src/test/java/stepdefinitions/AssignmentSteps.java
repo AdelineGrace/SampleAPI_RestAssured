@@ -112,14 +112,17 @@ public class AssignmentSteps extends BaseStep {
 
 	public void Cleanup() 
 	{
+		// delete user
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
 		response = request.delete(UserRoutes.deleteUser(userId));
 
+		// delete batch
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
 		response = request.delete(ProgramBatchRoutes.deleteBatch(batchId));
 		
+		// delete program
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
 		response = request.delete(ProgramRoutes.deleteProgram(programId));
