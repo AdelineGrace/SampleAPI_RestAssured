@@ -1,48 +1,51 @@
 package apiEngine.endpoints;
 
-import apiEngine.model.request.AddProgramRequest;
-import apiEngine.model.response.Program;
+import java.util.List;
+
+import apiEngine.model.request.AddAssignmentRequest;
+import apiEngine.model.response.Assignment;
+import apiEngine.response.RestResponse;
 import apiEngine.routes.AssignmentRoutes;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class AssignmentEndpoints {
-
-	private static final String BASE_URL = "https://bookstore.toolsqa.com";
-
-	public static RequestSpecification createBaseRequest() 
+	
+	String baseUrl;
+	
+	public AssignmentEndpoints(String baseUrl)
 	{
-		RestAssured.baseURI = BASE_URL;
-		RequestSpecification request = RestAssured.given();
-		
-		return request;
+		this.baseUrl = baseUrl;
 	}
 	
-	public static Response GetAssignments(RequestSpecification request)
+	public RestResponse<Assignment> CreateAssignment(int batchId, String userId)
 	{
-		Response response = request.get(AssignmentRoutes.getAllAssignments());
-		
-		return response;
-	}
-	
-	
-	public static Program CreateProgram()
-	{
-		AddProgramRequest program = new AddProgramRequest("TestingTurtles_54781", "Active", "testing");
-		
-		RestAssured.baseURI = BASE_URL;
+		AddAssignmentRequest assignment = new AddAssignmentRequest("Testing", "TestingTurtles_187745", batchId, "Testing", userId, 
+			"2023-07-29T22:00:04.964+00:00", userId, "file1.json", "file2.json", "file3.json", "file4.json", "file5.json");
+
+		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
-		
 		request.header("Content-Type", "application/json");
-		Response response = request.body("\"programName\": \"Jun23-APICollectors-SDET-332\",\n"
-				+ "    \"programDescription\": \"DA\",\n"
-				+ "    \"programStatus\": \"Active\"").post("/saveprogram");
+		Response response = request.body(assignment).post(AssignmentRoutes.createAssignment());
 		System.out.println("response - " + response.asPrettyString());
-
-		Program resProgram = response.getBody().as(Program.class);
+		Assignment resAssignment = response.getBody().as(Assignment.class);
+		System.out.println(resAssignment.assignmentId);
 		
-		return resProgram;
+		return new RestResponse<Assignment>(Assignment.class, response);
 	}
 	
+	public void GetAllAssignments()
+	{
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		Response response = request.get(AssignmentRoutes.getAllAssignments());
+		System.out.println(response.getStatusCode());
+		System.out.println(response.asPrettyString());
+		
+		JsonPath jsonPathEvaluator = response.jsonPath();
+		List<Assignment> assignmentList = jsonPathEvaluator.getList("", Assignment.class);
+		System.out.print(assignmentList.get(0).assignmentId);
+	}
 }
