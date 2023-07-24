@@ -19,13 +19,27 @@
 @ProgramModule
 Feature: PROGRAM MODULE
 
-  @GetAllTag_01
-  Scenario: Check if user able to retrieve all programs with valid LMS API
-    Given User creates GET Request for the LMS API endpoint for Program Module
-    When User sends HTTPS Request in Program Module
-    Then User receives 200 OK Status with response body.
 
-  @Get_pgmId_02
+  @PostTag
+  Scenario Outline: Check if user able to create a program for existing, non existing and missing mandatory field.
+    Given User creates POST Request with fields "<RowNumber>" and "<Sheetname>" from excel
+    When User sends request Body with mandatory , additional  fields.
+    Then User receives Status with response body "<RowNumber>" and "<Sheetname>" from excel
+
+    Examples: 
+      | Sheetname | RowNumber |
+      | ProgramPost|	postNew	|
+      | ProgramPost|	postNew1	|
+      | ProgramPost|	postExist	|
+      | ProgramPost|	postMissing|
+      
+#  @GetAllTag
+#  Scenario: Check if user able to retrieve all programs with valid LMS API
+ #   Given User creates GET Request for the LMS API endpoint for Program Module
+ #   When User sends HTTPS Request in Program Module
+ #   Then User receives 200 OK Status with response body.
+
+  @Get_pgmId
   Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
     Given User creates GET Request for the LMS API endpoint for Program Module
     When User sends HTTPS Request with valid or invalid for  <programId>
@@ -36,30 +50,51 @@ Feature: PROGRAM MODULE
       |valid	| 10669 |200|
       |invalid| 10		|	404|
 
-
-  @PostTag_01
-  Scenario Outline: Check if user able to create a program for existing, non existing and missing mandatory field.
-    Given User creates POST Request with fields "<Sheetname>" and <RowNumber> from excel
-    When User sends request Body with mandatory , additional  fields.
-    Then User receives Status with response body
-
-    Examples: 
-      | Sheetname | RowNumber |
-      | ProgramPost|	0	|
-      | ProgramPost|	1	|
-      | ProgramPost|	2	|
-    
-  @PutByID_01
+  @PutByID
   Scenario Outline: Check if user able to update a program with valid/invalid programID and missing field
     Given User creates PUT Request with fields "<Sheetname>" and <RowNumber> from excel
-    When User sends request Body with valid/invalid programID and missing field
+    When User sends PUT request Body with valid/invalid programID and missing field
     Then User receives Status with response body
 
     Examples: 
       | Sheetname | RowNumber |
-      | ProgramPost|	3	|
-      | ProgramPost|	4	|
-      | ProgramPost|	5	|
+      | Program|	putIdValid	|
+      | Program|	putIdInvalid	|
+      | Program|	putIdMissing	|
     
     
- 
+  @PutByName
+  Scenario Outline: Check if user able to update a program with valid/invalid programID and missing field
+    Given User creates PUT Request with fields "<Sheetname>" and <RowNumber> from excel
+    When User sends PUT request Body with valid/invalid ProgramName and missing field
+    Then User receives Status with response body
+
+    Examples: 
+      | Sheetname | RowNumber |
+      | Program|	putNameValid	|
+      | Program|	putNameInvalid	|
+      | Program|	putNameMissing	|
+    
+
+  @Delete_pgmName
+  Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
+    Given User creates DELETE Request for the LMS API endpoint for Program Module
+    When User sends Delete Request with valid or invalid ProgramName "<programName>".
+    Then User receives status as "<option>"  with response body.
+
+    Examples: 
+     |option | programName |
+      |valid	| JUL-23-RESTAPI-Turtle01 |
+      |invalid| JUL		|
+    
+     @Delete_pgmID
+  Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
+    Given User creates DELETE Request for the LMS API endpoint for Program Module
+    When User sends DELETE Request with valid or invalid for <programId>
+    Then User receives status as "<option>" with valid or invalid Programid.
+
+    Examples: 
+     |option | programId |status|
+      |valid	| 10669 |200|
+      |invalid| 10		|	404|
+   
