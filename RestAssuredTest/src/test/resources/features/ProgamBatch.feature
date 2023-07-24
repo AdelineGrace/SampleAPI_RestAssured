@@ -31,6 +31,8 @@ Feature: Program Batch
       |Post_Batch_Missing_BatchName|batch|
        |Post_Batch_Missing_NoOfClasses|batch|
        |Post_Batch_Missing_ProgramId|batch|
+       
+ 
 
   @Get_All_001
   Scenario Outline: Check if user able to retrieve all batches with "<dataKey>" endpoint
@@ -73,7 +75,31 @@ Feature: Program Batch
       | dataKey | sheetName|
       | Get_ByProgramId_Valid   |batch|
       | Get_ByProgramId_Invalid |batch|
-       
+      
+   @UpdateBatch
+  Scenario Outline: Check if user able to update a Batch with "<dataKey>" batchID and mandatory request body
+    Given User creates PUT Request for the LMS API "batchModule"
+    When User sends PUT Request with mandatory and additional fields  "<sheetName>" with "<dataKey>"
+    Then User receives Status with response body for put "<sheetName>" with "<dataKey>"
+        Examples: 
+      |dataKey | sheetName|
+      |Put_Batch_Valid |batch|
+      |Put_Batch_Invalid |batch|
+      |Put_Batch_Missing_BatchStatus|batch|
+      |Put_Batch_Missing_BatchName|batch|
+      |Put_Batch_Missing_NoOfClasses|batch|
+      |Put_Batch_Missing_ProgramId|batch|
+      
+  
+    @DeleteBatch
+  Scenario Outline: Check if user able to delete a Batch with "<dataKey>" batchID 
+    Given User creates DELETE Request for the LMS API "batchModule"
+    When User sends DELETE Request for "<sheetName>" with "<dataKey>" batchId
+    Then User receives Status with response body for "<sheetName>" with "<dataKey>"  
+    Examples: 
+      |dataKey | sheetName|
+      |Delete_Batch_Valid |batch|
+      |Delete_Batch_Invalid |batch|  
       
       
       
