@@ -12,7 +12,7 @@ import io.cucumber.junit.CucumberOptions;
 					//"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 					}, //reporting purpose
 			monochrome=false,  //console output color
-			features = {"src/test/resources/features/User.feature"}, //location of feature files
+			features = {"src/test/resources/features/ProgramModule.feature"}, //location of feature files
 			glue= "stepdefinitions" //location of step definition files
 		)
 public class TestRunner {

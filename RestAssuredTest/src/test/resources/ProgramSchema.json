@@ -1,0 +1,60 @@
+{
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "programId",
+        "programName",
+        "programStatus"
+    ],
+    "properties": {
+        "programId": {
+            "type": "integer",
+            "default": 0,
+            "title": "The programId Schema",
+            "examples": [
+                11621
+            ]
+        },
+        "programName": {
+            "type": "string",
+            "default": "",
+            "title": "The programName Schema",
+            "examples": [
+                "JUL-23-RESTAPI-Turtle01"
+            ]
+        },
+        "programDescription": {
+            "type": "string",
+            "default": "",
+            "title": "The programDescription Schema",
+            "examples": [
+                "JUL-23-Testing-Trial-Rest"
+            ]
+        },
+        "programStatus": {
+            "type": "string",
+            "default": "",
+            "title": "The programStatus Schema",
+            "examples": [
+                "Active"
+            ]
+        },
+        "creationTime": {
+            "type": "string",
+            "default": "",
+            "title": "The creationTime Schema",
+            "examples": [
+                "2023-07-23T01:37:14.699+00:00"
+            ]
+        },
+        "lastModTime": {
+            "type": "string",
+            "default": "",
+            "title": "The lastModTime Schema",
+            "examples": [
+                "2023-07-23T01:37:14.699+00:00"
+            ]
+        }
+    }
+}
