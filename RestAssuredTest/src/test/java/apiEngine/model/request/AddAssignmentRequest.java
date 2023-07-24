@@ -14,53 +14,22 @@ public class AddAssignmentRequest {
 	public String pathAttachment3;
 	public String pathAttachment4;
 	public String pathAttachment5;
-
-	public void AssignmentDescription(String assignmentDescription) {
-		this.assignmentDescription = assignmentDescription;
-	}
-
-	public void AssignmentName(String assignmentName) {
-		this.assignmentName = assignmentName;
-	}
-
-	public void BatchId(Integer batchId) {
-		this.batchId = batchId;
-	}
-
-	public void Comments(String comments) {
-		this.comments = comments;
-	}
-
-	public void CreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public void DueDate(String dueDate) {
-		this.dueDate = dueDate;
-	}
-
-	public void GraderId(String graderId) {
-		this.graderId = graderId;
-	}
-
-	public void PathAttachment1(String pathAttachment1) {
-		this.pathAttachment1 = pathAttachment1;
-	}
 	
-	public void PathAttachment2(String pathAttachment2) {
+	public AddAssignmentRequest(String assignmentName, String assignmentDescription, Integer batchId, 
+			String comments, String createdBy, String dueDate, String graderId, String pathAttachment1,
+			String pathAttachment2, String pathAttachment3, String pathAttachment4, String pathAttachment5)
+	{
+		this.assignmentDescription = assignmentDescription;
+		this.assignmentName = assignmentName;
+		this.batchId = batchId;
+		this.comments = comments;
+		this.createdBy = createdBy;
+		this.dueDate = dueDate;
+		this.graderId = graderId;
+		this.pathAttachment1 = pathAttachment1;
 		this.pathAttachment2 = pathAttachment2;
-	}
-
-	public void PathAttachment3(String pathAttachment3) {
 		this.pathAttachment3 = pathAttachment3;
-	}
-
-	public void PathAttachment4(String pathAttachment4) {
 		this.pathAttachment4 = pathAttachment4;
-	}
-
-	public void PathAttachment5(String pathAttachment5) {
 		this.pathAttachment5 = pathAttachment5;
 	}
-
 }

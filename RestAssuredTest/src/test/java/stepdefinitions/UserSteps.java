@@ -6,7 +6,7 @@ import java.util.List;
 
 import apiEngine.model.response.Assignment;
 import apiEngine.routes.AssignmentRoutes;
-import apiEngine.routes.UserRoute;
+import apiEngine.routes.UserRoutes;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,7 +32,7 @@ public class UserSteps {
 	}
 	@When("User sends HTTPS Request")
 	public void user_sends_https_request() {
-		response = request.get(UserRoute.getAllUsers());
+		response = request.get(UserRoutes.getAllUsers());
 		//System.out.println("user routeaa"+ UserRoute.getAllUsers());
 		//System.out.println(response.asPrettyString());
 
@@ -61,8 +61,8 @@ public class UserSteps {
 	public void user_creates_get_request_for_the_lms_api_endpoint_with_valid_user_id() {
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
-		response = request.get(UserRoute.getAllUsers());
-		System.out.println("user routeaa"+ UserRoute.getAllUsers());
+		response = request.get(UserRoutes.getAllUsers());
+		System.out.println("user routeaa"+ UserRoutes.getAllUsers());
 		System.out.println(response.asPrettyString());
 	}
 	
@@ -88,8 +88,8 @@ public class UserSteps {
 	public void user_creates_get_request_for_the_lms_api_endpoint_with_valid_user_id(String userId) {
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
-		response = request.get(UserRoute.getUserWithUserID(userId));
-		System.out.println("user routeaa"+ UserRoute.getUserWithUserID(userId));
+		response = request.get(UserRoutes.getUserWithUserID(userId));
+		System.out.println("user routeaa"+ UserRoutes.getUserWithUserID(userId));
 		System.out.println(response.asPrettyString());
 	}
 	
@@ -97,9 +97,9 @@ public class UserSteps {
 	public void user_creates_get_request_for_the_lms_api_endpoint_with_invalid_user_id(String userId) {
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
-		response = request.get(UserRoute.getUserWithUserID(userId));
+		response = request.get(UserRoutes.getUserWithUserID(userId));
 		errorStatusCode = response.statusCode();
-		System.out.println("user routeaa"+ UserRoute.getUserWithUserID(userId));
+		System.out.println("user routeaa"+ UserRoutes.getUserWithUserID(userId));
 		System.out.println(response.asPrettyString());;
 	}
 @Then("User receives {string} Not Found Status with message and boolean success details")
@@ -120,15 +120,15 @@ public void user_receives_not_found_status_with_message_and_boolean_success_deta
 public void user_creates_get_request_for_the_lms_api_all_staff_endpoint() {
 	RestAssured.baseURI = baseUrl;
 	request = RestAssured.given();
-	response = request.get(UserRoute.getAllStaffUsers());
-	System.out.println("user routeaa"+ UserRoute.getAllStaffUsers());
+	response = request.get(UserRoutes.getAllStaffUsers());
+	System.out.println("user routeaa"+ UserRoutes.getAllStaffUsers());
 	System.out.println(response.asPrettyString());
     
 }
 
 @Then("User receives {int} OK Status with response body")
 public void user_receives_ok_status_with_response_body(Integer int1) {
-	response = request.get(UserRoute.getAllStaffUsers());
+	response = request.get(UserRoutes.getAllStaffUsers());
 	int statusCode = response.statusCode();
 	assertEquals(statusCode, 200);
    System.out.println("Status Code" + response.statusCode());
@@ -138,8 +138,8 @@ public void user_receives_ok_status_with_response_body(Integer int1) {
 public void user_creates_get_request_for_the_lms_api_user_roles_endpoint() {
 	RestAssured.baseURI = baseUrl;
 	request = RestAssured.given();
-	response = request.get(UserRoute.getAllUserWithRoles());
-	System.out.println("user routeaa"+ UserRoute.getAllUserWithRoles());
+	response = request.get(UserRoutes.getAllUserWithRoles());
+	System.out.println("user routeaa"+ UserRoutes.getAllUserWithRoles());
 	System.out.println(response.asPrettyString());
 }
 
