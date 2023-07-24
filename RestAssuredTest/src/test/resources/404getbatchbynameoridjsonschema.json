@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "message",
+    "success"
+  ]
+}
+
+
