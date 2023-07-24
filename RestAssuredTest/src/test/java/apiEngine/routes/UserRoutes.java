@@ -1,6 +1,7 @@
 package apiEngine.routes;
 
-public class UserRoute {
+public class UserRoutes {
+	
 	public static String getAllUsers()
 	{
 		return "/users/users";
@@ -17,6 +18,11 @@ public class UserRoute {
 	public static String getAllUserWithRoles()
 	{
 		return "/users/users/roles";
+	}
+	
+	public static String deleteUser(String userId)
+	{
+		return "/users/users/" + userId;
 	}
 
 }
