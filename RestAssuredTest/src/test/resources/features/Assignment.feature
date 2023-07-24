@@ -8,13 +8,10 @@ Feature: Assignment module
     Then User receives response for POST "<sheetName>" with "<dataKey>"
 
     Examples: 
-      | sheetName | dataKey                        |  
-      | batch     | Post_Batch_Valid               |  
-      | batch     | Post_Batch_Existing            |  
-      | batch     | Post_Batch_Missing_BatchStatus |  
-      | batch     | Post_Batch_Missing_BatchName   |  
-      | batch     | Post_Batch_Missing_NoOfClasses |  
-      | batch     | Post_Batch_Missing_ProgramId   |  
+      | sheetName  | dataKey               |
+      | assignment | Post_Assignment_Valid |
+      | assignment | Post_Assignment_Existing |
+      
   #@GetAllAssignments
   #Scenario: Check if user able to retrieve a record with valid LMS API
     #Given User creates GET Request for the LMS API endpoint
