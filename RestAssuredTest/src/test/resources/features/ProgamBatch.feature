@@ -28,6 +28,9 @@ Feature: Program Batch
       | Post_Batch_Valid |batch|
       |Post_Batch_Existing |batch|
       |Post_Batch_Missing_BatchStatus|batch|
+      |Post_Batch_Missing_BatchName|batch|
+       |Post_Batch_Missing_NoOfClasses|batch|
+       |Post_Batch_Missing_ProgramId|batch|
 
   @Get_All_001
   Scenario Outline: Check if user able to retrieve all batches with "<dataKey>" endpoint
@@ -70,8 +73,7 @@ Feature: Program Batch
       | dataKey | sheetName|
       | Get_ByProgramId_Valid   |batch|
       | Get_ByProgramId_Invalid |batch|
-      
-  
+       
       
       
       

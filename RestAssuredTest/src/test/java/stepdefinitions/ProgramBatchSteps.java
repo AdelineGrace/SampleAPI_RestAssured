@@ -268,43 +268,48 @@ public class ProgramBatchSteps {
 		Map<String,String> excelDataMap=null;
 		String endpoint=null, Batchname=null, BatchStatus=null,  BatchDescription=null ;
 		String dynamicBatchname =null;
-		Integer NoOfClasses,Programid;
+		Integer NoOfClasses=null,Programid = null;
 		try {
-			//Jul23-TeamName-ProgramName-BatchName-serialnumber
+			
 			
 			excelDataMap = ExcelReader.getData(dataKey,sheetName);
 			if(null != excelDataMap && excelDataMap.size() > 0 ) {
 				 if(dataKey.equals("Post_Batch_Existing")) {
 					 dynamicBatchname = ConfigReader.getProperty("e2e.existingbatchname");
 					 LoggerLoad.logDebug("existing");
-				 }else{
-					 LoggerLoad.logDebug("New");
-				 Batchname = excelDataMap.get("BatchName");
-				 LoggerLoad.logDebug("Batchname: "+Batchname);
-				 String generateinvalidID=RandomStringUtils.randomNumeric(3);
-				 dynamicBatchname = "Jul23-TestingTurtles-" +ConfigReader.getProperty("e2e.programname")+"-"+Batchname+"-"+generateinvalidID;
-				 LoggerLoad.logInfo("dynamicBatchname"+dynamicBatchname);
-				 }
+				 }else {
+					 if(!(dataKey.equals("Post_Batch_Missing_BatchName")) && (!(excelDataMap.get("BatchName").isBlank()))) {
+						 Batchname=excelDataMap.get("BatchName");
+						 LoggerLoad.logDebug("Batchname: "+Batchname);
+						 String generateinvalidID=RandomStringUtils.randomNumeric(3);
+						 dynamicBatchname = "Jul23-TestingTurtles-" +ConfigReader.getProperty("e2e.programname")+"-"+Batchname+"-"+generateinvalidID;
+						 LoggerLoad.logInfo("dynamicBatchname"+dynamicBatchname);
+						 
+					 }
+				}
+				if(!excelDataMap.get("BatchStatus").isBlank()) {
+					BatchStatus = excelDataMap.get("BatchStatus");
+				}
+				if(!excelDataMap.get("NoOfClasses").isBlank()) {
+					NoOfClasses = Integer.parseInt(excelDataMap.get("NoOfClasses"));
+					
+				}
+				if(!excelDataMap.get("BatchDescription").isBlank()) {
+					BatchDescription = excelDataMap.get("BatchDescription");
+				}
+				
+				if(dataKey.equals("Post_Batch_Missing_ProgramId")) {
+					 Programid = null;
+					 
+				}else {
+					 Programid = Integer.parseInt(ConfigReader.getProperty("e2e.programid"));
+					 LoggerLoad.logDebug("programid: "+Programid);
+			    }
 				 
-				 Programid = Integer.parseInt(ConfigReader.getProperty("e2e.programid"));
-				 if(!excelDataMap.get("BatchStatus").isBlank()) {
-				  BatchStatus = excelDataMap.get("BatchStatus");
-				 }
-				 LoggerLoad.logDebug("BatchStatus: "+BatchStatus);
-				 NoOfClasses = Integer.parseInt(excelDataMap.get("NoOfClasses"));
-				 LoggerLoad.logDebug("NoOfClasses: "+NoOfClasses);
-				 BatchDescription = excelDataMap.get("BatchDescription");
-				 LoggerLoad.logDebug("NoOfClasses: "+NoOfClasses);
+				AddBatchRequest batch = new AddBatchRequest(dynamicBatchname, BatchStatus, BatchDescription,NoOfClasses, Programid);
+				response = request.body(batch).post();
+				response.then().log().all();
 				 
-				 
-				 AddBatchRequest batch = new AddBatchRequest(dynamicBatchname, BatchStatus, BatchDescription,NoOfClasses, Programid);
-				 response = request.body(batch).post();
-				 int Statuscode400 = response.getStatusCode();
-					System.out.println("Statuscode400:" +Statuscode400);
-				 //System.out.println("response - " + response.asPrettyString());
-				 response.then().log().all();
-				 Batch resBatch = response.getBody().as(Batch.class);
-				 System.out.println(resBatch.batchId);
 				
 			}
 		} catch (Exception e) {
@@ -323,6 +328,8 @@ public class ProgramBatchSteps {
 		response= response.then().log().all().extract().response();	
 		if(dataKey.equals("Post_Batch_Valid")) {
 			response.then().statusCode(201);
+			Batch resBatch = response.getBody().as(Batch.class);
+			System.out.println(resBatch.batchId);
 			JsonPath js = response.jsonPath();
 			int batchId = js.getInt("batchId");
 			String batchName = js.getString("batchName");
@@ -339,7 +346,7 @@ public class ProgramBatchSteps {
 			System.out.println("FAIL");
 			
 		}
-		else if(dataKey.equals("Post_Batch_Missing_BatchStatus")) {
+		else if(dataKey.equals("Post_Batch_Missing_BatchStatus")||dataKey.equals("Post_Batch_Missing_BatchName")||dataKey.equals("Post_Batch_Missing_NoOfClasses")||dataKey.equals("Post_Batch_Missing_ProgramId")){
 			response.then().statusCode(400);
 			
 			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
