@@ -104,6 +104,7 @@ public class ExcelReader {
 		return dataMap;
 	}
 
+	
 	public static void main(String []args) throws Exception {
 		Map<String,String> dataMap = new HashMap<String, String>();
 		dataMap = getData("updateBooking21","sheet1");
