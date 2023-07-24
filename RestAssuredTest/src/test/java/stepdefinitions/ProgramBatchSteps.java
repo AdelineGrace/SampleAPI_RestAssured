@@ -308,7 +308,7 @@ public class ProgramBatchSteps {
 				 
 				AddBatchRequest batch = new AddBatchRequest(dynamicBatchname, BatchStatus, BatchDescription,NoOfClasses, Programid);
 				response = request.body(batch).post();
-				response.then().log().all();
+				//response.then().log().all();
 				 
 				
 			}
@@ -324,7 +324,7 @@ public class ProgramBatchSteps {
 
 	@Then("User receives Status with response body for post {string} with {string}")
 	public void user_receives_status_code_with_response_body_for_post(String sheetName, String dataKey) throws IOException {
-		response.then().log().all();
+		//response.then().log().all();
 		response= response.then().log().all().extract().response();	
 		if(dataKey.equals("Post_Batch_Valid")) {
 			response.then().statusCode(201);
@@ -357,5 +357,156 @@ public class ProgramBatchSteps {
 			assertTrue(false);
 		}
 		
+	}
+	
+	@Given("User creates PUT Request for the LMS API {string}")
+	public void user_creates_put_request_for_the_lms_api(String string) {
+		switch (string) {
+		case "batchModule":
+			LoggerLoad.logInfo("Method : user_creates_get_request_for_the_lms_api - inside case batchModule");
+			RestAssured.baseURI = baseUrl+batchUrl;
+			break;
+
+		default:
+			RestAssured.baseURI = baseUrl;
+			break;
+		}
+		
+        request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+	}
+
+	@When("User sends PUT Request with mandatory and additional fields  {string} with {string}")
+	public void user_sends_put_request_with_mandatory_and_additional_fields_with(String sheetName, String dataKey ) {
+		Map<String,String> excelDataMap=null;
+		String endpointBatchId=null, Batchname=null, BatchStatus=null,  BatchDescription=null ;
+		String dynamicBatchname =null;
+		Integer NoOfClasses=null,Programid = null;
+		try {
+			
+			
+			excelDataMap = ExcelReader.getData(dataKey,sheetName);
+			if(null != excelDataMap && excelDataMap.size() > 0 ) {
+				
+				if(dataKey.equals("Put_Batch_Invalid")){
+					endpointBatchId="/0000";
+				} else {
+					endpointBatchId="/"+ConfigReader.getProperty("e2e.batchid");
+				}
+						
+				
+			  if(!(dataKey.equals("Put_Batch_Missing_BatchName")) && (!(excelDataMap.get("BatchName").isBlank()))) {
+						 Batchname=excelDataMap.get("BatchName");
+						 LoggerLoad.logDebug("Batchname: "+Batchname);
+						 String generateinvalidID=RandomStringUtils.randomNumeric(3);
+						 dynamicBatchname = "Jul23-TestingTurtles-" +ConfigReader.getProperty("e2e.programname")+"-"+Batchname+"-"+generateinvalidID;
+						 LoggerLoad.logInfo("dynamicBatchname"+dynamicBatchname);
+						 
+			  }
+				
+				if(!excelDataMap.get("BatchStatus").isBlank()) {
+					BatchStatus = excelDataMap.get("BatchStatus");
+				}
+				if(!excelDataMap.get("NoOfClasses").isBlank()) {
+					NoOfClasses = Integer.parseInt(excelDataMap.get("NoOfClasses"));
+					
+				}
+				if(!excelDataMap.get("BatchDescription").isBlank()) {
+					BatchDescription = excelDataMap.get("BatchDescription");
+				}
+				
+				if(dataKey.equals("Put_Batch_Missing_ProgramId")) {
+					 Programid = null;
+					 
+				}else {
+					 Programid = Integer.parseInt(ConfigReader.getProperty("e2e.programid"));
+					 LoggerLoad.logDebug("programid: "+Programid);
+			    }
+				 
+				AddBatchRequest batch = new AddBatchRequest(dynamicBatchname, BatchStatus, BatchDescription,NoOfClasses, Programid);
+				response = request.body(batch).put(endpointBatchId);
+				//response.then().log().all();
+				 
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	@Then("User receives Status with response body for put {string} with {string}")
+	public void user_receives_status_with_response_body_for_put_with(String sheetName, String dataKey) throws IOException {
+		//response.then().log().all();
+		response= response.then().log().all().extract().response();	
+		if(dataKey.equals("Put_Batch_Valid")) {
+			response.then().statusCode(200);
+			Batch resBatch = response.getBody().as(Batch.class);
+			System.out.println(resBatch.batchId);
+			JsonPath js = response.jsonPath();
+			int batchId = js.getInt("batchId");
+			String batchName = js.getString("batchName");
+			System.out.println("Response BatchId"+batchId);
+			ConfigReader.setProperty("e2e.batchid", Integer.toString(batchId));
+			ConfigReader.setProperty("e2e.batchname", batchName);
+			ConfigReader.setProperty("e2e.existingbatchname", batchName);
+		    response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getbatchbyidjsonschema.json")));
+		}
+		
+		else if( dataKey.equals("Put_Batch_Missing_BatchStatus")||dataKey.equals("Put_Batch_Missing_BatchName")||dataKey.equals("Put_Batch_Missing_NoOfClasses")||dataKey.equals("Put_Batch_Missing_ProgramId")){
+			response.then().statusCode(400);
+			
+			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
+				System.out.println("FAIL");
+			
+		}
+		else if(dataKey.equals("Put_Batch_Invalid")){
+			response.then().statusCode(404);
+			
+			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
+				System.out.println("FAIL");
+			
+		}
+		else {
+			assertTrue(false);
+		}
+	}
+	
+	
+	@Given("User creates DELETE Request for the LMS API {string}")
+	public void user_creates_delete_request_for_the_lms_api(String string) {
+		switch (string) {
+		case "batchModule":
+			LoggerLoad.logInfo("Method : user_creates_get_request_for_the_lms_api - inside case batchModule");
+			RestAssured.baseURI = baseUrl+batchUrl;
+			break;
+
+		default:
+			RestAssured.baseURI = baseUrl;
+			break;
+		}
+		
+        request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+	}
+
+	@When("User sends DELETE Request for {string} with {string} batchId")
+	public void user_sends_delete_request_for_with_batch_id(String sheetName, String dataKey) {
+		response = request.delete("/"+ConfigReader.getProperty("e2e.batchid"));
+		//response.then().log().all();
+	}
+
+	@Then("User receives Status with response body for {string} with {string}")
+	public void user_receives_status_with_response_body_for_with(String sheetName, String dataKey) {
+		//response.then().log().all();
+		response= response.then().log().all().extract().response();	
+		if(dataKey.equals("Delete_Batch_Valid")) {
+			response.then().statusCode(200);
+		}else {
+			response.then().statusCode(404);
+			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
+			System.out.println("FAIL");
+			
+		}
 	}
 }
