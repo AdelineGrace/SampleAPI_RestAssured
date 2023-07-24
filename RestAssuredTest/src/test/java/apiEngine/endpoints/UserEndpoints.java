@@ -29,5 +29,4 @@ public class UserEndpoints {
 		
 		return new RestResponse<User>(User.class, response);
 	}
-
 }

@@ -20,18 +20,15 @@ public class AssignmentEndpoints {
 		this.baseUrl = baseUrl;
 	}
 	
-	public RestResponse<Assignment> CreateAssignment(int batchId, String userId)
+	public RestResponse<Assignment> CreateAssignment(AddAssignmentRequest assignmentReq)
 	{
-		AddAssignmentRequest assignment = new AddAssignmentRequest("Testing", "TestingTurtles_187745", batchId, "Testing", userId, 
-			"2023-07-29T22:00:04.964+00:00", userId, "file1.json", "file2.json", "file3.json", "file4.json", "file5.json");
-
 		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json");
-		Response response = request.body(assignment).post(AssignmentRoutes.createAssignment());
+		Response response = request.body(assignmentReq).post(AssignmentRoutes.createAssignment());
 		System.out.println("response - " + response.asPrettyString());
-		Assignment resAssignment = response.getBody().as(Assignment.class);
-		System.out.println(resAssignment.assignmentId);
+		Assignment assignmentRes = response.getBody().as(Assignment.class);
+		System.out.println(assignmentRes.assignmentId);
 		
 		return new RestResponse<Assignment>(Assignment.class, response);
 	}

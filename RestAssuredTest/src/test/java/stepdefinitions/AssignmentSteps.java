@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.http.HttpStatus;
 
+import apiEngine.model.request.AddAssignmentRequest;
 import apiEngine.model.request.AddBatchRequest;
 import apiEngine.model.request.AddProgramRequest;
 import apiEngine.model.request.AddUserRequest;
@@ -12,114 +13,181 @@ import apiEngine.model.response.Assignment;
 import apiEngine.model.response.Batch;
 import apiEngine.model.response.Program;
 import apiEngine.model.response.User;
+import apiEngine.response.IRestResponse;
 import apiEngine.routes.AssignmentRoutes;
+import apiEngine.routes.ProgramBatchRoutes;
+import apiEngine.routes.UserRoutes;
 import dataProviders.ExcelReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import utilities.LoggerLoad;
 
 public class AssignmentSteps extends BaseStep {
 
 	String baseUrl = "https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms";
 	RequestSpecification request;
 	Response response;
+	private IRestResponse<Assignment> assignmentResponse;
+	AddAssignmentRequest addAssignmentReq;
+	
 	Map<String, String> excelDataMap;
 
 	Program program;
 	Batch batch;
 	User user;
-	Assignment assignment;
 
 	static int programId;
 	static int batchId;
 	static String userId;
 	static int assignmentId;
 
-	public void CreatePreRequisites() 
-{
+	public void CreatePreRequisites() {
+
 		excelDataMap = null;
 		AddProgramRequest programReq = null;
 		AddBatchRequest batchReq = null;
 		AddUserRequest userReq = null;
 
 		try {
-			excelDataMap = ExcelReader.getData("CreateProgram_Assignment", "assignmentProgram");
+			excelDataMap = ExcelReader.getData("Post_Program_Assignment", "program");
 			if (null != excelDataMap && excelDataMap.size() > 0) {
 				programReq = new AddProgramRequest(excelDataMap.get("programName"), excelDataMap.get("programStatus"),
 						excelDataMap.get("programDescription"));
 			}
+		} catch (Exception ex) {
 
-			excelDataMap = ExcelReader.getData("CreateBatch_Assignment", "assignmentBatch");
+		}
+		program = programEndpoints.CreateProgram(programReq).getBody();
+		programId = program.programId;
+
+		try {
+			excelDataMap = ExcelReader.getData("Post_Batch_Assignment", "batch");
 			if (null != excelDataMap && excelDataMap.size() > 0) {
 				batchReq = new AddBatchRequest(excelDataMap.get("batchName"), excelDataMap.get("batchStatus"),
 						excelDataMap.get("batchDescription"), Integer.parseInt(excelDataMap.get("batchNoOfClasses")),
 						programId);
 			}
-			
-			excelDataMap = ExcelReader.getData("CreateUserAssignment", "assignmentUser");
+		} catch (Exception ex) {
+
+		}
+
+		batch = batchEndpoints.CreateBatch(batchReq).getBody();
+		batchId = batch.batchId;
+
+		try {
+			excelDataMap = ExcelReader.getData("Post_User_Assignment", "user");
 			if (null != excelDataMap && excelDataMap.size() > 0) {
-				userReq = new AddUserRequest(excelDataMap.get("userFirstName"), excelDataMap.get("userLastName"), 
-						excelDataMap.get("userMiddleName"), excelDataMap.get("userComments"), excelDataMap.get("userEduPg"), 
-						excelDataMap.get("userEduUg"), excelDataMap.get("userLinkedinUrl"), excelDataMap.get("userLocation"),
-						12345678, excelDataMap.get("roleId"), excelDataMap.get("userRoleStatus"), 
+				userReq = new AddUserRequest(excelDataMap.get("userFirstName"), excelDataMap.get("userLastName"),
+						excelDataMap.get("userMiddleName"), excelDataMap.get("userComments"),
+						excelDataMap.get("userEduPg"), excelDataMap.get("userEduUg"),
+						excelDataMap.get("userLinkedinUrl"), excelDataMap.get("userLocation"), 12345678,
+						excelDataMap.get("roleId"), excelDataMap.get("userRoleStatus"),
 						excelDataMap.get("userTimeZone"), excelDataMap.get("userVisaStatus"));
 			}
 		} catch (Exception ex) {
 
 		}
 
-		// create program
-		program = programEndpoints.CreateProgram(programReq).getBody();
-		programId = program.programId;
-
-		// Add Batch
-		batch = batchEndpoints.CreateBatch(batchReq).getBody();
-		batchId = batch.batchId;
-		
-		// create user
 		user = userEndpoints.CreateUser(userReq).getBody();
 		userId = user.userId;
 
 	}
 
-	// Create new Assignment
-	@Given("User creates POST Request for the LMS API endpoint")
-	public void user_creates_post_request_for_the_lms_api_endpoint() {
-
-		CreatePreRequisites();
+	public void Cleanup()
+	{
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+		response = request.delete(UserRoutes.deleteUser(userId));
 		
-		excelDataMap = null;
-		try {
-			excelDataMap = ExcelReader.getData("CreateAssignment_Valid", "assignment");
-			if (null != excelDataMap && excelDataMap.size() > 0) {
-//				AddAssignmentRequest addAssignmentReq = new AssignmentSteps(String assignmentName, String assignmentDescription, Integer batchId, 
-//						String comments, String createdBy, String dueDate, String graderId, String pathAttachment1,
-//						String pathAttachment2, String pathAttachment3, String pathAttachment4, String pathAttachment5);
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+		response = request.delete(ProgramBatchRoutes.deleteBatch(batchId));
+	}
+
+	@Given("User creates POST Assignment Request for the LMS API with fields from {string} with {string}")
+	public void user_creates_post_assignment_request_for_the_lms_api_with_fields_from_with(String sheetName, String dataKey) 
+	{
+		try 
+		{
+			CreatePreRequisites();
+			
+			RestAssured.baseURI = baseUrl;
+			RequestSpecification request = RestAssured.given();
+			request.header("Content-Type", "application/json");
+
+			excelDataMap = null;
+			
+			excelDataMap = ExcelReader.getData(dataKey, sheetName);
+
+			if (excelDataMap != null && excelDataMap.size() > 0) 
+			{
+				addAssignmentReq = new AddAssignmentRequest(excelDataMap.get("assignmentName"),
+						excelDataMap.get("assignmentDescription"), batchId, excelDataMap.get("comments"), userId,
+						"2023-07-29T22:00:04.964+00:00", userId, excelDataMap.get("pathAttachment1"),
+						excelDataMap.get("pathAttachment2"), excelDataMap.get("pathAttachment3"),
+						excelDataMap.get("pathAttachment4"), excelDataMap.get("pathAttachment5)"));
 			}
-		} catch (Exception ex) {
-
+			LoggerLoad.logInfo("Assignment POST request created");
+		} 
+		catch (Exception ex) 
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
 		}
-
-
 	}
 
-	@When("User sends POST Request with mandatory and additional fields")
-	public void user_sends_post_request_with_mandatory_and_additional_fields() {
-//		assignment = assignmentEndpoints.CreateAssignment(batchId, userId).getBody();
-//		assignmentId = assignment.assignmentId;
+	@When("User sends HTTP POST Assignment Request")
+	public void user_sends_http_post_assignment_request() 
+	{
+		try
+		{
+			assignmentResponse = assignmentEndpoints.CreateAssignment(addAssignmentReq);
+			LoggerLoad.logInfo("Assignment POST request sent");
+		}
+		catch(Exception ex)
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
 	}
 
-	@Then("User receives Created Status with response body")
-	public void user_receives_created_status_with_response_body() {
-		System.out.println(assignment.assignmentId);
-		response.then().assertThat().statusCode(HttpStatus.SC_OK).contentType("")
-				.body(JsonSchemaValidator.matchesJsonSchema(
-						getClass().getClassLoader().getResourceAsStream("getassignmentbyidjsonschema.json")));
+	@Then("User receives response for POST {string} with {string}")
+	public void user_receives_response_for_post_with(String sheetName, String dataKey) 
+	{
+		try
+		{
+			assignmentResponse.getResponse().then().log().all().extract().response();	
+			Assignment assignment = assignmentResponse.getBody();
+			assignmentId = assignment.assignmentId;
+			System.out.println(assignment.assignmentId);
+			
+			if(dataKey.equals("Post_Assignment_Valid")) 
+			{
+				assignmentResponse.getResponse().then().assertThat()
+						// Validate response status
+						.statusCode(HttpStatus.SC_OK)
+						// Validate content type
+						.contentType(ContentType.JSON)
+						// Validate json schema
+						.body(JsonSchemaValidator.matchesJsonSchema(
+								getClass().getClassLoader().getResourceAsStream("getassignmentbyidjsonschema.json")));
+				
+				// Validate values in response
+				
+			}
+		}
+		catch(Exception ex)
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
 
 	}
 
