@@ -19,7 +19,6 @@
 @ProgramModule
 Feature: PROGRAM MODULE
 
-
   @PostTag
   Scenario Outline: Check if user able to create a program for existing, non existing and missing mandatory field.
     Given User creates POST Request with fields "<RowNumber>" and "<Sheetname>" from excel
@@ -27,28 +26,27 @@ Feature: PROGRAM MODULE
     Then User receives Status with response body "<RowNumber>" and "<Sheetname>" from excel
 
     Examples: 
-      | Sheetname | RowNumber |
-      | ProgramPost|	postNew	|
-      | ProgramPost|	postNew1	|
-      | ProgramPost|	postExist	|
-      | ProgramPost|	postMissing|
-      
-#  @GetAllTag
-#  Scenario: Check if user able to retrieve all programs with valid LMS API
- #   Given User creates GET Request for the LMS API endpoint for Program Module
- #   When User sends HTTPS Request in Program Module
- #   Then User receives 200 OK Status with response body.
+      | Sheetname   | RowNumber   |
+      | ProgramPost | postNew     |
+      | ProgramPost | postNew1    |
+      | ProgramPost | postExist   |
+      | ProgramPost | postMissing |
 
+  #  @GetAllTag
+  #  Scenario: Check if user able to retrieve all programs with valid LMS API
+  #   Given User creates GET Request for the LMS API endpoint for Program Module
+  #   When User sends HTTPS Request in Program Module
+  #   Then User receives 200 OK Status with response body.
   @Get_pgmId
   Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
     Given User creates GET Request for the LMS API endpoint for Program Module
     When User sends HTTPS Request with valid or invalid for  <programId>
-    Then User receives valid or invalid as "<option>" and <status> with response body.
+    Then User receives valid or invalid  "<option>" with response body.
 
     Examples: 
-     |option | programId |status|
-      |valid	| 10669 |200|
-      |invalid| 10		|	404|
+      | option  | programId |
+      | valid   |     10669 |
+      | invalid |        10 |
 
   @PutByID
   Scenario Outline: Check if user able to update a program with valid/invalid programID and missing field
@@ -57,12 +55,11 @@ Feature: PROGRAM MODULE
     Then User receives Status with response body
 
     Examples: 
-      | Sheetname | RowNumber |
-      | Program|	putIdValid	|
-      | Program|	putIdInvalid	|
-      | Program|	putIdMissing	|
-    
-    
+      | Sheetname | RowNumber    |
+      | Program   | putIdValid   |
+      | Program   | putIdInvalid |
+      | Program   | putIdMissing |
+
   @PutByName
   Scenario Outline: Check if user able to update a program with valid/invalid programID and missing field
     Given User creates PUT Request with fields "<Sheetname>" and <RowNumber> from excel
@@ -70,11 +67,10 @@ Feature: PROGRAM MODULE
     Then User receives Status with response body
 
     Examples: 
-      | Sheetname | RowNumber |
-      | Program|	putNameValid	|
-      | Program|	putNameInvalid	|
-      | Program|	putNameMissing	|
-    
+      | Sheetname | RowNumber      |
+      | Program   | putNameValid   |
+      | Program   | putNameInvalid |
+      | Program   | putNameMissing |
 
   @Delete_pgmName
   Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
@@ -83,18 +79,17 @@ Feature: PROGRAM MODULE
     Then User receives status as "<option>"  with response body.
 
     Examples: 
-     |option | programName |
-      |valid	| JUL-23-RESTAPI-Turtle01 |
-      |invalid| JUL		|
-    
-     @Delete_pgmID
+      | option  | programName             |
+      | valid   | JUL-23-RESTAPI-Turtle01 |
+      | invalid | JUL                     |
+
+  @Delete_pgmID
   Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
     Given User creates DELETE Request for the LMS API endpoint for Program Module
     When User sends DELETE Request with valid or invalid for <programId>
     Then User receives status as "<option>" with valid or invalid Programid.
 
     Examples: 
-     |option | programId |status|
-      |valid	| 10669 |200|
-      |invalid| 10		|	404|
-   
+      | option  | programId | status |
+      | valid   |     10669 |    200 |
+      | invalid |        10 |    404 |

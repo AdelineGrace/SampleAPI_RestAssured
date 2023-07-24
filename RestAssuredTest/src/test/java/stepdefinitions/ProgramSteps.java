@@ -47,69 +47,66 @@ public class ProgramSteps {
 		
 		RequestSpecification requestSpec;
 		Response resp;
-		//public static HashMap map = new HashMap<>();
+		
 		
 	///////********POST******************************
 			@Given("User creates POST Request with fields {string} and {string} from excel")
 			public void user_creates_post_request_for_lms_api_endpoint(String RowNum,String sheetName) throws Exception {
 				ExcelReader reader = new ExcelReader();
 				Map<String,String> excelDataMap=null;
-				excelDataMap = reader.getData(RowNum,sheetName);
-				String pgmName= excelDataMap.get("ProgramName");
-				String pgmStatus= excelDataMap.get("ProgramStatus");
-				String pgmDesc= excelDataMap.get("ProgramDesc");
-				String pgmStatusCode= excelDataMap.get("statusCode");
-				//Integer statusCode= Integer.parseInt(pgmStatusCode);
-				System.out.println("Pgm name from excel="+pgmName);
-				System.out.println("Pgm Status from excel="+pgmStatus);
-				System.out.println("Pgm Desc from excel="+pgmDesc);
-				
-			/*	JSONObject jbody = new JSONObject();
-				jbody.put("programName",pgmName);
-				jbody.put("programDescription",pgmDesc);
-				jbody.put("programStatus",pgmStatus);
-				requestSpec=RestAssured.given()
-						.header("Content-Type", "application/json")
-						.body(jbody.toJSONString()); // Post the request and check the response
-				*/
-				AddProgramRequest program ;
-				if(pgmName.isBlank()) {
-					pgmName="";
-				 program = new AddProgramRequest(pgmName,pgmStatus,pgmDesc);
-				 requestSpec=RestAssured.given()
-							.header("Content-Type", "application/json")
-							.body(program);
-				}else if(pgmStatus.isBlank()) {
-					pgmStatus="";
+				try {					
+					excelDataMap = reader.getData(RowNum,sheetName);
+					String pgmName= excelDataMap.get("ProgramName");
+					String pgmStatus= excelDataMap.get("ProgramStatus");
+					String pgmDesc= excelDataMap.get("ProgramDesc");
+					//String pgmStatusCode= excelDataMap.get("statusCode");
+					//Integer statusCode= Integer.parseInt(pgmStatusCode)
+						
+					AddProgramRequest program ;
+					if(pgmName.isBlank()) {
+						pgmName="";
 					 program = new AddProgramRequest(pgmName,pgmStatus,pgmDesc);
 					 requestSpec=RestAssured.given()
 								.header("Content-Type", "application/json")
 								.body(program);
-				}else {
-					program = new AddProgramRequest(pgmName,pgmStatus,pgmDesc);
-					 requestSpec=RestAssured.given()
-								.header("Content-Type", "application/json")
-								.body(program);
-				}						
+					}else if(pgmStatus.isBlank()) {
+						pgmStatus="";
+						 program = new AddProgramRequest(pgmName,pgmStatus,pgmDesc);
+						 requestSpec=RestAssured.given()
+									.header("Content-Type", "application/json")
+									.body(program);
+					}else {
+						program = new AddProgramRequest(pgmName,pgmStatus,pgmDesc);
+						 requestSpec=RestAssured.given()
+									.header("Content-Type", "application/json")
+									.body(program);
+				}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			@When("User sends request Body with mandatory , additional  fields.")
 			public void user_sends_https_request_and_request_body_with_mandatory_additional_fields() {
 			    
 				resp=requestSpec.when().post(baseurl+pgm_postEndpoint);
-				//System.out.println("Path -> " +baseurl+pgm_postEndpoint);
 				System.out.println("response-> " + resp.asPrettyString());
 			}
 
 			@Then("User receives Status with response body {string} and {string} from excel")
 			public void user_receives_created_status_with_response_body(String RowNum,String sheetName) throws Exception {
-			    
-			   resp.then().log().all().extract().response();
-			   System.out.println("The status received:-> " + resp.statusLine());			   
-			   System.out.println("Status code--->"+resp.statusCode());
-			   resp.then().assertThat()
-			      .body(JsonSchemaValidator.matchesJsonSchema(new File("src\\test\\resources\\ProgramSchema.json")));
-			   
-			   			   
+				String jsonString= resp.asString();
+				if(RowNum.equals("postNew")|| RowNum.equals("postNew1")) {
+				   //resp.then().log().all().extract().response();
+				   System.out.println("The status received:-> " + resp.statusLine());			   
+				   System.out.println("Status code--->"+resp.statusCode());
+				   resp.then().assertThat().statusCode(201)
+				      .body(JsonSchemaValidator.matchesJsonSchema(new File("src\\test\\resources\\ProgramSchema.json")));
+				}else if(RowNum.equals("postExist")|| RowNum.equals("postMissing")) {
+					resp.then().assertThat().statusCode(400);
+					assertEquals(jsonString.contains("cannot create program"), true);
+				}
+		   			   
 			}
 		///////************Get all**********************
 		
@@ -127,11 +124,15 @@ public class ProgramSteps {
 		public void user_receives_ok_status_with_response_body() {
 			
 		    ValidatableResponse valid_resp= resp.then();
-		 //  int id= resp.jsonPath().getInt("programId");
-		   //System.out.println("Program id : -"+id);
-		    System.out.println(resp.getStatusCode());
-			//System.out.println(resp.getBody().asPrettyString());
-			valid_resp.assertThat().statusCode(200);    
+			valid_resp.assertThat().statusCode(200)
+								.and()
+								.body(JsonSchemaValidator
+										.matchesJsonSchema(getClass()
+												.getClassLoader()
+												.getResourceAsStream("ProgramSchema.json")));
+						
+			 //  int id= resp.jsonPath().getInt("programId");
+			   //System.out.println("Program id : -"+id);
 		}
 		
 		////*******Get One Pgm by Id************
@@ -145,16 +146,16 @@ public class ProgramSteps {
 				resp= requestSpec.when().get("/programs/"+pgmid);	
 		}
 		
-		@Then("User receives valid or invalid as {string} and {int} with response body.")
-		public void user_receives_status_and_details(String option,Integer statuscode) {
-			int GetIdstatuscode = resp.getStatusCode();
+		@Then("User receives valid or invalid  {string} with response body.")
+		public void user_receives_status_and_details(String option) {
+			//int GetIdstatuscode = resp.getStatusCode();
+			String jsonString =resp.asString();
 		    if(option.equals("valid")) {
 				resp.then()
 					.assertThat()
 					.statusCode(200)
 					.and()
 					.body(JsonSchemaValidator.matchesJsonSchema(new File("src\\test\\resources\\ProgramSchema.json")));
-					//.header("Connection","keep-alive");
 				System.out.println(resp.getBody().asPrettyString());
 				
 		    }
@@ -162,9 +163,9 @@ public class ProgramSteps {
 		    	System.out.println("Invalid Program Id!");
 		    	resp.then()
 				.assertThat()
-				.statusCode(404)
-				.and()
-				.body(JsonSchemaValidator.matchesJsonSchema(new File("src\\test\\resources\\ProgramSchema.json")));				
+				.statusCode(404);
+		    	assertEquals(jsonString.contains("not found"), true);
+				//.body(JsonSchemaValidator.matchesJsonSchema(new File("src\\test\\resources\\ProgramSchema.json")));				
 		    	//System.out.println(resp.getBody().asPrettyString());
 		    	
 		    }
