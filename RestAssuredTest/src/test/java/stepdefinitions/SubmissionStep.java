@@ -16,6 +16,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import utilities.ConstantURL;
 
 public class SubmissionStep {
 
@@ -68,7 +69,7 @@ public class SubmissionStep {
 
 	@When("User creates GET Request for the LMS API endpoint with valid Assignment ID in submission module")
 	public void user_creates_get_request_for_the_lms_api_endpoint_with_valid_assignment_id_in_submission_module() {
-		response = request.get(SubmissionRoutes.getsubmissionByAssignmentId(3197));
+		response = request.get(SubmissionRoutes.getsubmissionByAssignmentId(3344));
 	}
 
 	@Then("User receives response ok status with response body for assignment ID in submission module")
@@ -105,13 +106,15 @@ public class SubmissionStep {
 	public void user_creates_get_request_for_the_lms_api_endpoint_with_valid_student_id_for_submission_module() {
 	    
 		RestAssured.baseURI = baseUrl;
+		System.out.println(baseUrl);
 		request = RestAssured.given();
 	}
 
 	@When("User sends HTTPS Request for Student ID for submission module")
 	public void user_sends_https_request_for_student_id_for_submission_module() {
-	    
-		response = request.get(SubmissionRoutes.getGradeByStudentId("U7876"));
+	  
+		response = request.get(SubmissionRoutes.getGradeByStudentId("U8158"));
+		System.out.println(response.asPrettyString());
 		
 	}
 
@@ -154,7 +157,7 @@ public class SubmissionStep {
 
 	@When("User sends HTTPS Request for Batch ID for submission module")
 	public void user_sends_https_request_for_batch_id_for_submission_module() {
-		response = request.get(SubmissionRoutes.getGradeBybatchId(6500));	    
+		response = request.get(SubmissionRoutes.getGradeBybatchId(6463));	    
 	}
 
 	@Then("User receives response ok status with response body for Batch ID for submission module")
@@ -199,7 +202,7 @@ public class SubmissionStep {
 	@When("User sends HTTPS Request for submission by Batch ID for submission module")
 	public void user_sends_https_request_for_submission_by_batch_id_for_submission_module() {
 		
-		response = request.get(SubmissionRoutes.getsubmissionBybatchId(6500));
+		response = request.get(SubmissionRoutes.getsubmissionBybatchId(6463));
 	}
 
 	@Then("User receives response ok status with response body for submission by Batch ID")
@@ -221,7 +224,7 @@ public class SubmissionStep {
 	@When("User sends HTTPS Request for submission by Invalid Batch ID")
 	public void user_sends_https_request_for_submission_by_invalid_batch_id() {
 		
-		response = request.get(SubmissionRoutes.getsubmissionBybatchId(6500));
+		response = request.get(SubmissionRoutes.getsubmissionBybatchId(6666));
 	}
 
 	@Then("User receives Not Found Status with message and boolean success details for submission by Batch ID")
@@ -243,7 +246,7 @@ public class SubmissionStep {
 	@When("User sends HTTPS Request for submission by UserID")
 	public void user_sends_https_request_for_submission_by_user_id() {
 	    
-		response = request.get(SubmissionRoutes.getsubmissionByUserId("U7876"));
+		response = request.get(SubmissionRoutes.getsubmissionByUserId("U8158"));
 		
 	}
 
@@ -284,19 +287,19 @@ public class SubmissionStep {
 	public void user_creates_post_request_for_the_lms_api_endpoint_for_submission() {
 	    
 		AddSubmission submission = new AddSubmission();
-		submission.assignmentId(3276);
-		submission.userId("U7876");
+		submission.assignmentId(3352);
+		submission.userId("U8158");
 		submission.subDesc("Testing");
-		submission.subcomments("team2-testing turtles");
+		submission.subcomments("testing MIP");
 		submission.subPathAttach1("null");
 		submission.subPathAttach2("file2.json");
 		submission.subPathAttach3("file3.json");
 		submission.subPathAttach4("file4.json");
 		submission.subPathAttach5("file5.json");
-		submission.subDateTime("07-23-2023 11:36:00");
+		submission.subDateTime("07-26-2023 11:36:00");
 		submission.gradedBy("U7876");
-		submission.gradedDateTime("");
-		submission.grade("");
+		submission.gradedDateTime("07-27-2023 11:36:00");
+		submission.grade("5");
 		
 		
 		
@@ -322,6 +325,45 @@ public class SubmissionStep {
 		System.out.println(response.getStatusCode());
 	}
 
+
+
+// tag 13 Postrequest_with_Negative_scenario1
+	
+	@Given("User creates POST Request for the LMS API endpoint for submission module")
+	public void user_creates_post_request_for_the_lms_api_endpoint_for_submission_module() {
+	    
+		this.baseUrl=ConstantURL.Post_URl;
+		this.request=RestAssured.given().header("Content-Type", "application/json");
+		
+		
+	}
+
+	@When("User sends HTTPS Request and request Body with Mandatory field	from {string} and {int} submission module")
+	public void user_sends_https_request_and_request_body_with_mandatory_field_from_and_submission_module(String string, Integer int1) {
+	   
+	}
+
+	@Then("User receives Bad request status created status with response body for post request submission module")
+	public void user_receives_bad_request_status_created_status_with_response_body_for_post_request_submission_module() {
+	    
+	}
+	
+	// tag 14 Postrequest_with_Negative_scenario2
+
+	@Given("User creates POST Request for the submission module LMS API endpoint")
+	public void user_creates_post_request_for_the_submission_module_lms_api_endpoint() {
+	   
+	}
+
+	@When("User sends HTTPS Request and request Body without Mandatory field	from {string} and {int} submission module")
+	public void user_sends_https_request_and_request_body_without_mandatory_field_from_and_submission_module(String string, Integer int1) {
+	   
+	}
+
+	@Then("User receives Bad request with response body for post request submission module")
+	public void user_receives_bad_request_with_response_body_for_post_request_submission_module() {
+	    
+	}
 
 
 

@@ -14,12 +14,13 @@ public class SubmissionRoutes {
 	
 	public static String getGradeByStudentId(String studentId)
 	{
-		return "/assignmentsubmission/getGrades/" + studentId;
+		System.out.println(studentId);
+		return "/assignmentsubmission/getGradesByStudentId/" + studentId;
 	}
 		
 	public static String getGradeBybatchId(Integer batchId)
 	{
-		return "/assignmentsubmission/getGrades/" + batchId;
+		return "/assignmentsubmission/grades/" + batchId;
 	}
 
 	public static String getsubmissionByUserId(String userId)
