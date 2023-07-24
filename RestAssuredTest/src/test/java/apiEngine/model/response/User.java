@@ -11,7 +11,7 @@ public class User {
 	public String userLinkedinUrl;
 	public String userLocation;
 	public String userMiddleName;
-	public Integer userPhoneNumber;
+	public long userPhoneNumber;
 	public String userTimeZone;
 	public String userVisaStatus;
 }
