@@ -1,7 +1,9 @@
 package dataProviders;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -38,6 +40,23 @@ public class ConfigReader {
 	
 	public static String getProperty( String key) {
 		return properties.getProperty(key);
+	}
+	
+	public static void setProperty(String key, String value) throws IOException {
+		
+		FileOutputStream out;
+		try {
+			out = new FileOutputStream(propertyFilePath);
+			properties.setProperty(key, value);;
+			properties.store(out, null);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+			
+	
+		 
 	}
 
 }

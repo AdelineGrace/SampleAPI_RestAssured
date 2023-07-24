@@ -2,6 +2,8 @@ package apiTests;
 
 import java.util.List;
 
+import apiEngine.endpoints.ProgramEndpoints;
+import apiEngine.model.request.AddProgramRequest;
 import apiEngine.model.response.Assignment;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -12,14 +14,19 @@ public class FirstTest {
 	
 	public static void main(String[] args) {
 		
+		ProgramEndpoints endPoint = new ProgramEndpoints("https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms");
+		AddProgramRequest programReq = new AddProgramRequest("TestingTurtles_59871", "Active", "testing");
+		 Response response = endPoint.CreateProgram(programReq);
+		
 		String baseUrl = "https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms";
 		RequestSpecification request;
-		Response response;
 		
 		RestAssured.baseURI = baseUrl;
 		
+		
+		
 		// Get Request
-		request = RestAssured.given().log().all();
+		request = RestAssured.given();
 		
         response = request.get("/assignments");
         
