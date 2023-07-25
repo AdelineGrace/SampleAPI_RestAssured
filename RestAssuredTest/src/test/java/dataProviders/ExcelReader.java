@@ -1,5 +1,4 @@
 package dataProviders;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,8 +16,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import utilities.LoggerLoad;
 
 
+//>>>>>>> branch 'preetha' of https://github.com/twinklejain22/Team2_TestingTurtles.git
 
 public class ExcelReader {
+	
+
 
 	private static XSSFSheet excelSheet;
 	private static XSSFWorkbook excelWorkbook;
@@ -104,6 +106,7 @@ public class ExcelReader {
 		return dataMap;
 	}
 
+	
 	public static void main(String []args) throws Exception {
 		Map<String,String> dataMap = new HashMap<String, String>();
 		dataMap = getData("updateBooking21","sheet1");
