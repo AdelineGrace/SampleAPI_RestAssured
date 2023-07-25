@@ -329,7 +329,7 @@ public class ProgramSteps {
 		public void user_sends_put_request_body_with_invalid_program_id() {
 			Integer getPgmId=30;
 			AddProgramRequest pgmresp;
-			pgmresp = new AddProgramRequest(30,"JUL-23-RESTAPI-Turtle01_New","InActive","JUL-23-RESTAPI-Turtle01_DESC_New");
+			pgmresp = new AddProgramRequest("JUL-23-RESTAPI-Turtle01_New","InActive","JUL-23-RESTAPI-Turtle01_DESC_New");
 			resp = requestSpec.body(pgmresp).put("/putprogram/"+getPgmId);		
 		    
 		}

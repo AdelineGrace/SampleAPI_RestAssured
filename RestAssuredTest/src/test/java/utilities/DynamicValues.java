@@ -1,10 +1,13 @@
 package utilities;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class DynamicValues {
 	
 	public static String SerialNumber()
 	{
-		return String.valueOf(Math.floor(Math.random() * 100000));
+		return RandomStringUtils.randomNumeric(3);
+		
 	}
 	
 	public static int PhoneNumber()
