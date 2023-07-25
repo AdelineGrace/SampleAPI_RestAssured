@@ -120,7 +120,7 @@ public class AssignmentSteps extends BaseStep {
 		// delete batch
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
-		response = request.delete(ProgramBatchRoutes.deleteBatch(batchId));
+		response = request.delete(ProgramBatchRoutes.deleteBatch(batchId,"valid"));
 		
 		// delete program
 		RestAssured.baseURI = baseUrl;
