@@ -4,7 +4,6 @@ import java.util.List;
 
 import apiEngine.model.request.AddAssignmentRequest;
 import apiEngine.model.response.Assignment;
-import apiEngine.response.RestResponse;
 import apiEngine.routes.AssignmentRoutes;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -20,17 +19,15 @@ public class AssignmentEndpoints {
 		this.baseUrl = baseUrl;
 	}
 	
-	public RestResponse<Assignment> CreateAssignment(AddAssignmentRequest assignmentReq)
+	public Response CreateAssignment(AddAssignmentRequest assignmentReq)
 	{
 		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json");
 		Response response = request.body(assignmentReq).post(AssignmentRoutes.createAssignment());
 		System.out.println("response - " + response.asPrettyString());
-		Assignment assignmentRes = response.getBody().as(Assignment.class);
-		System.out.println(assignmentRes.assignmentId);
 		
-		return new RestResponse<Assignment>(Assignment.class, response);
+		return response;
 	}
 	
 	public void GetAllAssignments()

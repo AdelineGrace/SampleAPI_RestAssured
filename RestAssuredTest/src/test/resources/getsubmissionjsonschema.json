@@ -1,0 +1,76 @@
+{
+    "type": "array",
+    "required": [
+            "submissionId",
+            "assignmentId",
+            "userId",
+            "subDesc",
+            "subComments",
+            "subPathAttach1",
+            "subPathAttach2",
+            "subPathAttach3",
+            "subPathAttach4",
+            "subPathAttach5",
+            "subDateTime",
+            "gradedBy",
+            "gradedDateTime",
+            "grade"
+        ],
+        "properties": {
+            "submissionId": {
+                "type": "integer",
+                },
+            "assignmentId": {
+                "type": "integer",
+                
+            },
+            "userId": {
+                "type": "string",
+                
+            },
+            "subDesc": {
+                "type": "string",
+                
+            },
+            "subComments": {
+                "type": "string",
+                
+            },
+            "subPathAttach1": {
+                "type": "string",
+                
+            },
+            "subPathAttach2": {
+                "type": "string",
+                
+            },
+            "subPathAttach3": {
+                "type": "string",
+                
+            },
+            "subPathAttach4": {
+                "type": "string",
+                
+            },
+            "subPathAttach5": {
+                "type": "string",
+                
+            },
+            "subDateTime": {
+                "type": "string",
+                
+            },
+            "gradedBy": {
+                "type": "null",
+                
+            },
+            "gradedDateTime": {
+                "type": "null",
+                 },
+            "grade": {
+                "type": "integer",
+               }
+        }
+        
+    
+}
