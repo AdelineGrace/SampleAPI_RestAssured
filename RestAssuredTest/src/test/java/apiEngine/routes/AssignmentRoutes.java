@@ -17,9 +17,14 @@ public class AssignmentRoutes {
 		return "/assignments/" + assignmentId;
 	}
 	
+	public static String getAssignmentByBatchId(Integer batchId)
+	{
+		return "/assignments/batch/" + batchId;
+	}
+	
 	public static String deleteAssignmentById(Integer assignmentId)
 	{
-		return "assignments/" + assignmentId;
+		return "/assignments/" + assignmentId;
 	}
 
 }
