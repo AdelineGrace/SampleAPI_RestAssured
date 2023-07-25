@@ -8,36 +8,45 @@ Feature: Assignment module
     Then User receives response for POST "<sheetName>" with "<dataKey>"
 
     Examples: 
-      | sheetName  | dataKey               |
-      | assignment | Post_Assignment_Valid |
+      | sheetName  | dataKey                  |
+      | assignment | Post_Assignment_Valid    |
       | assignment | Post_Assignment_Existing |
-      
-  #@GetAllAssignments
-  #Scenario: Check if user able to retrieve a record with valid LMS API
-    #Given User creates GET Request for the LMS API endpoint
-    #When User sends GetAllAssignments Request
-    #Then User receives OK Status with response body containing all assignments
-#
-  #@GetAssignmentByID
-  #Scenario: Check if user able to retrieve a record with valid Assignment ID
-    #Given User creates GET Request for the LMS API endpoint with valid Assignment ID
-    #When User sends GetAssignmentByAssignmentid Request with valid id
-    #Then User receives OK Status with response body containing valid assignment
-#
-  #@GetAssignmentByID
-  #Scenario: Check if user able to retrieve a record with invalid Assignment ID
-    #Given User creates GET Request for the LMS API endpoint with invalid Assignment ID
-    #When User sends GetAssignmentByAssignmentid Request with invalid id
-    #Then User receives Not Found Status with message and boolean success details
-#
-  #@DeleteAssignmentByID
-  #Scenario: Check if user able to delete a record with valid Assignment ID
-    #Given User creates DELETE Request for the LMS API endpoint with valid Assignment Id
-    #When User sends the Delete Request
-    #Then User receives Ok status with message
-#
-  #@DeleteAssignmentByID
-  #Scenario: Check if user able to delete a record with valid LMS API and invalid Assignment Id
-    #Given User creates DELETE Request for the LMS API endpoint with invalid Assignment Id
-    #When User sends the Delete Request with invalid id
-    #Then User receives Not Found Status with valid message and boolean success details
+
+  @GetAllAssignments
+  Scenario: Check if user able to retrieve a record with valid LMS API
+    Given User creates GET Request for the LMS API endpoint
+    When User sends GetAllAssignments Request
+    Then User receives OK Status with response body containing all assignments
+
+  @GetAssignmentByAssignmentID @GetAssignmentByBatchID
+  Scenario Outline: Check if user able to retrieve a record with valid Assignment or Batch ID
+    Given User creates GET Request for the LMS API endpoint with "<scenario>" scenario
+    When User sends "<scenario>" Request with valid id
+    Then User receives OK Status with response body containing valid assignment "<scenario>"
+
+    Examples: 
+      | scenario                         |
+      | Get_Assignment_ValidAssignmentId |
+      | Get_Assignment_ValidBatchId      |
+
+  @DeleteAssignmentByAssignmentID
+  Scenario Outline: Check if user able to delete a record with valid and invalid Assignment ID
+    Given User creates DELETE Request for the LMS API endpoint with "<dataKey>" scenario
+    When User sends the HTTP Delete Request
+    Then User receives response for DELETE "<sheetName>" with "<dataKey>"
+
+    Examples: 
+      | sheetName  | dataKey                     |
+      | assignment | Delete_Assignment_ValidId   |
+      | assignment | Delete_Assignment_DeletedId |
+
+  @GetAssignmentByDeletedAssignmentID @GetAssignmentByDeletedBatchID
+  Scenario Outline: Check if user able to retrieve a record with invalid Assignment or batch ID
+    Given User creates GET Request for the LMS API endpoint with "<scenario>"
+    When User sends "<scenario>" Request with invalid id
+    Then User receives Not Found Status with message and boolean success details "<scenario>"
+
+    Examples: 
+      | scenario                           |
+      | Get_Assignment_DeletedAssignmentId |
+      | Get_Assignment_DeletedBatchId      |

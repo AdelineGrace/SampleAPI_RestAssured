@@ -6,7 +6,7 @@ public class DynamicValues {
 	
 	public static String SerialNumber()
 	{
-		return RandomStringUtils.randomNumeric(3);
+		return RandomStringUtils.randomNumeric(5);
 		
 	}
 	
