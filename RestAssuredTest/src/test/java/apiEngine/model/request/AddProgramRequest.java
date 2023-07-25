@@ -1,8 +1,10 @@
 package apiEngine.model.request;
 
+import utilities.LoggerLoad;
+
 public class AddProgramRequest {
 	
-	public Integer programID;
+	
 	public String programDescription;
 	public String programName;
 	public String programStatus;
@@ -12,13 +14,8 @@ public class AddProgramRequest {
         this.programName = programName;
         this.programStatus = programStatus;
         this.programDescription = programDescription;
+        LoggerLoad.logInfo("Progam Request: programName: "+programName+ "programStatus: "+ programStatus+"programDescription: "+programDescription);
     }
-    public AddProgramRequest(Integer programID,String programName, String programStatus, String programDescription)
-    {
-    	this.programID = programID;
-        this.programName = programName;
-        this.programStatus = programStatus;
-        this.programDescription = programDescription;
-    }
+   
 
 }
