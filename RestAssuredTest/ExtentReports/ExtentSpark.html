@@ -1,0 +1,1691 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Ds-Algo-Cucumber-Framework</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa bdd-report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Extent Spark Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Jul 26, 2023 15:03:00</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('category-view')">
+<a id="nav-category" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-tag"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Jul 26, 2023 15:03:00</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Jul 26, 2023 15:03:32</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Features Passed</p>
+<h3>1</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Features Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Features</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>1</b> features passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> features failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Scenarios</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='child-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'><b>23</b> scenarios passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> scenarios failed,
+<b>0</b> skipped, <b data-tooltip='%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Steps</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='grandchild-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'><b>69</b> steps passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> steps failed,
+<b>0</b> skipped, <b data-tooltip='%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Assignment module":30.052
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 category-container">
+<div class="card">
+<div class="card-header"><p>Tags</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead><tbody>
+<tr>
+<td>@CreateAssignment</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@GetAssignmentByDeletedBatchID</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@GetAssignmentByAssignmentID</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@GetAssignmentByBatchID</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@GetAssignmentByDeletedAssignmentID</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@DeleteAssignmentByAssignmentID</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@UpdateAssignment</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@Assignment</td>
+<td>23</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@GetAllAssignments</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 1,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 23,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 69,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+};
+</script><div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tag"></i></a>
+<ul id="tag-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" href="#">@CreateAssignment</a><a class="dropdown-item" href="#">@GetAssignmentByDeletedBatchID</a><a class="dropdown-item" href="#">@GetAssignmentByAssignmentID</a><a class="dropdown-item" href="#">@GetAssignmentByBatchID</a><a class="dropdown-item" href="#">@GetAssignmentByDeletedAssignmentID</a><a class="dropdown-item" href="#">@DeleteAssignmentByAssignmentID</a><a class="dropdown-item" href="#">@UpdateAssignment</a><a class="dropdown-item" href="#">@Assignment</a><a class="dropdown-item" href="#">@GetAllAssignments</a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Assignment module</p>
+            <p class="text-sm">
+              <span>3:03:02 PM</span> / <span>00:00:30:052</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Assignment module</h5>
+<span class='badge badge-success'>07.26.2023 3:03:02 PM</span>
+<span class='badge badge-danger'>07.26.2023 3:03:32 PM</span>
+<span class='badge badge-default'>00:00:30:052</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-10 m-l-5"></div>
+</div>
+</div>
+<div class="accordion mt-4">
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="2"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "<dataKey>" endpoint and request body</div>
+      </div>
+    </div>
+        <div class="scenario_outline collapse">
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="3"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_Valid"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_Valid"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_Valid"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="7"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_Existing"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_Existing"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_Existing"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="11"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_MissingAssignmentName"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_MissingAssignmentName"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_MissingAssignmentName"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="15"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_MissingDueDate"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_MissingDueDate"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_MissingDueDate"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="19"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_MissingAssignmentDescription"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_MissingAssignmentDescription"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_MissingAssignmentDescription"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="23"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_MissingBatchId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_MissingBatchId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_MissingBatchId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="27"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_MissingCreatedBy"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_MissingCreatedBy"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_MissingCreatedBy"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="31"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates POST Assignment Request for the LMS API with fields from "assignment" with "Post_Assignment_MissingGraderId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTP POST Assignment Request for "Post_Assignment_MissingGraderId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for POST "assignment" with "Post_Assignment_MissingGraderId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="35"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to retrieve a record with valid LMS API</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="stepdefinitions.AssignmentSteps.user_creates_get_request_for_the_lms_api_endpoint()">
+                <span>Given User creates GET Request for the LMS API endpoint</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="stepdefinitions.AssignmentSteps.user_sends_GetAllAssignments_request()">
+                <span>When User sends GetAllAssignments Request</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="stepdefinitions.AssignmentSteps.user_receives_ok_status_with_response_body_containing_all_assignments()">
+                <span>Then User receives OK Status with response body containing all assignments</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="39"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to retrieve a record with valid Assignment or Batch ID</div>
+      </div>
+    </div>
+        <div class="scenario_outline collapse">
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="40"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to retrieve a record with valid Assignment or Batch ID</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates GET Request for the LMS API endpoint with "Get_Assignment_ValidAssignmentId" scenario</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends "Get_Assignment_ValidAssignmentId" Request with valid id</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives OK Status with response body containing valid assignment "Get_Assignment_ValidAssignmentId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="44"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to retrieve a record with valid Assignment or Batch ID</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates GET Request for the LMS API endpoint with "Get_Assignment_ValidBatchId" scenario</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends "Get_Assignment_ValidBatchId" Request with valid id</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives OK Status with response body containing valid assignment "Get_Assignment_ValidBatchId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="48"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "<dataKey>", AssignmentId and request body</div>
+      </div>
+    </div>
+        <div class="scenario_outline collapse">
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="49"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_ValidId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_ValidId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_ValidId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="53"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_InvalidId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_InvalidId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_InvalidId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="57"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_MissingAssignmentName"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_MissingAssignmentName"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_MissingAssignmentName"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="61"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_MissingDueDate"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_MissingDueDate"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_MissingDueDate"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="65"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_MissingAssignmentDescription"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_MissingAssignmentDescription"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_MissingAssignmentDescription"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="69"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_MissingBatchId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_MissingBatchId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_MissingBatchId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="73"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_MissingCreatedBy"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_MissingCreatedBy"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_MissingCreatedBy"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="77"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates PUT Request for the LMS API endpoint with fields from "assignment" with "Put_Assignment_MissingGraderId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends HTTPS PUT AssignmentRequest for "Put_Assignment_MissingGraderId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for PUT "assignment" with "Put_Assignment_MissingGraderId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="81"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to delete a record with valid and invalid Assignment ID</div>
+      </div>
+    </div>
+        <div class="scenario_outline collapse">
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="82"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to delete a record with valid and invalid Assignment ID</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates DELETE Request for the LMS API endpoint with "Delete_Assignment_ValidId" scenario</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends the HTTP Delete Request</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for DELETE "assignment" with "Delete_Assignment_ValidId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="86"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to delete a record with valid and invalid Assignment ID</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates DELETE Request for the LMS API endpoint with "Delete_Assignment_DeletedId" scenario</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends the HTTP Delete Request</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives response for DELETE "assignment" with "Delete_Assignment_DeletedId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="90"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to retrieve a record with invalid Assignment or batch ID</div>
+      </div>
+    </div>
+        <div class="scenario_outline collapse">
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="91"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to retrieve a record with invalid Assignment or batch ID</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates GET Request for the LMS API endpoint with "Get_Assignment_DeletedAssignmentId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends "Get_Assignment_DeletedAssignmentId" Request with invalid id</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives Not Found Status with message and boolean success details "Get_Assignment_DeletedAssignmentId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="95"><span class="badge log pass-bg mr-2">Pass</span>Check if user able to retrieve a record with invalid Assignment or batch ID</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given User creates GET Request for the LMS API endpoint with "Get_Assignment_DeletedBatchId"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When User sends "Get_Assignment_DeletedBatchId" Request with invalid id</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then User receives Not Found Status with message and boolean success details "Get_Assignment_DeletedBatchId"</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+  </div>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="test-wrapper row view category-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Category</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">9</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>8</span>
+</span>
+<p class="name">@CreateAssignment</p>
+<p class="duration text-sm">8 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@CreateAssignment</h4>
+<span status="pass" class='badge log pass-bg'>8 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:02 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='3'>Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:11 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='7'>Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='11'>Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='15'>Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:15 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='19'>Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:16 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='23'>Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:17 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='27'>Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:17 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='31'>Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByDeletedBatchID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByDeletedBatchID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:32 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByAssignmentID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByAssignmentID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:20 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByBatchID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByBatchID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:20 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByDeletedAssignmentID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByDeletedAssignmentID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:32 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@DeleteAssignmentByAssignmentID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@DeleteAssignmentByAssignmentID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='82'>Check if user able to delete a record with valid and invalid Assignment ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:30 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='86'>Check if user able to delete a record with valid and invalid Assignment ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>8</span>
+</span>
+<p class="name">@UpdateAssignment</p>
+<p class="duration text-sm">8 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@UpdateAssignment</h4>
+<span status="pass" class='badge log pass-bg'>8 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='49'>Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:22 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='53'>Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:23 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='57'>Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:23 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='61'>Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:24 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='65'>Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='69'>Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='73'>Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:27 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='77'>Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>23</span>
+</span>
+<p class="name">@Assignment</p>
+<p class="duration text-sm">23 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@Assignment</h4>
+<span status="pass" class='badge log pass-bg'>23 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:02 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='3'>Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:11 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='7'>Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='11'>Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='15'>Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:15 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='19'>Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:16 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='23'>Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:17 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='27'>Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:17 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='31'>Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:18 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='35'>Check if user able to retrieve a record with valid LMS API</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid LMS API</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:20 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='49'>Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:22 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='53'>Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:23 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='57'>Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:23 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='61'>Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:24 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='65'>Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='69'>Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='73'>Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:27 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='77'>Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='82'>Check if user able to delete a record with valid and invalid Assignment ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:30 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='86'>Check if user able to delete a record with valid and invalid Assignment ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:32 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>1</span>
+</span>
+<p class="name">@GetAllAssignments</p>
+<p class="duration text-sm">1 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAllAssignments</h4>
+<span status="pass" class='badge log pass-bg'>1 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>15:03:18 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='35'>Check if user able to retrieve a record with valid LMS API</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid LMS API</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>
