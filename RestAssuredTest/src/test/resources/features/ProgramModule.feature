@@ -19,124 +19,115 @@
 @ProgramModule
 Feature: PROGRAM MODULE
 
-  @PostTag
+  @01PostTag
   Scenario Outline: Check if user able to create a program for existing, non existing and missing mandatory field.
-    Given User creates POST Request with fields "<Sheetname>" and "<option>" from excel
+    Given User creates POST Request with fields "<KeyOption>" and "<Sheetname>" from excel
     When User sends request Body with mandatory , additional  fields.
-    Then User receives Status with response body "<Sheetname>" and "<option>" from excel.
+    Then User receives Status with response body "<KeyOption>" and "<Sheetname>" from excel.
 
     Examples: 
-      | Sheetname   | option|
-      | ProgramPost | postNew|
-      | ProgramPost | postNew1|
-      | ProgramPost | postExist|
-      | ProgramPost | postMissing|
+      | KeyOption   | Sheetname     |
+      | postNew     | ProgramModule |
+      | postNew1    | ProgramModule |
+      | postExist   | ProgramModule |
+      | postMissing | ProgramModule |
 
-   @GetAllTag
-   Scenario: Check if user able to retrieve all programs with valid LMS API
-    Given User creates GET Request for the LMS API endpoint for Program Module
-    When User sends HTTPS Request in Program Module
-    Then User receives 200 OK Status with response body.
-  
-  @Get_pgmId
-  Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
-    Given User creates GET Request for the LMS API endpoint for Program Module
-    When User sends HTTPS Request with valid or invalid for  <programId>
-    Then User receives valid or invalid  "<option>" with response body for ProgramModule.
+  @02GetAllTag02
+  Scenario: Check if user able to retrieve all GET ALL programs with valid LMS API
+  Given User creates GET ALL Request for the LMS API endpoint for Program Module
+  When User sends HTTPS Request in Program Module
+  Then User receives 200 OK Status with response body for Program Module
+ 
+  @03Get_pgmId
+  Scenario Outline: Check if user able  GET  a program with valid & invalid program ID and LMS API
+    Given User creates GET BY ID Request for the LMS API endpoint for Program Module
+    When User sends HTTPS Request with valid or invalid  Program Id from "<KeyOption>"  Program Module.
+    Then User receives valid or invalid  "<KeyOption>" with response body for ProgramModule.
 
     Examples: 
-      | option  | programId |
-      | valid   |     13857 |
-      | invalid |        10 |
+      | KeyOption      | 
+      | Get_Id_valid   | 
+      | Get_Id_invalid | 
 
-  @PutByID_Valid
-  Scenario Outline: Check if user able to update a program with valid programID
+  @04PutByID_Valid
+  Scenario Outline: Check if user able to update a program with "<KeyOption>" valid programID
     Given User creates PUT Request with programID for Program Module.
-    When User sends PUT request Body with valid programID for Program Module
+    When User sends PUT request with valid programID from "<KeyOption>" and "<Sheetname>" for Program Module
     Then User receives Status with response body for the "<KeyOption>" for Program Module.
 
     Examples: 
-       | KeyOption    |
-       | putIdValid   |
-       
-      
- @PutByID_invalid
+      | KeyOption  | Sheetname     |
+      | putIdValid | ProgramModule |
+
+  @05PutByID_invalid
   Scenario Outline: Check if user able to update a program with invalid programID
     Given User creates PUT Request with programID for Program Module.
-    When User sends PUT request Body with invalid programID for Program Module
+    When User sends PUT request with invalid programID from "<KeyOption>" and "<Sheetname>" for Program Module
     Then User receives Status with response body for the "<KeyOption>" for Program Module.
 
     Examples: 
-       | KeyOption    |
-       | putIdInvalid |
-      
-      
-   @PutByID_missing
-  Scenario Outline: Check if user able to update a program with missing field
+      | KeyOption    | Sheetname     |
+      | putIdInvalid | ProgramModule |
+
+  @06PutByID_missing
+  Scenario Outline: Check if user able to update a program with missing field Program Id
     Given User creates PUT Request with programID for Program Module.
-    When User sends PUT request Body with missing programID for Program Module
+    When User sends PUT request  with missing programID from "<KeyOption>" and "<Sheetname>" for Program Module
     Then User receives Status with response body for the "<KeyOption>" for Program Module.
 
     Examples: 
-       | KeyOption    |
-      | putIdMissing |
-      
-   @PutByName_Valid
-  Scenario Outline: Check if user able to update a program with valid programName
-    Given User creates PUT Request with programName for Program Module.
-    When User sends PUT request Body with valid programName for Program Module
-    Then User receives Status for the "<KeyName>" for Program Module with programName.
+      | KeyOption    | Sheetname     |
+      | putIdMissing | ProgramModule |
 
-    Examples: 
-       | KeyName    |
-       | putNameValid   |
-       
-      
- @PutByName_invalid
-  Scenario Outline: Check if user able to update a program with invalid programName
-    Given User creates PUT Request with programName for Program Module.
-    When User sends PUT request Body with invalid programName for Program Module
-    Then User receives Status for the "<KeyName>" for Program Module with programName.
-
-    Examples: 
-       | KeyName    |
-       | putNameInvalid |
-      
-      
-   @PutByName_missing
+  @07PutByName_missing
   Scenario Outline: Check if user able to update a program with missing field programName
     Given User creates PUT Request with programName for Program Module.
-    When User sends PUT request Body with missing programName for Program Module
-    Then User receives Status for the "<KeyName>" for Program Module with programName.
+    When User sends PUT request Body with missing programName from "<KeyOption>" and "<Sheetname>"  for Program Module
+    Then User receives Status for the "<KeyOption>" for Program Module with programName.
 
     Examples: 
-       | KeyName    |
-      | putNameMissing |
-      
+      | KeyOption      | Sheetname     |
+      | putNameMissing | ProgramModule |
 
+  @08PutByName_Valid
+  Scenario Outline: Check if user able to update a program with valid programName for Program Module
+    Given User creates PUT Request with programName for Program Module.
+    When User sends PUT request Body with valid programName from "<KeyOption>" and "<Sheetname>"  for Program Module
+    Then User receives Status for the "<KeyOption>" for Program Module with programName.
 
-  @Delete_pgmName
-  Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
+    Examples: 
+      | KeyOption    | Sheetname     |
+      | putNameValid | ProgramModule |
+
+  @09PutByName_invalid
+  Scenario Outline: Check if user able to update a program with invalid programName for Program Module
+    Given User creates PUT Request with programName for Program Module.
+    When User sends PUT request Body with invalid programName from "<KeyOption>" and "<Sheetname>"  for Program Module
+    Then User receives Status for the "<KeyOption>" for Program Module with programName.
+
+    Examples: 
+      | KeyOption      | Sheetname     |
+      | putNameInvalid | ProgramModule |
+
+  @10Delete_pgmName
+  Scenario Outline: Check if user able to DELETE a program with valid & invalid program Name and LMS API
     Given User creates DELETE Request for the LMS API endpoint for Program Module
-    When User sends Delete Request with valid or invalid ProgramName "<programName>".
-    Then User receives status as "<option>"  with response body for ProgramModule.
+    When User sends Delete Request with valid or invalid ProgramName from "<KeyOption>" and "<Sheetname>" for Program Module
+    Then User receives status as "<KeyOption>"  with response body for ProgramModule.
 
     Examples: 
-      | option  | programName             |
-      | valid   | JUL-23-RESTAPI-Turtle01_New |
-      | invalid | SQL-20-Teams            |
+      | KeyOption             | Sheetname     |
+      | Delete_pgmNamevalid   | ProgramModule |
+      | Delete_pgmNameinvalid | ProgramModule |
 
-  @Delete_pgmID_valid
-  Scenario: Check if user able to retrieve a program with valid & invalid program ID and LMS API
+  @11Delete_pgmID_valid
+  Scenario: Check if user able to DELETE a program with valid program ID and LMS API
     Given User creates DELETE Request for the LMS API endpoint for Program Module with PGMID
     When User sends DELETE Request with valid ProgramID
     Then User receives status for valid  Programid for ProgramModule
 
-      
-    @Delete_pgmID_invalid
-  Scenario: Check if user able to retrieve a program with valid & invalid program ID and LMS API
+  @12Delete_pgmID_invalid
+  Scenario: Check if user able to DElete a program with invalid program ID and LMS API
     Given User creates DELETE Request for the LMS API endpoint for Program Module with PGMID
     When User sends DELETE Request with invalid ProgramID
     Then User receives status for invalid  Programid for ProgramModule
-
-  
