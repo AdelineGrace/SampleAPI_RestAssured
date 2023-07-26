@@ -125,7 +125,7 @@ public class UserSteps extends BaseStep {
 			String userId = (String) iterator.next();
 			RestAssured.baseURI = baseUrl;
 			request = RestAssured.given();
-			response = request.delete(UserRoutes.deleteUser(userId));
+			response = request.delete(UserRoutes.deleteUserById(userId));
 			response.then().log().all();
 		}
 		// delete user
@@ -139,7 +139,7 @@ public class UserSteps extends BaseStep {
 		// delete program
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
-		response = request.delete(ProgramRoutes.deleteProgram(programId));
+		response = request.delete(ProgramRoutes.deleteProgramById(programId));
 		response.then().log().all();
 	}
 
