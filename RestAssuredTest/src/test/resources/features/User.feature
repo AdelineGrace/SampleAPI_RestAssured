@@ -19,61 +19,41 @@
 @ProgramBatch
 Feature: User 
   
-@CreateUser
-  Scenario Outline: Check if user able to add a user with "<dataKey>" endpoint and request body
-    Given User creates POST User Request for the LMS API with fields from "<sheetName>" with "<dataKey>"
-    When User sends HTTP POST User Request
-    Then User receives response for POST User "<sheetName>" with "<dataKey>"
 
-    Examples: 
-      | sheetName  | dataKey  |
-      | user | Post_User_Valid |
-      | user | Post_User_Existing |
-      | user |Post_User_Missing_PhoneNumber|
-      | user | Post_User_Missing_FirstName|
-      | user | Post_User_Missing_LastName|
-      | user | Post_User_Missing_RoleId|
-      | user | Post_User_Missing_RoleStatus|
-      | user | Post_User_Missing_TimeZone|
-      | user | Post_User_Missing_VisaStatus|
-      
- @UpdateUser
-  Scenario Outline: Check if user able to update a user with "<dataKey>" endpoint and request body
-    Given User creates PUT User Request for the LMS API with fields from "<sheetName>" with "<dataKey>"
-    When User sends HTTP PUT User Request "<dataKey>"
-    Then User receives response for PUT User "<sheetName>" with "<dataKey>"
 
-    Examples: 
-      | sheetName  | dataKey  |
-      | user | Put_User_Valid |
-      | user |Put_User_Missing_PhoneNumber|
-      | user | Put_User_Missing_FirstName|
-      | user | Put_User_Missing_LastName|
-      | user | Put_User_Missing_TimeZone|
-      | user | Put_User_Missing_VisaStatus|
-      
-  @UpdateUserRole
-  Scenario Outline: Check if user able to update a user role with "<dataKey>" endpoint and request body
-    Given User creates PUT User Role Request for the LMS API with fields from "<sheetName>" with "<dataKey>"
-    When User sends HTTP PUT User Role Request "<dataKey>"
-    Then User receives response for PUT User Role "<sheetName>" with "<dataKey>"
 
-    Examples: 
-      | sheetName  | dataKey  |
-      | user | Put_UserRole_Valid |
-      | user | Put_UserRole_Invalid |
-      | user |Put_UserRole_Missing_RoleId|
-      | user | Put_UserRole_Missing_RoleStatus|
+ @GetAllUsers
+  Scenario:Check if user able to retrieve all user with valid LMS API
+    Given User creates GET Request for the LMS API All User endpoint
+    When User sends HTTPS Request 
+    Then User receives OK Status with response body containing all users  
+    
+ @GetUserwithValidUserId
+  Scenario Outline: Check if user able to retrieve a user with valid User ID
+    Given User creates GET Request for the LMS API endpoint with "<userId>" valid User ID
+    When User sends HTTPS Request 
+    Then User receives OK Status with response body containing all users  
+     Examples:
+      | userId |
+      | U7988  |
       
-  @AssignUserBatch
-  Scenario Outline: Check if user able to update a user with batch "<dataKey>" endpoint and request body
-    Given User creates PUT User batch Request for the LMS API with fields from "<sheetName>" with "<dataKey>"
-    When User sends HTTP PUT User batch Request "<dataKey>"
-    Then User receives response for PUT User batch "<sheetName>" with "<dataKey>"
-
-    Examples: 
-      | sheetName  | dataKey  |
-      | user | Put_UserBatch_Valid |
-      | user | Put_UserBatch_Invalid |
-      | user | Put_UserBatch_Missing|
+ @GetUserwithinValidUserId
+  Scenario Outline: Check if user able to retrieve a user with invalid User ID
+    Given User creates GET Request for the LMS API endpoint with "<userId>" invalid User ID
+    When User sends HTTPS Request 
+    Then User receives "404" Not Found Status with message and boolean success details
+     Examples:
+      | userId |
+      | U79  |
       
+  @GetAllStaff
+  Scenario:Check if user able to retrieve a user with valid LMS API
+    Given User creates GET Request for the LMS API All Staff endpoint
+    When User sends HTTPS Request 
+    Then User receives 200 OK Status with response body
+    
+  @GetAllUsersWithRoles
+  Scenario:Check if user able to retrieve a user with valid LMS API
+    Given User creates GET Request for the LMS API User Roles endpoint
+    When User sends HTTPS Request 
+    Then User receives 200 OK Status with response body
