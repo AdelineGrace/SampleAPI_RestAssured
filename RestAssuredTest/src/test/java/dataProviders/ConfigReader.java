@@ -57,5 +57,10 @@ public class ConfigReader {
 	
 		 
 	}
+	
+	public static String getInvalidAssignmentId()
+	{
+		return properties.getProperty("assignment.invalidid");
+	}
 
 }

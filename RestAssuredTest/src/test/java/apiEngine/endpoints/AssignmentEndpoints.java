@@ -1,12 +1,9 @@
 package apiEngine.endpoints;
 
-import java.util.List;
 
 import apiEngine.model.request.AddAssignmentRequest;
-import apiEngine.model.response.Assignment;
 import apiEngine.routes.AssignmentRoutes;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -24,22 +21,61 @@ public class AssignmentEndpoints {
 		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json");
+		
 		Response response = request.body(assignmentReq).post(AssignmentRoutes.createAssignment());
-		System.out.println("response - " + response.asPrettyString());
 		
 		return response;
 	}
 	
-	public void GetAllAssignments()
+	public Response GetAllAssignments()
 	{
 		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
-		Response response = request.get(AssignmentRoutes.getAllAssignments());
-		System.out.println(response.getStatusCode());
-		System.out.println(response.asPrettyString());
 		
-		JsonPath jsonPathEvaluator = response.jsonPath();
-		List<Assignment> assignmentList = jsonPathEvaluator.getList("", Assignment.class);
-		System.out.print(assignmentList.get(0).assignmentId);
+		Response response = request.get(AssignmentRoutes.getAllAssignments());
+		
+		return response;
 	}
+	
+	public Response GetAssignmentByAssignmentId(int assignmentId)
+	{
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		
+		Response response = request.get(AssignmentRoutes.getAssignmentByAssignmentId(assignmentId));
+		
+		return response;
+	}
+	
+	public Response GetAssignmentByBatchId(int batchId)
+	{
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		
+		Response response = request.get(AssignmentRoutes.getAssignmentByBatchId(batchId));
+		
+		return response;
+	}
+	
+	public Response UpdateAssignment(AddAssignmentRequest assignmentReq, int assignmentId)
+	{
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		
+		Response response = request.body(assignmentReq).put(AssignmentRoutes.updateAssignmentById(assignmentId));
+		
+		return response;
+	}
+	
+	public Response DeleteAssignmentById(int assignmentId)
+	{
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		
+		Response response = request.delete(AssignmentRoutes.deleteAssignmentById(assignmentId));
+		
+		return response;
+	}
+	
 }

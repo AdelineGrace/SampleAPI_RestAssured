@@ -4,13 +4,19 @@ Feature: Assignment module
   @CreateAssignment
   Scenario Outline: Check if user able to add a record with "<dataKey>" endpoint and request body
     Given User creates POST Assignment Request for the LMS API with fields from "<sheetName>" with "<dataKey>"
-    When User sends HTTP POST Assignment Request
+    When User sends HTTP POST Assignment Request for "<dataKey>"
     Then User receives response for POST "<sheetName>" with "<dataKey>"
 
     Examples: 
-      | sheetName  | dataKey                  |
-      | assignment | Post_Assignment_Valid    |
-      | assignment | Post_Assignment_Existing |
+      | sheetName  | dataKey                                      |
+      | assignment | Post_Assignment_Valid                        |
+      | assignment | Post_Assignment_Existing                     |
+      | assignment | Post_Assignment_MissingAssignmentName        |
+      | assignment | Post_Assignment_MissingDueDate               |
+      | assignment | Post_Assignment_MissingAssignmentDescription |
+      | assignment | Post_Assignment_MissingBatchId               |
+      | assignment | Post_Assignment_MissingCreatedBy             |
+      | assignment | Post_Assignment_MissingGraderId              |
 
   @GetAllAssignments
   Scenario: Check if user able to retrieve a record with valid LMS API
@@ -28,6 +34,23 @@ Feature: Assignment module
       | scenario                         |
       | Get_Assignment_ValidAssignmentId |
       | Get_Assignment_ValidBatchId      |
+
+  @UpdateAssignment
+  Scenario Outline: Check if user able to update a record with "<dataKey>", AssignmentId and request body
+    Given User creates PUT Request for the LMS API endpoint with fields from "<sheetName>" with "<dataKey>"
+    When User sends HTTPS PUT AssignmentRequest for "<dataKey>"
+    Then User receives response for PUT "<sheetName>" with "<dataKey>"
+
+    Examples: 
+      | sheetName  | dataKey                                     |
+      | assignment | Put_Assignment_ValidId                      |
+      | assignment | Put_Assignment_InvalidId                    |
+      | assignment | Put_Assignment_MissingAssignmentName        |
+      | assignment | Put_Assignment_MissingDueDate               |
+      | assignment | Put_Assignment_MissingAssignmentDescription |
+      | assignment | Put_Assignment_MissingBatchId               |
+      | assignment | Put_Assignment_MissingCreatedBy             |
+      | assignment | Put_Assignment_MissingGraderId              |
 
   @DeleteAssignmentByAssignmentID
   Scenario Outline: Check if user able to delete a record with valid and invalid Assignment ID
