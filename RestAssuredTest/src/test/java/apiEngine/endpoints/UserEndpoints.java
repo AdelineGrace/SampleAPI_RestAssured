@@ -22,7 +22,6 @@ public class UserEndpoints {
 		request.header("Content-Type", "application/json");
 		
 		Response response = request.body(userReq).post(UserRoutes.createUser());
-		System.out.println("response - " + response.asPrettyString());
 		
 		return response;
 	}

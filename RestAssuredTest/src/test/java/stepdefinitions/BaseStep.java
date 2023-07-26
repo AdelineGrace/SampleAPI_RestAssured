@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import apiEngine.endpoints.AssignmentEndpoints;
+import apiEngine.endpoints.AssignmentSubmitEndpoints;
 import apiEngine.endpoints.BatchEndpoints;
 import apiEngine.endpoints.ProgramEndpoints;
 import apiEngine.endpoints.UserEndpoints;
@@ -13,6 +14,7 @@ public class BaseStep {
 	BatchEndpoints batchEndpoints;
 	UserEndpoints userEndpoints;
 	AssignmentEndpoints assignmentEndpoints;
+	AssignmentSubmitEndpoints submitEndpoints;
 
     public BaseStep() 
     {
@@ -20,5 +22,6 @@ public class BaseStep {
 		batchEndpoints = new BatchEndpoints(baseUrl);
 		userEndpoints = new UserEndpoints(baseUrl);
 		assignmentEndpoints = new AssignmentEndpoints(baseUrl);
+		submitEndpoints = new AssignmentSubmitEndpoints(baseUrl);
     }
 }
