@@ -11,10 +11,4 @@ public class UserRoleMap {
         this.userRoleStatus = userRoleStatus;
     }
 
-	@Override
-	public String toString() {
-		return "UserRoleMap [roleId=" + roleId + ", userRoleStatus=" + userRoleStatus + "]";
-	}
-	
-
 }
