@@ -2,6 +2,11 @@ package apiEngine.routes;
 
 public class UserRoutes {
 	
+	public static String createUser()
+	{
+		return "/users/users/roleStatus";
+	}
+	
 	public static String getAllUsers()
 	{
 		return "/users/users";
@@ -20,7 +25,7 @@ public class UserRoutes {
 		return "/users/users/roles";
 	}
 	
-	public static String deleteUser(String userId)
+	public static String deleteUserById(String userId)
 	{
 		return "/users/users/" + userId;
 	}

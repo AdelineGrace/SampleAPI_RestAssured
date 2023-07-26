@@ -26,5 +26,10 @@ public class AssignmentRoutes {
 	{
 		return "/assignments/" + assignmentId;
 	}
+	
+	public static String updateAssignmentById(Integer assignmentId)
+	{
+		return "/assignments/" + assignmentId;
+	}
 
 }

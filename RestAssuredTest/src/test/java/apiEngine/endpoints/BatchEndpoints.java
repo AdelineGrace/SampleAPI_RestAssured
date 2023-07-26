@@ -1,14 +1,8 @@
 package apiEngine.endpoints;
 
-import java.util.List;
-
 import apiEngine.model.request.AddBatchRequest;
-import apiEngine.model.response.Assignment;
-import apiEngine.model.response.Batch;
-import apiEngine.routes.AssignmentRoutes;
 import apiEngine.routes.ProgramBatchRoutes;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -27,8 +21,7 @@ public class BatchEndpoints {
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json");
 		
-		Response response = request.body(batchReq).post("/batches");
-		System.out.println("response - " + response.asPrettyString());
+		Response response = request.body(batchReq).post(ProgramBatchRoutes.createBatch());
 		
 		return response;
 	}
@@ -85,6 +78,15 @@ public class BatchEndpoints {
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json");
 		Response response = request.delete(ProgramBatchRoutes.deleteBatch(batchId,dataKey));
+		return response;
+		
+	}
+	
+	public Response DeleteBatchById(Integer batchId) {
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		Response response = request.delete(ProgramBatchRoutes.deleteBatchById(batchId));
 		return response;
 		
 	}

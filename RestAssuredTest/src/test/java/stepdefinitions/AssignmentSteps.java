@@ -17,10 +17,7 @@ import apiEngine.model.response.Assignment;
 import apiEngine.model.response.Batch;
 import apiEngine.model.response.Program;
 import apiEngine.model.response.User;
-import apiEngine.routes.AssignmentRoutes;
-import apiEngine.routes.ProgramBatchRoutes;
-import apiEngine.routes.ProgramRoutes;
-import apiEngine.routes.UserRoutes;
+import dataProviders.ConfigReader;
 import dataProviders.ExcelReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -36,7 +33,6 @@ import utilities.LoggerLoad;
 
 public class AssignmentSteps extends BaseStep {
 
-	String baseUrl = "https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms";
 	RequestSpecification request;
 	Response response;
 	AddAssignmentRequest addAssignmentReq;
@@ -74,7 +70,7 @@ public class AssignmentSteps extends BaseStep {
 			response = programEndpoints.CreateProgram(programReq);
 			program = response.getBody().as(Program.class);
 			programId = program.programId;
-			System.out.println("Program id - " + programId);
+			LoggerLoad.logInfo("Program created with id- " + programId);
 
 			// create batch
 			excelDataMap = ExcelReader.getData("Post_Batch_Assignment", "batch");
@@ -88,6 +84,7 @@ public class AssignmentSteps extends BaseStep {
 			response = batchEndpoints.CreateBatch(batchReq);
 			batch = response.getBody().as(Batch.class);
 			batchId = batch.batchId;
+			LoggerLoad.logInfo("Program batch created with id- " + batchId);
 
 			// create user
 			excelDataMap = ExcelReader.getData("Post_User_Assignment", "user");
@@ -104,6 +101,7 @@ public class AssignmentSteps extends BaseStep {
 			response = userEndpoints.CreateUser(userReq);
 			user = response.getBody().as(User.class);
 			userId = user.userId;
+			LoggerLoad.logInfo("User created with id- " + userId);
 
 		} 
 		catch (Exception ex) 
@@ -117,19 +115,16 @@ public class AssignmentSteps extends BaseStep {
 	public void Cleanup() 
 	{
 		// delete user
-		RestAssured.baseURI = baseUrl;
-		request = RestAssured.given();
-		response = request.delete(UserRoutes.deleteUser(userId));
+		userEndpoints.DeleteUserById(userId);
+		LoggerLoad.logInfo("User deleted with id- " + userId);
 
 		// delete batch
-		RestAssured.baseURI = baseUrl;
-		request = RestAssured.given();
-		response = request.delete(ProgramBatchRoutes.deleteBatch(batchId,"valid"));
+		batchEndpoints.DeleteBatchById(batchId);
+		LoggerLoad.logInfo("Program batch deleted with id- " + batchId);
 		
 		// delete program
-		RestAssured.baseURI = baseUrl;
-		request = RestAssured.given();
-		response = request.delete(ProgramRoutes.deleteProgram(programId));
+		programEndpoints.DeleteProgramById(programId);
+		LoggerLoad.logInfo("Program deleted with id- " + programId);
 	}
 
 	@Given("User creates POST Assignment Request for the LMS API with fields from {string} with {string}")
@@ -143,37 +138,58 @@ public class AssignmentSteps extends BaseStep {
 				SetupPreRequisites();
 			}
 			
-			
 			RestAssured.baseURI = baseUrl;
 			RequestSpecification request = RestAssured.given();
 			request.header("Content-Type", "application/json");
 
+			String assignmentName = null, assignmentDescription = null, dueDate = null, comments = null, 
+					createdBy = null, gradedBy = null, pathAttachment1 = null, pathAttachment2 = null, 
+					pathAttachment3 = null, pathAttachment4 = null, pathAttachment5 = null;
+			
+			Integer reqBatchid = null;
+			
 			excelDataMap = ExcelReader.getData(dataKey, sheetName);
 
 			if (excelDataMap != null && excelDataMap.size() > 0) 
 			{
-				switch(dataKey)
+				if(dataKey.equals("Post_Assignment_Existing"))
 				{
-					case "Post_Assignment_Valid" : 
-						addAssignmentReq = new AddAssignmentRequest(excelDataMap.get("assignmentName") + DynamicValues.SerialNumber(),
-								excelDataMap.get("assignmentDescription"), batchId, excelDataMap.get("comments"), userId,
-								"2023-07-29T22:00:04.964+00:00", userId, excelDataMap.get("pathAttachment1"),
-								excelDataMap.get("pathAttachment2"), excelDataMap.get("pathAttachment3"),
-								excelDataMap.get("pathAttachment4"), excelDataMap.get("pathAttachment5)"));
-						break;
-						
-					case "Post_Assignment_Existing" : 
-						addAssignmentReq = new AddAssignmentRequest(String.valueOf(assignmentAdded.assignmentName),
-								excelDataMap.get("assignmentDescription"), batchId, excelDataMap.get("comments"), userId,
-								"2023-07-29T22:00:04.964+00:00", userId, excelDataMap.get("pathAttachment1"),
-								excelDataMap.get("pathAttachment2"), excelDataMap.get("pathAttachment3"),
-								excelDataMap.get("pathAttachment4"), excelDataMap.get("pathAttachment5)"));
-						break;
-					
+					assignmentName = assignmentAdded.assignmentName;
 				}
+				else if(dataKey.equals("Post_Assignment_MissingAssignmentName"))
+				{
+					assignmentName = null;
+				}
+				else
+				{
+					assignmentName = excelDataMap.get("assignmentName") + DynamicValues.SerialNumber();
+				}
+				if(!dataKey.equals("Post_Assignment_MissingBatchId"))
+				{
+					reqBatchid = batchId;
+				}
+				if(!dataKey.equals("Post_Assignment_MissingCreatedBy"))
+				{
+					createdBy = userId;
+				}
+				if(!dataKey.equals("Post_Assignment_MissingGraderId"))
+				{
+					gradedBy = userId;
+				}
+				assignmentDescription = excelDataMap.get("assignmentDescription");
+				dueDate = excelDataMap.get("dueDate");
+				comments = excelDataMap.get("comments");
+				pathAttachment1 = excelDataMap.get("pathAttachment1");
+				pathAttachment2 = excelDataMap.get("pathAttachment2");
+				pathAttachment3 = excelDataMap.get("pathAttachment3");
+				pathAttachment4 = excelDataMap.get("pathAttachment4");
+				pathAttachment5 = excelDataMap.get("pathAttachment5");
 			}
 			
-			LoggerLoad.logInfo("Assignment POST request created");
+			addAssignmentReq = new AddAssignmentRequest(assignmentName, assignmentDescription, reqBatchid, comments, createdBy,
+					dueDate, gradedBy, pathAttachment1, pathAttachment2, pathAttachment3,pathAttachment4, pathAttachment5);
+			
+			LoggerLoad.logInfo("Assignment POST request created for- " + dataKey);
 		} 
 		catch (Exception ex) 
 		{
@@ -182,13 +198,13 @@ public class AssignmentSteps extends BaseStep {
 		}
 	}
 
-	@When("User sends HTTP POST Assignment Request")
-	public void user_sends_http_post_assignment_request() 
+	@When("User sends HTTP POST Assignment Request for {string}")
+	public void user_sends_http_post_assignment_request(String dataKey) 
 	{
 		try 
 		{
 			response = assignmentEndpoints.CreateAssignment(addAssignmentReq);
-			LoggerLoad.logInfo("Assignment POST request sent");
+			LoggerLoad.logInfo("Assignment POST request sent for- " + dataKey);
 		} 
 		catch (Exception ex) 
 		{
@@ -253,9 +269,24 @@ public class AssignmentSteps extends BaseStep {
 					assertEquals(excelDataMap.get("success"), Boolean.toString(jsonPathEvaluator.get("success")));
 					
 					break;
+					
+				default : 
+					response.then().assertThat()
+						// Validate response status
+						.statusCode(HttpStatus.SC_BAD_REQUEST)
+						// Validate json schema
+						.body(JsonSchemaValidator.matchesJsonSchema(
+							getClass().getClassLoader().getResourceAsStream("400statuscodejsonschema.json")));
+					
+					// Validate error json
+					jsonPathEvaluator = response.jsonPath();
+					assertEquals(excelDataMap.get("message"), jsonPathEvaluator.get("message"));
+					assertEquals(excelDataMap.get("success"), Boolean.toString(jsonPathEvaluator.get("success")));
+					
+					break;
 			}
 			
-			LoggerLoad.logInfo("Assignment POST response validated");
+			LoggerLoad.logInfo("Assignment POST response validated for- " + dataKey);
 		} 
 		catch (Exception ex) 
 		{
@@ -287,7 +318,8 @@ public class AssignmentSteps extends BaseStep {
 	{
 		try
 		{
-			response = request.get(AssignmentRoutes.getAllAssignments());
+			response = assignmentEndpoints.GetAllAssignments();
+			
 			LoggerLoad.logInfo("GET all assignments request sent");
 		} 
 		catch (Exception ex) 
@@ -367,15 +399,15 @@ public class AssignmentSteps extends BaseStep {
 			switch(scenario)
 			{
 				case "Get_Assignment_ValidAssignmentId" :
-					response = request.get(AssignmentRoutes.getAssignmentByAssignmentId(assignmentId));
+					response = assignmentEndpoints.GetAssignmentByAssignmentId(assignmentId);
 					break;
 					
 				case "Get_Assignment_ValidBatchId" :
-					response = request.get(AssignmentRoutes.getAssignmentByBatchId(batchId));
+					response = assignmentEndpoints.GetAssignmentByBatchId(batchId);
 					break;
 			}
 	
-			LoggerLoad.logInfo("Get assignment by id request sent");
+			LoggerLoad.logInfo("Get assignment by id request sent for- " + scenario);
 		}
 		catch (Exception ex) 
 		{
@@ -438,8 +470,171 @@ public class AssignmentSteps extends BaseStep {
 			assertEquals(assignmentAdded.pathAttachment4, assignmentResponse.pathAttachment4);
 			assertEquals(assignmentAdded.pathAttachment5, assignmentResponse.pathAttachment5);
 			
-			LoggerLoad.logInfo("Get assignment by id response validated");
+			LoggerLoad.logInfo("Get assignment by id response validated for- " + scenario);
 		}
+		catch (Exception ex) 
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+	
+	// Update assignment by Assignment id
+	@Given("User creates PUT Request for the LMS API endpoint with fields from {string} with {string}")
+	public void user_creates_put_request_for_the_lms_api_endpoint_with_fields_from_with(String sheetName, String dataKey) 
+	{
+		try 
+		{	
+			RestAssured.baseURI = baseUrl;
+			RequestSpecification request = RestAssured.given();
+			request.header("Content-Type", "application/json");
+			
+			String assignmentName = null, assignmentDescription = null, dueDate = null, comments = null, 
+					createdBy = null, gradedBy = null, pathAttachment1 = null, pathAttachment2 = null, 
+					pathAttachment3 = null, pathAttachment4 = null, pathAttachment5 = null;
+			
+			Integer reqBatchid = null;
+
+			excelDataMap = ExcelReader.getData(dataKey, sheetName);
+
+			if (excelDataMap != null && excelDataMap.size() > 0) 
+			{
+				if(dataKey.equals("Put_Assignment_MissingAssignmentName"))
+				{
+					assignmentName = null;
+				}
+				else
+				{
+					assignmentName = excelDataMap.get("assignmentName") + DynamicValues.SerialNumber();
+				}
+				if(!dataKey.equals("Put_Assignment_MissingBatchId"))
+				{
+					reqBatchid = batchId;
+				}
+				if(!dataKey.equals("Put_Assignment_MissingCreatedBy"))
+				{
+					createdBy = userId;
+				}
+				if(!dataKey.equals("Put_Assignment_MissingGraderId"))
+				{
+					gradedBy = userId;
+				}
+				assignmentDescription = excelDataMap.get("assignmentDescription");
+				dueDate = excelDataMap.get("dueDate");
+				comments = excelDataMap.get("comments");
+				pathAttachment1 = excelDataMap.get("pathAttachment1");
+				pathAttachment2 = excelDataMap.get("pathAttachment2");
+				pathAttachment3 = excelDataMap.get("pathAttachment3");
+				pathAttachment4 = excelDataMap.get("pathAttachment4");
+				pathAttachment5 = excelDataMap.get("pathAttachment5");
+			}
+			
+			addAssignmentReq = new AddAssignmentRequest(assignmentName, assignmentDescription, reqBatchid, comments, createdBy,
+					dueDate, gradedBy, pathAttachment1, pathAttachment2, pathAttachment3,pathAttachment4, pathAttachment5);
+			
+			
+			LoggerLoad.logInfo("Assignment PUT request created");
+		} 
+		catch (Exception ex) 
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+
+	@When("User sends HTTPS PUT AssignmentRequest for {string}")
+	public void user_sends_https_put_assignment_request(String dataKey) 
+	{
+		try 
+		{
+			if(dataKey.equals("Put_Assignment_InvalidId"))
+			{
+				response = assignmentEndpoints.UpdateAssignment(addAssignmentReq, Integer.parseInt(ConfigReader.getInvalidAssignmentId()));
+			}
+			else
+				response = assignmentEndpoints.UpdateAssignment(addAssignmentReq, assignmentId);
+			
+			LoggerLoad.logInfo("Assignment PUT request sent for - " + dataKey);
+		} 
+		catch (Exception ex) 
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+
+	@Then("User receives response for PUT {string} with {string}")
+	public void user_receives_response_for_put_with(String sheetName, String dataKey) 
+	{
+		try 
+		{
+			response.then().log().all().extract().response();
+			
+			switch(dataKey)
+			{
+				case "Put_Assignment_ValidId" : 
+					response.then().assertThat()
+						// Validate response status
+						.statusCode(HttpStatus.SC_OK)
+						// Validate content type
+						.contentType(ContentType.JSON)
+						// Validate json schema
+						.body(JsonSchemaValidator.matchesJsonSchema(
+							getClass().getClassLoader().getResourceAsStream("getassignmentbyidjsonschema.json")));
+					
+					// Validate values in response
+					Assignment assignmentResponse = response.getBody().as(Assignment.class);
+					
+					assertEquals(assignmentId, assignmentResponse.assignmentId.intValue());
+					assertEquals(addAssignmentReq.assignmentName, assignmentResponse.assignmentName);
+					assertEquals(addAssignmentReq.assignmentDescription, assignmentResponse.assignmentDescription);
+					assertEquals(addAssignmentReq.comments, assignmentResponse.comments);
+					assertEquals(addAssignmentReq.batchId, assignmentResponse.batchId);
+					assertEquals(addAssignmentReq.createdBy, assignmentResponse.createdBy);
+					assertEquals(addAssignmentReq.dueDate, assignmentResponse.dueDate);
+					assertEquals(addAssignmentReq.graderId, assignmentResponse.graderId);
+					assertEquals(addAssignmentReq.pathAttachment1, assignmentResponse.pathAttachment1);
+					assertEquals(addAssignmentReq.pathAttachment2, assignmentResponse.pathAttachment2);
+					assertEquals(addAssignmentReq.pathAttachment3, assignmentResponse.pathAttachment3);
+					assertEquals(addAssignmentReq.pathAttachment4, assignmentResponse.pathAttachment4);
+					assertEquals(addAssignmentReq.pathAttachment5, assignmentResponse.pathAttachment5);
+					
+					break;
+					
+				case "Put_Assignment_InvalidId" : 
+					response.then().assertThat()
+						// Validate response status
+						.statusCode(HttpStatus.SC_NOT_FOUND)
+						// Validate json schema
+						.body(JsonSchemaValidator.matchesJsonSchema(
+							getClass().getClassLoader().getResourceAsStream("400statuscodejsonschema.json")));
+					
+					// Validate error json
+					JsonPath jsonPathEvaluator = response.jsonPath();
+					assertEquals(excelDataMap.get("message") + Integer.parseInt(ConfigReader.getInvalidAssignmentId()) + " ", 
+							jsonPathEvaluator.get("message"));
+					assertEquals(excelDataMap.get("success"), Boolean.toString(jsonPathEvaluator.get("success")));
+					
+					break;
+					
+				default : 
+					response.then().assertThat()
+						// Validate response status
+						.statusCode(HttpStatus.SC_BAD_REQUEST)
+						// Validate json schema
+						.body(JsonSchemaValidator.matchesJsonSchema(
+							getClass().getClassLoader().getResourceAsStream("400statuscodejsonschema.json")));
+					
+					// Validate error json
+					jsonPathEvaluator = response.jsonPath();
+					assertEquals(excelDataMap.get("message"), jsonPathEvaluator.get("message"));
+					assertEquals(excelDataMap.get("success"), Boolean.toString(jsonPathEvaluator.get("success")));
+					
+					break;
+			}
+			
+			LoggerLoad.logInfo("Assignment POST response validated for- " + dataKey);
+		} 
 		catch (Exception ex) 
 		{
 			LoggerLoad.logInfo(ex.getMessage());
@@ -470,7 +665,7 @@ public class AssignmentSteps extends BaseStep {
 	{
 		try
 		{
-			response = request.delete(AssignmentRoutes.deleteAssignmentById(assignmentId));
+			response = assignmentEndpoints.DeleteAssignmentById(assignmentId);
 			
 			LoggerLoad.logInfo("DELETE assignment by id request sent");
 		} 
@@ -563,11 +758,11 @@ public class AssignmentSteps extends BaseStep {
 			switch(scenario)
 			{
 				case "Get_Assignment_DeletedAssignmentId" :
-					response = request.get(AssignmentRoutes.getAssignmentByAssignmentId(assignmentId));
+					response = assignmentEndpoints.GetAssignmentByAssignmentId(assignmentId);
 					break;
 					
 				case "Get_Assignment_DeletedBatchId" :
-					response = request.get(AssignmentRoutes.getAssignmentByBatchId(batchId));
+					response = assignmentEndpoints.GetAssignmentByBatchId(batchId);
 					break;
 			}
 
