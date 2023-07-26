@@ -1,7 +1,6 @@
 package dataProviders;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -57,6 +56,11 @@ public class ConfigReader {
 			
 	
 		 
+	}
+	
+	public static String getInvalidAssignmentId()
+	{
+		return properties.getProperty("assignment.invalidid");
 	}
 
 }

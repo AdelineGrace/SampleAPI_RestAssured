@@ -1,0 +1,32 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "required": [
+            "programId",
+            "programName",
+            "programDescription",
+            "programStatus"
+        ],
+        "properties": {
+            "programId": {
+                "type": "integer"
+            },
+            "programName": {
+                "type": "string"
+            },
+            "programDescription": {
+                "type": "string"
+            },
+            "programStatus": {
+                "type": "string"
+            },
+            "creationTime": {
+                "type": "string"
+            },
+            "lastModTime": {
+                "type": "string"
+            }
+        }
+    }
+}

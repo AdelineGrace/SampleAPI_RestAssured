@@ -16,7 +16,6 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import utilities.ConstantURL;
 
 public class SubmissionStep {
 
@@ -332,7 +331,7 @@ public class SubmissionStep {
 	@Given("User creates POST Request for the LMS API endpoint for submission module")
 	public void user_creates_post_request_for_the_lms_api_endpoint_for_submission_module() {
 	    
-		this.baseUrl=ConstantURL.Post_URl;
+		//this.baseUrl=ConstantURL.Post_URl;
 		this.request=RestAssured.given().header("Content-Type", "application/json");
 		
 		
