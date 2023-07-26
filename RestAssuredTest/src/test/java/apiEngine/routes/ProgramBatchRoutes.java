@@ -72,5 +72,10 @@ public class ProgramBatchRoutes {
 			endpoint ="/batches/" + batchId;
 		return endpoint;
 	}
+	
+	public static String deleteBatchById(int batchId)
+	{
+		return "/batches/" + batchId;
+	}
 
 }
