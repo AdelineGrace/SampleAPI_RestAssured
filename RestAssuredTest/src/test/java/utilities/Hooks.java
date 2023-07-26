@@ -4,9 +4,7 @@ package utilities;
 
 
 import dataProviders.ConfigReader;
-import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
-import io.cucumber.java.Scenario;
 
 public class Hooks {
 

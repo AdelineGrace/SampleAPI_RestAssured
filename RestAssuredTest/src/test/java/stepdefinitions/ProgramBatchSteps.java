@@ -90,7 +90,7 @@ public class ProgramBatchSteps extends BaseStep {
 		// delete program
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
-		response = request.delete(ProgramRoutes.deleteProgram(programId));
+		response = request.delete(ProgramRoutes.deleteProgramById(programId));
 	}
 
 	

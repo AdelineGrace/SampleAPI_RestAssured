@@ -1,6 +1,7 @@
 package apiEngine.endpoints;
 
 import apiEngine.model.request.AddUserRequest;
+
 import apiEngine.model.request.AssignUserRoleProgramBatchStatus;
 import apiEngine.model.request.UpdateUserRequest;
 import apiEngine.model.request.UserRoleMap;
@@ -26,12 +27,13 @@ public class UserEndpoints {
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json");
 		
-		Response response = request.body(userReq).post("/users/users/roleStatus");
+		Response response = request.body(userReq).post(UserRoutes.createUser());
 		System.out.println("response - " + response.asPrettyString());
 		
 		return response;
 	}
 	
+
 	public Response UpdateUser (UpdateUserRequest userReq, String userId, String dataKey) 
 	{
 		LoggerLoad.logDebug(userReq.toString());
@@ -68,6 +70,16 @@ public class UserEndpoints {
 		Response response = request.body(assignUserRoleProgramBatchStatus).put(UserRoutes.updateUserRoleBatch(userId, dataKey));
 		request.given().log().all(true);
 		System.out.println("response - " + response.asPrettyString());
+		return response;
+	}
+	
+	public Response DeleteUserById(String userId)
+	{
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		
+		Response response = request.get(UserRoutes.deleteUserById(userId));
+
 		
 		return response;
 	}

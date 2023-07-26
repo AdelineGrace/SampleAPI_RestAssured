@@ -1,0 +1,28 @@
+{
+    "type": "object",
+    "required": [
+        "programId",
+        "programName",
+        "programStatus"
+    ],
+    "properties": {
+        "programId": {
+            "type": "integer"
+        },
+        "programName": {
+            "type": "string"
+        },
+        "programDescription": {
+            "type": "string"
+        },
+        "programStatus": {
+            "type": "string"
+        },
+        "creationTime": {
+            "type": "string"
+        },
+        "lastModTime": {
+            "type": "string"
+        }
+    }
+}
