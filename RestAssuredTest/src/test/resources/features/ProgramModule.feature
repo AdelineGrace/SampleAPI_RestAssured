@@ -36,7 +36,7 @@ Feature: PROGRAM MODULE
   Scenario: Check if user able to retrieve all GET ALL programs with valid LMS API
   Given User creates GET ALL Request for the LMS API endpoint for Program Module
   When User sends HTTPS Request in Program Module
-  Then User receives 200 OK Status with response body.
+  Then User receives 200 OK Status with response body for Program Module
  
   @03Get_pgmId
   Scenario Outline: Check if user able  GET  a program with valid & invalid program ID and LMS API
