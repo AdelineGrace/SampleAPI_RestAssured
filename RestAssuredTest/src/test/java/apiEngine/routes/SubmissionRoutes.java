@@ -2,6 +2,11 @@ package apiEngine.routes;
 
 public class SubmissionRoutes {
 	
+	public static String createAssignmentSubmission()
+	{
+		return "/assignmentsubmission";
+	}
+	
 	public static String getAllAssignments()
 	{
 		return "/assignmentsubmission";
@@ -31,6 +36,11 @@ public class SubmissionRoutes {
 	public static String getsubmissionBybatchId(Integer subbatchid)
 	{
 		return "/assignmentsubmission/studentbatch" + subbatchid;
+	}
+	
+	public static String deleteSubmissionBySubmissionId(Integer submissionId)
+	{
+		return "/assignmentsubmission/" + submissionId;
 	}
 	
 }

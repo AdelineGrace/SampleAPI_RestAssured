@@ -68,9 +68,16 @@ public class AssignmentSteps extends BaseStep {
 			}
 
 			response = programEndpoints.CreateProgram(programReq);
-			program = response.getBody().as(Program.class);
-			programId = program.programId;
-			LoggerLoad.logInfo("Program created with id- " + programId);
+			if(response.statusCode() == 201)
+			{
+				program = response.getBody().as(Program.class);
+				programId = program.programId;
+				LoggerLoad.logInfo("Program created with id- " + programId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("Program not created for assignment module");
+			}
 
 			// create batch
 			excelDataMap = ExcelReader.getData("Post_Batch_Assignment", "batch");
@@ -82,9 +89,16 @@ public class AssignmentSteps extends BaseStep {
 			}
 
 			response = batchEndpoints.CreateBatch(batchReq);
-			batch = response.getBody().as(Batch.class);
-			batchId = batch.batchId;
-			LoggerLoad.logInfo("Program batch created with id- " + batchId);
+			if(response.statusCode() == 201)
+			{
+				batch = response.getBody().as(Batch.class);
+				batchId = batch.batchId;
+				LoggerLoad.logInfo("Program batch created with id- " + batchId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("Program Batch not created for assignment module");
+			}
 
 			// create user
 			excelDataMap = ExcelReader.getData("Post_User_Assignment", "user");
@@ -99,9 +113,16 @@ public class AssignmentSteps extends BaseStep {
 			}
 			
 			response = userEndpoints.CreateUser(userReq);
-			user = response.getBody().as(User.class);
-			userId = user.userId;
-			LoggerLoad.logInfo("User created with id- " + userId);
+			if(response.statusCode() == 201)
+			{
+				user = response.getBody().as(User.class);
+				userId = user.userId;
+				LoggerLoad.logInfo("User created with id- " + userId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("User not created for assignment module");
+			}
 
 		} 
 		catch (Exception ex) 
@@ -115,16 +136,25 @@ public class AssignmentSteps extends BaseStep {
 	public void Cleanup() 
 	{
 		// delete user
-		userEndpoints.DeleteUserById(userId);
-		LoggerLoad.logInfo("User deleted with id- " + userId);
+		response = userEndpoints.DeleteUserById(userId);
+		if(response.statusCode() == 200)
+			LoggerLoad.logInfo("User deleted with id- " + userId);
+		else
+			LoggerLoad.logInfo("User not deleted for assignment module");
 
 		// delete batch
-		batchEndpoints.DeleteBatchById(batchId);
-		LoggerLoad.logInfo("Program batch deleted with id- " + batchId);
+		response = batchEndpoints.DeleteBatchById(batchId);
+		if(response.statusCode() == 200)
+			LoggerLoad.logInfo("Program batch deleted with id- " + batchId);
+		else
+			LoggerLoad.logInfo("Program batch not deleted for assignment module");
 		
 		// delete program
-		programEndpoints.DeleteProgramById(programId);
-		LoggerLoad.logInfo("Program deleted with id- " + programId);
+		response = programEndpoints.DeleteProgramById(programId);
+		if(response.statusCode() == 200)
+			LoggerLoad.logInfo("Program deleted with id- " + programId);
+		else
+			LoggerLoad.logInfo("Program not deleted for assignment module");
 	}
 
 	@Given("User creates POST Assignment Request for the LMS API with fields from {string} with {string}")
@@ -176,8 +206,10 @@ public class AssignmentSteps extends BaseStep {
 				{
 					gradedBy = userId;
 				}
-				assignmentDescription = excelDataMap.get("assignmentDescription");
-				dueDate = excelDataMap.get("dueDate");
+				if(!excelDataMap.get("assignmentDescription").isBlank())
+					assignmentDescription = excelDataMap.get("assignmentDescription");
+				if(!excelDataMap.get("dueDate").isBlank())
+					dueDate = excelDataMap.get("dueDate");
 				comments = excelDataMap.get("comments");
 				pathAttachment1 = excelDataMap.get("pathAttachment1");
 				pathAttachment2 = excelDataMap.get("pathAttachment2");
@@ -519,8 +551,10 @@ public class AssignmentSteps extends BaseStep {
 				{
 					gradedBy = userId;
 				}
-				assignmentDescription = excelDataMap.get("assignmentDescription");
-				dueDate = excelDataMap.get("dueDate");
+				if(!excelDataMap.get("assignmentDescription").isBlank())
+					assignmentDescription = excelDataMap.get("assignmentDescription");
+				if(!excelDataMap.get("dueDate").isBlank())
+					dueDate = excelDataMap.get("dueDate");
 				comments = excelDataMap.get("comments");
 				pathAttachment1 = excelDataMap.get("pathAttachment1");
 				pathAttachment2 = excelDataMap.get("pathAttachment2");
@@ -723,7 +757,8 @@ public class AssignmentSteps extends BaseStep {
 		
 			LoggerLoad.logInfo("DELETE assignment by id response validated");
 			
-			Cleanup();	
+			if(dataKey.equals("Delete_Assignment_ValidId"))
+				Cleanup();	
 		} 
 		catch (Exception ex) 
 		{
