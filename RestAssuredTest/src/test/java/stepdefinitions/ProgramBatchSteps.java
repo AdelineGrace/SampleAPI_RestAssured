@@ -90,7 +90,7 @@ public class ProgramBatchSteps extends BaseStep {
 		// delete program
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
-		response = request.delete(ProgramRoutes.deleteProgram(programId));
+		response = request.delete(ProgramRoutes.deleteProgramById(programId));
 	}
 
 	
@@ -498,6 +498,7 @@ public class ProgramBatchSteps extends BaseStep {
 		response= response.then().log().all().extract().response();	
 		if(dataKey.equals("Valid")) {
 			response.then().statusCode(200);
+			Cleanup();
 		}else {
 			response.then().statusCode(404);
 			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
