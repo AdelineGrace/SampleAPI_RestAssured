@@ -32,11 +32,12 @@ Feature: PROGRAM MODULE
       | ProgramPost | postExist|
       | ProgramPost | postMissing|
 
-  #  @GetAllTag
-  #  Scenario: Check if user able to retrieve all programs with valid LMS API
-  #   Given User creates GET Request for the LMS API endpoint for Program Module
-  #   When User sends HTTPS Request in Program Module
-  #   Then User receives 200 OK Status with response body.
+   @GetAllTag
+   Scenario: Check if user able to retrieve all programs with valid LMS API
+    Given User creates GET Request for the LMS API endpoint for Program Module
+    When User sends HTTPS Request in Program Module
+    Then User receives 200 OK Status with response body.
+  
   @Get_pgmId
   Scenario Outline: Check if user able to retrieve a program with valid & invalid program ID and LMS API
     Given User creates GET Request for the LMS API endpoint for Program Module
@@ -45,7 +46,7 @@ Feature: PROGRAM MODULE
 
     Examples: 
       | option  | programId |
-      | valid   |     10669 |
+      | valid   |     13857 |
       | invalid |        10 |
 
   @PutByID_Valid
