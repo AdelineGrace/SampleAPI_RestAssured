@@ -176,7 +176,7 @@ public class ProgramSteps {
     this.resp = requestSpec.when().get(ConfigReader.getProperty("pgm.getall"));
   }
 
-  @Then("User receives 200 OK Status with response body.")
+  @Then("User receives 200 OK Status with response body for Program Module")
   public void user_receives_ok_status_with_response_body() {
 		try
 		{
@@ -303,7 +303,7 @@ public class ProgramSteps {
 				    //resp = requestSpec.body(pgmresp).put("/putprogram/"+getPgmId);
 				    JSONObject body = new JSONObject();
 				    //body.put("programId", getPgmId);
-				    body.put("programName", pgmName);
+				    body.put("programName", pgmName + DynamicValues.SerialNumber());
 				    body.put("programDescription", pgmDesc);
 				    body.put("programStatus", pgmStatus);
 				    //System.out.println(body);
@@ -360,9 +360,9 @@ public class ProgramSteps {
 	      	updatedId1 = programResponse.programId;
 	      	updatedName1 = programResponse.programName;
 		  System.out.println("**Status Code-->" + resp.statusCode());
-		  resp.then().assertThat().statusCode(200);
-		 // .contentType(ContentType.JSON)
-	       // .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
+		  resp.then().assertThat().statusCode(200)
+		  .contentType(ContentType.JSON)
+	        .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
 		 
 		  
 	  break;
@@ -496,9 +496,9 @@ public class ProgramSteps {
 			      	updatedId2 = programResponse.programId;
 			      	updatedName2 = programResponse.programName;
 				  System.out.println("Status code--->" + resp.statusCode());
-				  resp.then().assertThat().statusCode(200);
-				 // .contentType(ContentType.JSON)
-			       // .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
+				  resp.then().assertThat().statusCode(200)
+				  .contentType(ContentType.JSON)
+			        .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
 				  
 				  
 				  break;
@@ -600,7 +600,8 @@ public class ProgramSteps {
 	 
 	@When("User sends DELETE Request with valid ProgramID")
 	public void user_sends_delete_request_with_valid_ProgramID() {
-					
+			try
+			{
 					Integer getPgmId = updatedId2;
 					System.out.println("ID FOR DELETE->"+getPgmId);
 					System.out.println("PgmName FOR DELETE->"+updatedName2);
@@ -608,9 +609,17 @@ public class ProgramSteps {
 							
 			
 			LoggerLoad.logInfo("DELETE by valid Program Id response created");
+			}
+			catch (Exception ex) 
+			{
+					LoggerLoad.logInfo(ex.getMessage());
+					ex.printStackTrace();
+			}
 	}
 	@Then("User receives status for valid  Programid for ProgramModule")
 	public void user_receives_status_as_with_valid_Programid() {
+		try
+		{
 			System.out.println("Status code--->" + resp.statusCode());
 			String jsonString =resp.asString();
 			System.out.println("Json String After DELETE Command--->"+jsonString);
@@ -619,9 +628,17 @@ public class ProgramSteps {
 			.statusCode(200);		
 			assertEquals(jsonString.contains("deleted Successfully!"), true);	
 			LoggerLoad.logInfo("DELETE by valid Program Id response validated");
+		}
+		catch (Exception ex) 
+		{
+				LoggerLoad.logInfo(ex.getMessage());
+				ex.printStackTrace();
+		}
 	}
 	@When("User sends DELETE Request with invalid ProgramID")
 	public void user_sends_delete_request_with_invalid_ProgramID() {
+		try
+		{
 			Integer getPgmId=20;
 			//System.out.println("static id-->"+PgmIDForDelete);
 			// resp = requestSpec.queryParam("programName", "JUL-23-RESTAPI-Turtle02").when().get("/allPrograms");
@@ -629,11 +646,18 @@ public class ProgramSteps {
 			System.out.println("ID FOR DELETE->"+getPgmId);
 			resp= requestSpec.delete(ConfigReader.getProperty("pgm.deletebyId")+getPgmId);
 			LoggerLoad.logInfo("DELETE by invalid Program Id response created");
+		}
+		catch (Exception ex) 
+		{
+				LoggerLoad.logInfo(ex.getMessage());
+				ex.printStackTrace();
+		}
 	}
 
 	@Then("User receives status for invalid  Programid for ProgramModule")
 	public void user_receives_status_as_with_Programid_invalid() {
-			
+		try
+		{
 			System.out.println("Status code--->" + resp.statusCode());
 			String jsonString =resp.asString();
 			System.out.println("Json String After DELETE Command--->"+jsonString);
@@ -642,6 +666,12 @@ public class ProgramSteps {
 			.statusCode(404);		
 			assertEquals(jsonString.contains("no record found"), true);	
 			LoggerLoad.logInfo("DELETE by invalid Program Id response validate");
+		}
+		catch (Exception ex) 
+		{
+				LoggerLoad.logInfo(ex.getMessage());
+				ex.printStackTrace();
+		}
 	}	
 }
 
