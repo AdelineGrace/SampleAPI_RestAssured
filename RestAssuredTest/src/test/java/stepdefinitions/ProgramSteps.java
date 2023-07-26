@@ -271,10 +271,19 @@ public class ProgramSteps {
 
   @When("User sends PUT request Body with valid programName for Program Module")
   public void user_sends_put_request_body_with_valid_program_name_for_program_module() {
-    AddProgramRequest addpgm;
-    String valipgmName = "JUL-23-RESTAPI-Turtle02";
+	  String valipgmName = "JUL-23-RESTAPI-Turtle02";
+	/*  AddProgramRequest addpgm;  
     addpgm =new AddProgramRequest( "JUL-23-RESTAPI-Turtle02_New", "InActive","JUL-23-RESTAPI-Turtle02_DESC_New");
-    resp = requestSpec.body(addpgm).put("/program/" + valipgmName);
+    resp = requestSpec.body(addpgm).put("/program/" + valipgmName); */
+    
+    JSONObject body = new JSONObject();
+    body.put("programName", "JUL-23-RESTAPI-Turtle02_New");
+    body.put("programStatus", "InActive");
+    body.put("programDescription", "JUL-23-RESTAPI-Turtle02_DESC_New");
+
+    System.out.println(body);
+    resp = requestSpec.body(body).put("/program/" + valipgmName);
+    
     System.out.println("Update By Name valid-->" + resp.asString());
   }
 
@@ -307,12 +316,7 @@ public class ProgramSteps {
   public void user_sends_put_request_body_with_invalid_program_name_for_program_module() {
     AddProgramRequest addpgm;
     String invalid_name = "Hello-World";
-    addpgm =
-      new AddProgramRequest(
-        invalid_name,
-        "InActive",
-        "JUL-23-RESTAPI-Turtle02_invalid"
-      );
+    addpgm = new AddProgramRequest( invalid_name, "InActive", "JUL-23-RESTAPI-Turtle02_invalid" );
     resp = requestSpec.body(addpgm).put("/program/" + invalid_name);
   }
 
