@@ -7,7 +7,8 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-			plugin = {"pretty", "html:target/index.html"
+			plugin = {"pretty", "html:target/index.html",
+					"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
 					//"junit:target/Destination.xml",
 					//"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 					}, //reporting purpose
