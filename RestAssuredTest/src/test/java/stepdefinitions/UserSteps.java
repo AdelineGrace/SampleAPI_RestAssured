@@ -38,6 +38,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import utilities.DynamicValues;
 import utilities.LoggerLoad;
+import utilities.RestAssuredRequestFilter;
 import apiEngine.model.response.User;
 
 public class UserSteps extends BaseStep {
@@ -58,7 +59,6 @@ public class UserSteps extends BaseStep {
 	static int programId;
 	static int batchId;
 	static int existingPhoneNumber;
-	// static String userId;
 	static int assignmentId;
 	static String existingAssignmentName;
 	static String roleId;
@@ -96,21 +96,7 @@ public class UserSteps extends BaseStep {
 			batch = response.getBody().as(Batch.class);
 			batchId = batch.batchId;
 
-			/*
-			 * // create user excelDataMap = ExcelReader.getData("Post_User_Assignment",
-			 * "user"); if (null != excelDataMap && excelDataMap.size() > 0) { userReq = new
-			 * AddUserRequest(excelDataMap.get("userFirstName") +
-			 * DynamicValues.SerialNumber(), excelDataMap.get("userLastName"),
-			 * excelDataMap.get("userMiddleName"), excelDataMap.get("userComments"),
-			 * excelDataMap.get("userEduPg"), excelDataMap.get("userEduUg"),
-			 * excelDataMap.get("userLinkedinUrl"), excelDataMap.get("userLocation"),
-			 * DynamicValues.PhoneNumber(), excelDataMap.get("roleId"),
-			 * excelDataMap.get("userRoleStatus"), excelDataMap.get("userTimeZone"),
-			 * excelDataMap.get("userVisaStatus")); }
-			 * 
-			 * response = userEndpoints.CreateUser(userReq); user =
-			 * response.getBody().as(User.class); userId = user.userId;
-			 */
+			
 
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
@@ -151,7 +137,7 @@ public class UserSteps extends BaseStep {
 				SetupPreRequisites();
 			}
 			RestAssured.baseURI = baseUrl;
-			RequestSpecification request = RestAssured.given();
+			RequestSpecification request = RestAssured.given().filter(new RestAssuredRequestFilter());
 			request.header("Content-Type", "application/json");
 
 			excelDataMap = null;
@@ -245,6 +231,17 @@ public class UserSteps extends BaseStep {
 
 				User user = response.getBody().as(User.class);
 				assertTrue(user.userId.startsWith("U"));
+				assertEquals(user.userComments,addUserRequest.userComments);
+				assertEquals(user.userEduPg,addUserRequest.userEduPg);
+				assertEquals(user.userEduUg,addUserRequest.userEduUg);
+				assertEquals(user.userFirstName,addUserRequest.userFirstName);
+				assertEquals(user.userLastName,addUserRequest.userLastName);
+				assertEquals(user.userLinkedinUrl,addUserRequest.userLinkedinUrl);
+				assertEquals(user.userLocation,addUserRequest.userLocation);
+				assertEquals(user.userMiddleName,addUserRequest.userMiddleName);
+				assertEquals(user.userPhoneNumber,addUserRequest.userPhoneNumber);
+				assertEquals(user.userTimeZone,addUserRequest.userTimeZone);
+				assertEquals(user.userVisaStatus,addUserRequest.userVisaStatus);
 				users.add(user.userId);
 				break;
 			case "Post_User_Existing":
@@ -642,8 +639,8 @@ public class UserSteps extends BaseStep {
 		try {
 			response.then().statusCode(200);
 			JsonPath jsonPathEvaluator = response.jsonPath();
-			List<User> userList = jsonPathEvaluator.getList("", User.class);
-			LoggerLoad.logDebug(userList.get(0).userId);
+			//List<User> userList = jsonPathEvaluator.getList("", User.class);
+			//LoggerLoad.logDebug(userList.get(0).userId);
 			response.then().assertThat().body(JsonSchemaValidator
 					.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getallusersjsonschema.json")));
 		} catch (Exception ex) {
@@ -707,7 +704,7 @@ public class UserSteps extends BaseStep {
 	@Then("User receives OK Status with response body containing all users with role")
 	public void user_receives_ok_status_with_response_body_containing_all_users_with_role() {
 		try {
-			response.then().log().all();
+			//response.then().log().all();
 			response.then().statusCode(200);
 			response.then().assertThat().body(JsonSchemaValidator
 					.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getuserbyidjsonschema.json")));
@@ -732,7 +729,7 @@ public class UserSteps extends BaseStep {
 	@Then("User receives OK Status with response body containing all staff user")
 	public void user_receives_ok_status_with_response_body_containing_all_staff_user() {
 		try {
-			response.then().log().all();
+			//response.then().log().all();
 			response.then().statusCode(200);
 			response.then().assertThat().body(JsonSchemaValidator
 					.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getuserbyidjsonschema.json")));
