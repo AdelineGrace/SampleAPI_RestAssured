@@ -2,30 +2,27 @@ package apiEngine.routes;
 
 import dataProviders.ConfigReader;
 
+import java.net.URI;
+
 public class SubmissionRoutes {
-	
-	public static String createAssignmentSubmission()
-	{
-		return ConfigReader.getSubmitPostUrl();
-	}
-	
+
 	public static String getAllAssignments()
 	{
 		return ConfigReader.getSubmitGetAllUrl();
 	}
 	
-	public static String getsubmissionByAssignmentId(Integer assignmentId)
+	public static String getsubmissionByAssignmentId(int assignmentid)
 	{
-		return ConfigReader.getSubmitGetByAssignmentIdUrl() + assignmentId;
+		return "/assignmentsubmission/getGrades/" + assignmentid;
 	}
 	
-	public static String getGradeByStudentId(String studentId)
+	public static String getGradeByStudentId(String studentid)
 	{
-		System.out.println(studentId);
-		return ConfigReader.getSubmitGetGradeByStudentIdUrl() + studentId;
+		System.out.println(studentid);
+		return "/assignmentsubmission/getGradesByStudentId/" + studentid;
 	}
 		
-	public static String getGradeBybatchId(Integer batchId)
+	public static String getGradeBybatchId(int batchId)
 	{
 		return ConfigReader.getSubmitGetGradeByBatchIdUrl() + batchId;
 	}
@@ -35,11 +32,36 @@ public class SubmissionRoutes {
 		return ConfigReader.getSubmitGetSubmissionByUserIdUrl() + userId;
 	}
 	
-	public static String getsubmissionBybatchId(Integer subbatchid)
+	public static String getsubmissionBybatchId(int batchId)
 	{
-		return ConfigReader.getSubmitGetSubmissionByBatchIdUrl() + subbatchid;
+		return "/assignmentsubmission/studentbatch/" + batchId;
 	}
-	
+
+	public static String postsubmission() {
+		return "/assignmentsubmission";
+
+	}
+
+	public static String putResubmit(Integer submissionId) {
+		return "/assignmentsubmission/" +submissionId;
+
+	}
+
+	public static String putGradesubmission(Integer submissionId) {
+		return "/assignmentsubmission/gradesubmission/" +submissionId ;
+
+	}
+
+	public static String deletesubmissionID(String submissionId) {
+		return "/assignmentsubmission/" +submissionId;
+
+	}
+
+	public static String createAssignmentSubmission() {
+
+		return "/assignmentsubmission";
+	}
+
 	public static String deleteSubmissionBySubmissionId(Integer submissionId)
 	{
 		return ConfigReader.getSubmitDeleteByIdUrl() + submissionId;
