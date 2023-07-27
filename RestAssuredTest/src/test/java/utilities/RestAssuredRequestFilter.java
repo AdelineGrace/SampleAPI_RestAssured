@@ -24,6 +24,5 @@ public class RestAssuredRequestFilter implements Filter {
                 response.getStatusCode() + " " + response.getStatusLine() + " \n Response Body => " + response.getBody().prettyPrint());
         return response;
     }
-
 	
 }

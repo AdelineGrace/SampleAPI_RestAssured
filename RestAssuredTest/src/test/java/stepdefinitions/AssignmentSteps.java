@@ -72,8 +72,6 @@ public class AssignmentSteps extends BaseStep {
 		}
 	}
 	
-
-	
 	@When("User sends HTTP POST Assignment Request for {string}")
 	public void user_sends_http_post_assignment_request(String dataKey) 
 	{
@@ -93,9 +91,7 @@ public class AssignmentSteps extends BaseStep {
 	public void user_receives_response_for_post_with(String sheetName, String dataKey) 
 	{
 		try 
-		{
-			response.then().log().all().extract().response();
-			
+		{	
 			switch(dataKey)
 			{
 				case "Post_Assignment_Valid" : 
