@@ -1,0 +1,176 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "array",
+    "default": [],
+    "title": "Root Schema",
+    "items": {
+        "type": "object",
+        "default": {},
+        "title": "A Schema",
+        "required": [
+            "submissionId",
+            "assignmentId",
+            "userId",
+            "subDesc",
+            "subComments",
+            "subPathAttach1",
+            "subPathAttach2",
+            "subPathAttach3",
+            "subPathAttach4",
+            "subPathAttach5",
+            "subDateTime",
+            "gradedBy",
+            "gradedDateTime",
+            "grade"
+        ],
+        "properties": {
+            "submissionId": {
+                "type": "integer",
+                "default": 0,
+                "title": "The submissionId Schema",
+                "examples": [
+                    1156
+                ]
+            },
+            "assignmentId": {
+                "type": "integer",
+                "default": 0,
+                "title": "The assignmentId Schema",
+                "examples": [
+                    3298
+                ]
+            },
+            "userId": {
+                "type": "string",
+                "default": "",
+                "title": "The userId Schema",
+                "examples": [
+                    "U8158"
+                ]
+            },
+            "subDesc": {
+                "type": "string",
+                "default": "",
+                "title": "The subDesc Schema",
+                "examples": [
+                    "team2"
+                ]
+            },
+            "subComments": {
+                "type": "string",
+                "default": "",
+                "title": "The subComments Schema",
+                "examples": [
+                    "team_2 API pase2"
+                ]
+            },
+            "subPathAttach1": {
+                "type": "string",
+                "default": "",
+                "title": "The subPathAttach1 Schema",
+                "examples": [
+                    "testing"
+                ]
+            },
+            "subPathAttach2": {
+                "type": "string",
+                "default": "",
+                "title": "The subPathAttach2 Schema",
+                "examples": [
+                    "turtles"
+                ]
+            },
+            "subPathAttach3": {
+                "type": "string",
+                "default": "",
+                "title": "The subPathAttach3 Schema",
+                "examples": [
+                    "string"
+                ]
+            },
+            "subPathAttach4": {
+                "type": "string",
+                "default": "",
+                "title": "The subPathAttach4 Schema",
+                "examples": [
+                    "string"
+                ]
+            },
+            "subPathAttach5": {
+                "type": "string",
+                "default": "",
+                "title": "The subPathAttach5 Schema",
+                "examples": [
+                    "string"
+                ]
+            },
+            "subDateTime": {
+                "type": "string",
+                "default": "",
+                "title": "The subDateTime Schema",
+                "examples": [
+                    "07-23-2023 19:38:47"
+                ]
+            },
+            "gradedBy": {
+                "type": "string",
+                "default": "",
+                "title": "The gradedBy Schema",
+                "examples": [
+                    "U7876"
+                ]
+            },
+            "gradedDateTime": {
+                "type": "string",
+                "default": "",
+                "title": "The gradedDateTime Schema",
+                "examples": [
+                    "07-25-2023 17:21:00"
+                ]
+            },
+            "grade": {
+                "type": "integer",
+                "default": 0,
+                "title": "The grade Schema",
+                "examples": [
+                    2
+                ]
+            }
+        },
+        "examples": [{
+            "submissionId": 1156,
+            "assignmentId": 3298,
+            "userId": "U8158",
+            "subDesc": "team2",
+            "subComments": "team_2 API pase2",
+            "subPathAttach1": "testing",
+            "subPathAttach2": "turtles",
+            "subPathAttach3": "string",
+            "subPathAttach4": "string",
+            "subPathAttach5": "string",
+            "subDateTime": "07-23-2023 19:38:47",
+            "gradedBy": "U7876",
+            "gradedDateTime": "07-25-2023 17:21:00",
+            "grade": 2
+        }]
+    },
+    "examples": [
+        [{
+            "submissionId": 1156,
+            "assignmentId": 3298,
+            "userId": "U8158",
+            "subDesc": "team2",
+            "subComments": "team_2 API pase2",
+            "subPathAttach1": "testing",
+            "subPathAttach2": "turtles",
+            "subPathAttach3": "string",
+            "subPathAttach4": "string",
+            "subPathAttach5": "string",
+            "subDateTime": "07-23-2023 19:38:47",
+            "gradedBy": "U7876",
+            "gradedDateTime": "07-25-2023 17:21:00",
+            "grade": 2
+        }]
+    ]
+}
