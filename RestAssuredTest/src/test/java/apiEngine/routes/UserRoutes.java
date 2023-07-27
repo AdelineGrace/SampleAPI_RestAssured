@@ -1,49 +1,53 @@
 package apiEngine.routes;
 
+import dataProviders.ConfigReader;
 import utilities.LoggerLoad;
 
 public class UserRoutes {
 	
 	public static String createUser()
 	{
-		return "/users/users/roleStatus";
+		return ConfigReader.getUserPostUrl();
 	}
 	
 	public static String getAllUsers()
 	{
-		return "/users/users";
+		return ConfigReader.getUserGetAllUrl();
 	}
 	
 	public static String getUserById(String userId,String dataKey)
 	{
 		String endpoint = null;
 		if("Invalid".equals(dataKey))
-			endpoint= "/users/users/00000" ;
+			endpoint= ConfigReader.getUserGetByUserIdUrl() + "00000" ;
 		else
-			endpoint= "/users/users/" + userId;
+			endpoint= ConfigReader.getUserGetByUserIdUrl() + userId;
 		return endpoint;
 	}
+	
 	public static String getAllStaffUsers()
 	{
-		return "/users/users/getAllStaff";
+		return ConfigReader.getUserGetAllStaffUrl();
 	}
+	
 	public static String getAllUserWithRoles()
 	{
-		return "/users/users/roles";
+		return ConfigReader.getUserGetAllUsersWithRolesUrl();
 	}
 	
 	public static String deleteUserById(String userId,String dataKey)
 	{
 		String endpoint = null;
 		if("Invalid".equals(dataKey))
-			endpoint = "/users/users/0000" ;
+			endpoint = ConfigReader.getUserDeleteByIdUrl() + "0000" ;
 		else 
-			endpoint = "/users/users/" + userId;
+			endpoint = ConfigReader.getUserDeleteByIdUrl() + userId;
 		return endpoint;
 	}
+
 	public static String deleteUserById(String userId)
 	{
-		return deleteUserById(userId,"Valid");
+		return ConfigReader.getUserDeleteByIdUrl() + userId;
 	}
 	
 	public static String updateUser(String userId, String dataKey) {

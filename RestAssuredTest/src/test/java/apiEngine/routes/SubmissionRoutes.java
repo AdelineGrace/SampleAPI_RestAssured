@@ -1,46 +1,48 @@
 package apiEngine.routes;
 
+import dataProviders.ConfigReader;
+
 public class SubmissionRoutes {
 	
 	public static String createAssignmentSubmission()
 	{
-		return "/assignmentsubmission";
+		return ConfigReader.getSubmitPostUrl();
 	}
 	
 	public static String getAllAssignments()
 	{
-		return "/assignmentsubmission";
+		return ConfigReader.getSubmitGetAllUrl();
 	}
 	
 	public static String getsubmissionByAssignmentId(Integer assignmentId)
 	{
-		return "/assignmentsubmission/getGrades/" + assignmentId;
+		return ConfigReader.getSubmitGetByAssignmentIdUrl() + assignmentId;
 	}
 	
 	public static String getGradeByStudentId(String studentId)
 	{
 		System.out.println(studentId);
-		return "/assignmentsubmission/getGradesByStudentId/" + studentId;
+		return ConfigReader.getSubmitGetGradeByStudentIdUrl() + studentId;
 	}
 		
 	public static String getGradeBybatchId(Integer batchId)
 	{
-		return "/assignmentsubmission/grades/" + batchId;
+		return ConfigReader.getSubmitGetGradeByBatchIdUrl() + batchId;
 	}
 
 	public static String getsubmissionByUserId(String userId)
 	{
-		return "/assignmentsubmission/student/" + userId;
+		return ConfigReader.getSubmitGetSubmissionByUserIdUrl() + userId;
 	}
 	
 	public static String getsubmissionBybatchId(Integer subbatchid)
 	{
-		return "/assignmentsubmission/studentbatch" + subbatchid;
+		return ConfigReader.getSubmitGetSubmissionByBatchIdUrl() + subbatchid;
 	}
 	
 	public static String deleteSubmissionBySubmissionId(Integer submissionId)
 	{
-		return "/assignmentsubmission/" + submissionId;
+		return ConfigReader.getSubmitDeleteByIdUrl() + submissionId;
 	}
 	
 }

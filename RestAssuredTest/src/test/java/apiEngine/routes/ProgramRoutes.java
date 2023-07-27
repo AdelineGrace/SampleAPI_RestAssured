@@ -1,15 +1,17 @@
 package apiEngine.routes;
 
+import dataProviders.ConfigReader;
+
 public class ProgramRoutes {
 	
 	public static String createProgram()
 	{
-		return "/saveprogram";
+		return ConfigReader.getProgramPostUrl();
 	}
 	
 	public static String deleteProgramById(int programId)
 	{
-		return "/deletebyprogid/" + programId;
+		return ConfigReader.getProgramDeleteByIdUrl() + programId;
 	}
 
 }
