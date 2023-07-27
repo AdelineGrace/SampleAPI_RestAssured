@@ -1,0 +1,1 @@
+{"uuid":"bc3b5a2d-59c0-4c54-abb7-f2261bb92e1d","name":"Scenario Outline: Check if user able to create a submission with \"<dataKey>\" endpoint and request body","children":["87bc5a50-1f61-4b34-a125-52098101acfe"],"befores":[],"afters":[],"start":1690465384119,"stop":1690465384125}
