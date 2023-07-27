@@ -533,7 +533,7 @@ public class AssignmentSteps extends BaseStep {
 							getClass().getClassLoader().getResourceAsStream("400statuscodejsonschema.json")));
 					
 					// Validate error json
-					JsonPath jsonPathEvaluator = response.jsonPath();
+				JsonPath jsonPathEvaluator = response.jsonPath();
 					assertEquals(excelDataMap.get("message") + Integer.parseInt(ConfigReader.getInvalidAssignmentId()) + " ", 
 							jsonPathEvaluator.get("message"));
 					assertEquals(excelDataMap.get("success"), Boolean.toString(jsonPathEvaluator.get("success")));

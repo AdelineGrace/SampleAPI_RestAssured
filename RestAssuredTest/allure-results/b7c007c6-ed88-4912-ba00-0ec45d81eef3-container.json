@@ -1,0 +1,1 @@
+{"uuid":"b7c007c6-ed88-4912-ba00-0ec45d81eef3","name":"Scenario Outline: Check if user able to delete a submission with valid and invalid Submission ID","children":["e3d499dd-6a52-4a2a-9a30-5a7d09387bd7"],"befores":[],"afters":[],"start":1690464449195,"stop":1690464449410}

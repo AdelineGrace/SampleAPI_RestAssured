@@ -1,0 +1,1 @@
+{"uuid":"2598870e-7a4b-4ae7-8d44-df2fd0e880b3","name":"Scenario Outline: Check if user able to create a program for existing, non existing and missing mandatory field.","children":["ea50a599-6f68-4e29-a938-4fce59c58fc1"],"befores":[],"afters":[],"start":1690464380671,"stop":1690464380678}

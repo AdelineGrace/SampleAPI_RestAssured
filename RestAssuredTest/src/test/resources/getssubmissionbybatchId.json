@@ -1,0 +1,391 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "title": "A Schema",
+        "required": [
+            "submissionId",
+            "assignmentId",
+            "userId",
+            "subDesc",
+            "subComments",
+            "subPathAttach1",
+            "subPathAttach2",
+            "subPathAttach3",
+            "subPathAttach4",
+            "subPathAttach5",
+            "subDateTime",
+            "gradedBy",
+            "gradedDateTime",
+            "grade"
+        ],
+        "properties": {
+            "submissionId": {
+                "type": "integer",
+                "title": "The submissionId Schema",
+                "examples": [
+                    1562,
+                    1156,
+                    1309,
+                    1472,
+                    1678,
+                    1803
+                ]
+            },
+            "assignmentId": {
+                "type": "integer",
+                "title": "The assignmentId Schema",
+                "examples": [
+                    3236,
+                    3298,
+                    3344,
+                    3528
+                ]
+            },
+            "userId": {
+                "type": "string",
+                "title": "The userId Schema",
+                "examples": [
+                    "U8208",
+                    "U8158",
+                    "U7900",
+                    "U7822",
+                    "U7876",
+                    "U8108"
+                ]
+            },
+            "subDesc": {
+                "type": "string",
+                "title": "The subDesc Schema",
+                "examples": [
+                    "Test1",
+                    "team2",
+                    "submission",
+                    "cool assignment",
+                    "test"
+                ]
+            },
+            "subComments": {
+                "type": "string",
+                "title": "The subComments Schema",
+                "examples": [
+                    "test1",
+                    "team_2 API pase2",
+                    "completed",
+                    "very good",
+                    "test123"
+                ]
+            },
+            "subPathAttach1": {
+                "type": "string",
+                "title": "The subPathAttach1 Schema",
+                "examples": [
+                    "test",
+                    "testing",
+                    "/usr/lib/gorgeous.hjson",
+                    "path1",
+                    "test1"
+                ]
+            },
+            "subPathAttach2": {
+                "type": "string",
+                "title": "The subPathAttach2 Schema",
+                "examples": [
+                    "test",
+                    "turtles",
+                    "/usr/libdata/generate_chips_alaska.opf",
+                    "path2",
+                    "test2"
+                ]
+            },
+            "subPathAttach3": {
+                "type": "string",
+                "title": "The subPathAttach3 Schema",
+                "examples": [
+                    "test",
+                    "string",
+                    "/boot/executive_concrete.obj",
+                    "path3",
+                    "turtles"
+                ]
+            },
+            "subPathAttach4": {
+                "type": "string",
+                "title": "The subPathAttach4 Schema",
+                "examples": [
+                    "test",
+                    "string",
+                    "/Network/end_to_end_table.der",
+                    "path4"
+                ]
+            },
+            "subPathAttach5": {
+                "type": "string",
+                "title": "The subPathAttach5 Schema",
+                "examples": [
+                    "test",
+                    "string",
+                    "/usr/local/src/borders_cheese.snf",
+                    "path5"
+                ]
+            },
+            "subDateTime": {
+                "type": "string",
+                "title": "The subDateTime Schema",
+                "examples": [
+                    "07-25-2023 21:54:30",
+                    "07-23-2023 19:38:47",
+                    "07-24-2023 21:10:15",
+                    "07-25-2023 13:14:00",
+                    "07-26-2023 05:29:27",
+                    "07-26-2023 17:40:55"
+                ]
+            },
+            "gradedBy": {
+                "type": [
+                    "null",
+                    "string"
+                ],
+                "title": "The gradedBy Schema",
+                "examples": [
+                    null,
+                    "U7876"
+                ]
+            },
+            "gradedDateTime": {
+                "type": [
+                    "null",
+                    "string"
+                ],
+                "title": "The gradedDateTime Schema",
+                "examples": [
+                    null,
+                    "07-25-2023 17:21:00"
+                ]
+            },
+            "grade": {
+                "type": "integer",
+                "title": "The grade Schema",
+                "examples": [
+                    -
+                    1,
+                    2
+                ]
+            }
+        },
+        "examples": [{
+            "submissionId": 1562,
+            "assignmentId": 3236,
+            "userId": "U8208",
+            "subDesc": "Test1",
+            "subComments": "test1",
+            "subPathAttach1": "test",
+            "subPathAttach2": "test",
+            "subPathAttach3": "test",
+            "subPathAttach4": "test",
+            "subPathAttach5": "test",
+            "subDateTime": "07-25-2023 21:54:30",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1156,
+            "assignmentId": 3298,
+            "userId": "U8158",
+            "subDesc": "team2",
+            "subComments": "team_2 API pase2",
+            "subPathAttach1": "testing",
+            "subPathAttach2": "turtles",
+            "subPathAttach3": "string",
+            "subPathAttach4": "string",
+            "subPathAttach5": "string",
+            "subDateTime": "07-23-2023 19:38:47",
+            "gradedBy": "U7876",
+            "gradedDateTime": "07-25-2023 17:21:00",
+            "grade": 2
+        },
+        {
+            "submissionId": 1309,
+            "assignmentId": 3344,
+            "userId": "U7900",
+            "subDesc": "submission",
+            "subComments": "completed",
+            "subPathAttach1": "/usr/lib/gorgeous.hjson",
+            "subPathAttach2": "/usr/libdata/generate_chips_alaska.opf",
+            "subPathAttach3": "/boot/executive_concrete.obj",
+            "subPathAttach4": "/Network/end_to_end_table.der",
+            "subPathAttach5": "/usr/local/src/borders_cheese.snf",
+            "subDateTime": "07-24-2023 21:10:15",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1472,
+            "assignmentId": 3236,
+            "userId": "U7822",
+            "subDesc": "cool assignment",
+            "subComments": "very good",
+            "subPathAttach1": "path1",
+            "subPathAttach2": "path2",
+            "subPathAttach3": "path3",
+            "subPathAttach4": "path4",
+            "subPathAttach5": "path5",
+            "subDateTime": "07-25-2023 13:14:00",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1678,
+            "assignmentId": 3528,
+            "userId": "U7876",
+            "subDesc": "test",
+            "subComments": "test123",
+            "subPathAttach1": "test1",
+            "subPathAttach2": "test2",
+            "subPathAttach3": "turtles",
+            "subPathAttach4": "string",
+            "subPathAttach5": "string",
+            "subDateTime": "07-26-2023 05:29:27",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1803,
+            "assignmentId": 3236,
+            "userId": "U8108",
+            "subDesc": "cool assignment",
+            "subComments": "very good",
+            "subPathAttach1": "path1",
+            "subPathAttach2": "path2",
+            "subPathAttach3": "path3",
+            "subPathAttach4": "path4",
+            "subPathAttach5": "path5",
+            "subDateTime": "07-26-2023 17:40:55",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        }]
+    },
+    "examples": [
+        [{
+            "submissionId": 1562,
+            "assignmentId": 3236,
+            "userId": "U8208",
+            "subDesc": "Test1",
+            "subComments": "test1",
+            "subPathAttach1": "test",
+            "subPathAttach2": "test",
+            "subPathAttach3": "test",
+            "subPathAttach4": "test",
+            "subPathAttach5": "test",
+            "subDateTime": "07-25-2023 21:54:30",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1156,
+            "assignmentId": 3298,
+            "userId": "U8158",
+            "subDesc": "team2",
+            "subComments": "team_2 API pase2",
+            "subPathAttach1": "testing",
+            "subPathAttach2": "turtles",
+            "subPathAttach3": "string",
+            "subPathAttach4": "string",
+            "subPathAttach5": "string",
+            "subDateTime": "07-23-2023 19:38:47",
+            "gradedBy": "U7876",
+            "gradedDateTime": "07-25-2023 17:21:00",
+            "grade": 2
+        },
+        {
+            "submissionId": 1309,
+            "assignmentId": 3344,
+            "userId": "U7900",
+            "subDesc": "submission",
+            "subComments": "completed",
+            "subPathAttach1": "/usr/lib/gorgeous.hjson",
+            "subPathAttach2": "/usr/libdata/generate_chips_alaska.opf",
+            "subPathAttach3": "/boot/executive_concrete.obj",
+            "subPathAttach4": "/Network/end_to_end_table.der",
+            "subPathAttach5": "/usr/local/src/borders_cheese.snf",
+            "subDateTime": "07-24-2023 21:10:15",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1472,
+            "assignmentId": 3236,
+            "userId": "U7822",
+            "subDesc": "cool assignment",
+            "subComments": "very good",
+            "subPathAttach1": "path1",
+            "subPathAttach2": "path2",
+            "subPathAttach3": "path3",
+            "subPathAttach4": "path4",
+            "subPathAttach5": "path5",
+            "subDateTime": "07-25-2023 13:14:00",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1678,
+            "assignmentId": 3528,
+            "userId": "U7876",
+            "subDesc": "test",
+            "subComments": "test123",
+            "subPathAttach1": "test1",
+            "subPathAttach2": "test2",
+            "subPathAttach3": "turtles",
+            "subPathAttach4": "string",
+            "subPathAttach5": "string",
+            "subDateTime": "07-26-2023 05:29:27",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        },
+        {
+            "submissionId": 1803,
+            "assignmentId": 3236,
+            "userId": "U8108",
+            "subDesc": "cool assignment",
+            "subComments": "very good",
+            "subPathAttach1": "path1",
+            "subPathAttach2": "path2",
+            "subPathAttach3": "path3",
+            "subPathAttach4": "path4",
+            "subPathAttach5": "path5",
+            "subDateTime": "07-26-2023 17:40:55",
+            "gradedBy": null,
+            "gradedDateTime": null,
+            "grade":
+                -
+                1
+        }]
+    ]
+}
