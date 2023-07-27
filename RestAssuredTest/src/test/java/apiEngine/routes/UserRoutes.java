@@ -14,9 +14,14 @@ public class UserRoutes {
 		return "/users/users";
 	}
 	
-	public static String getUserWithUserID(String userId)
+	public static String getUserById(String userId,String dataKey)
 	{
-		return "/users/users/" + userId;
+		String endpoint = null;
+		if("Invalid".equals(dataKey))
+			endpoint= "/users/users/00000" ;
+		else
+			endpoint= "/users/users/" + userId;
+		return endpoint;
 	}
 	public static String getAllStaffUsers()
 	{
@@ -27,10 +32,20 @@ public class UserRoutes {
 		return "/users/users/roles";
 	}
 	
+	public static String deleteUserById(String userId,String dataKey)
+	{
+		String endpoint = null;
+		if("Invalid".equals(dataKey))
+			endpoint = "/users/users/0000" ;
+		else 
+			endpoint = "/users/users/" + userId;
+		return endpoint;
+	}
 	public static String deleteUserById(String userId)
 	{
-		return "/users/users/" + userId;
+		return deleteUserById(userId,"Valid");
 	}
+	
 	public static String updateUser(String userId, String dataKey) {
 		String endpoint = null;
 		if("Put_User_Invalid".equals(dataKey))

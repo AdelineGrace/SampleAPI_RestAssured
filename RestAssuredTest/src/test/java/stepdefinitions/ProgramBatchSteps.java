@@ -503,6 +503,7 @@ public class ProgramBatchSteps extends BaseStep {
 			response.then().statusCode(404);
 			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
 			System.out.println("FAIL");
+			Cleanup();
 		}
 	    
 	}
