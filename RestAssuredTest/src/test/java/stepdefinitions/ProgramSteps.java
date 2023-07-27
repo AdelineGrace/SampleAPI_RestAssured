@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import apiEngine.model.request.AddProgramRequest;
 import apiEngine.model.response.Assignment;
@@ -37,6 +38,7 @@ public class ProgramSteps {
   RequestSpecification requestSpec;
   Response resp;
   ValidatableResponse valid_resp;
+  AddProgramRequest program;
   static int programId1, programId2;
   static String programName1 , programName2;
   static int updatedId1, updatedId2;
@@ -48,7 +50,7 @@ public class ProgramSteps {
   @Given( "User creates POST Request with fields {string} and {string} from excel" )
   public void user_creates_post_request_for_lms_api_endpoint( String dataKey,String sheetName) throws Exception ,IOException {
     try {
-	      AddProgramRequest program;
+	      
 	      String existingname = programName1;
 	      Map<String, String> excelDataMap = null;
 	      excelDataMap = ExcelReader.getData(dataKey, sheetName);
@@ -71,7 +73,7 @@ public class ProgramSteps {
 	        RestAssured.baseURI = baseurl;
 	        this.requestSpec =
 	          RestAssured
-	            .given()
+	            .given().log().all()
 	            .header("Content-Type", "application/json")
 	            .body(program);
 	        
@@ -107,7 +109,7 @@ public class ProgramSteps {
 				case "postNew" : 
 					System.out.println("Status code--->" + resp.statusCode());
 					//PgmIDForDelete = resProgram.programId;
-				      resp.then().assertThat().statusCode(201)
+				      resp.then().log().all().assertThat().statusCode(201)
 				        .and().body(JsonSchemaValidator.matchesJsonSchema(getClass()
 				              .getClassLoader()
 				              .getResourceAsStream("getPgmbyIdjsonschema.json")));
@@ -115,12 +117,19 @@ public class ProgramSteps {
 				      	Program programResponse = resp.getBody().as(Program.class);
 				      	programId1 = programResponse.programId;
 				      	programName1 = programResponse.programName;
-						//assignmentAdded = assignmentResponse;
+				      	Program programResponse1 = resp.getBody().as(Program.class);
+				      	programId1 = programResponse1.programId;
+				      	programName1 = programResponse1.programName;
+				      	
+				    	assertTrue(programResponse1.programId != null && programResponse1.programId != 0);					
+						assertEquals(programResponse1.programName, program.programName);
+						assertEquals(programResponse1.programStatus, program.programStatus);
+						assertEquals(programResponse1.programDescription, program.programDescription);
 				break;
 				case "postNew1":
 					System.out.println("Status code--->" + resp.statusCode());
 					//PgmIDForDelete = resProgram.programId;
-				      resp.then().assertThat().statusCode(201).and()
+				      resp.then().log().all().assertThat().statusCode(201).and()
 				        .body(JsonSchemaValidator.matchesJsonSchema(getClass()
 				              .getClassLoader()
 				              .getResourceAsStream("getPgmbyIdjsonschema.json")));
@@ -128,20 +137,25 @@ public class ProgramSteps {
 				      	Program programResponse2 = resp.getBody().as(Program.class);
 				      	programId2 = programResponse2.programId;
 				      	programName2 = programResponse2.programName;
+				      	
+				      	assertTrue(programResponse2.programId != null && programResponse2.programId != 0);					
+						assertEquals(programResponse2.programName, program.programName);
+						assertEquals(programResponse2.programStatus, program.programStatus);
+						assertEquals(programResponse2.programDescription, program.programDescription);	
 				break;     	
 				case "postExist":
 					System.out.println("Status code--->" + resp.statusCode());
-			    	this.resp.then().assertThat().statusCode(400);
+			    	this.resp.then().log().all().assertThat().statusCode(400);
 			    	assertEquals(jsonString.contains("cannot create program"), true);
 			    	LoggerLoad.logInfo("Program POST request already Exist");
 			    break;	
 				case "postMissing":
 					System.out.println("Status code--->" + resp.statusCode());
-			    	this.resp.then().assertThat().statusCode(500);
+			    	this.resp.then().log().all().assertThat().statusCode(500);
 			    	LoggerLoad.logInfo("Program POST request Missing Value");
 			    break;	
 				default : 
-					resp.then().assertThat().statusCode(404);
+					resp.then().log().all().assertThat().statusCode(404);
 					LoggerLoad.logInfo("Program POST Bad Request");
 				break;		
 			}
@@ -161,7 +175,7 @@ public class ProgramSteps {
 		{
 		  
 		  RestAssured.baseURI = baseurl;
-		  requestSpec = RestAssured.given();
+		  requestSpec = RestAssured.given().log().all();
 			LoggerLoad.logInfo("GET all assignments request created");
 		}
 	  catch (Exception ex) 
@@ -181,7 +195,7 @@ public class ProgramSteps {
 		try
 		{
 			  	System.out.println("Status code--->" + resp.statusCode());
-			  	 valid_resp = resp.then().assertThat().statusCode(200).contentType(ContentType.JSON)
+			  	 valid_resp = resp.then().log().all().assertThat().statusCode(200).contentType(ContentType.JSON)
 				      .and().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getallProgramjsonschema.json")));
 				    LoggerLoad.logInfo("GET all assignments request validated");
 		}
@@ -198,7 +212,7 @@ public class ProgramSteps {
   public void user_creates_get_request_for_the_lms_api_endpoint_for_valid() {
 	  
 	  RestAssured.baseURI = baseurl;
-	  requestSpec = RestAssured.given();
+	  requestSpec = RestAssured.given().log().all();
     
   }
 
@@ -234,16 +248,16 @@ public class ProgramSteps {
 	  if (option.equals("valid")) 
 	  {
 		  	System.out.println("Status code--->" + resp.statusCode());
-		      resp.then().assertThat().statusCode(200).contentType(ContentType.JSON)
+		      resp.then().log().all().assertThat().statusCode(200).contentType(ContentType.JSON)
 		        .and().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
 		      System.out.println(resp.getBody().asPrettyString());
 	  } else if (option.equals("invalid")) 
 	  {
 		  	System.out.println("Status code--->" + resp.statusCode());
 		      System.out.println("Invalid Program Id!");
-		      resp.then().assertThat().statusCode(404).contentType(ContentType.JSON);
+		      resp.then().log().all().assertThat().statusCode(404).contentType(ContentType.JSON);
 		      System.out.println(resp.statusCode());
-		     // assertEquals(jsonString.contains("not found"), true);
+		     
 	  }
 	  LoggerLoad.logInfo("GET By Program Id request validated");
   }
@@ -253,7 +267,7 @@ public class ProgramSteps {
   @Given("User creates PUT Request with programID for Program Module.")
   public void user_creates_put_request_with_valid_program_id_for_program_module() {
 	  	RestAssured.baseURI = baseurl;
-	  	requestSpec = RestAssured.given();
+	  	requestSpec = RestAssured.given().log().all();
 	  	requestSpec.header("Content-Type", "application/json");
   }
 
@@ -299,7 +313,7 @@ public class ProgramSteps {
 		        String pgmDesc = excelDataMap.get("ProgramDesc");
 		        Integer getPgmId = 0000;
 				    //AddProgramRequest pgmresp;
-				    //pgmresp = new AddProgramRequest("JUL-23-RESTAPI-Turtle01_New","InActive","JUL-23-RESTAPI-Turtle01_DESC_New");
+				    //pgmresp = new AddProgramRequest(pgmName + DynamicValues.SerialNumber(),pgmStatus,pgmDesc);
 				    //resp = requestSpec.body(pgmresp).put("/putprogram/"+getPgmId);
 				    JSONObject body = new JSONObject();
 				    //body.put("programId", getPgmId);
@@ -327,19 +341,19 @@ public class ProgramSteps {
 		      excelDataMap = ExcelReader.getData(dataKey, sheetName);
 		      
 		      if (null != excelDataMap && excelDataMap.size() > 0) {
-		        String pgmName = null;
+		        String pgmName = null ;
 		        String pgmStatus = excelDataMap.get("ProgramStatus");
 		        String pgmDesc = excelDataMap.get("ProgramDesc");
-		        Integer pgmId = null;
-				    //AddProgramRequest pgmresp;
-				    //pgmresp = new AddProgramRequest("JUL-23-RESTAPI-Turtle01_New","InActive","JUL-23-RESTAPI-Turtle01_DESC_New");
-				    //resp = requestSpec.body(pgmresp).put("/putprogram/"+getPgmId);
-				    JSONObject body = new JSONObject();
-				   // body.put("programId",pgmId);
+		       
+				    AddProgramRequest pgmresp;
+				    pgmresp = new AddProgramRequest(pgmName,pgmStatus,pgmDesc);
+				    resp = requestSpec.body(pgmresp).put(ConfigReader.getProperty("pgm.putById") + programId1);
+				    /*JSONObject body = new JSONObject();
 				    body.put("programName", pgmName);
 				    body.put("programDescription", pgmDesc);
 				    //System.out.println(body);
 				    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putById") + programId1);
+		     	*/
 		      }
 		      LoggerLoad.logInfo("PUT By Missing field with  Program Id request created");
 	      }
@@ -360,7 +374,7 @@ public class ProgramSteps {
 	      	updatedId1 = programResponse.programId;
 	      	updatedName1 = programResponse.programName;
 		  System.out.println("**Status Code-->" + resp.statusCode());
-		  resp.then().assertThat().statusCode(200)
+		  resp.then().log().all().assertThat().statusCode(200)
 		  .contentType(ContentType.JSON)
 	        .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
 		 
@@ -368,11 +382,11 @@ public class ProgramSteps {
 	  break;
 	  case "putIdInvalid":
 		  System.out.println("**Status Code-->" + resp.statusCode());
-	      resp.then().assertThat().statusCode(404); // Not Found
+	      resp.then().log().all().assertThat().statusCode(404); // Not Found
 	  break;
 	  case "putIdMissing":
 		  System.out.println("**Status Code-->" + resp.statusCode());
-	    resp.then().assertThat().statusCode(400);  
+	    resp.then().log().all().assertThat().statusCode(400);  
 	  break;
 	  }
 	  LoggerLoad.logInfo("PUT By valid,invalid and missing field Program Id request validated");
@@ -382,7 +396,7 @@ public class ProgramSteps {
   @Given("User creates PUT Request with programName for Program Module.")
   public void user_creates_put_request_with_program_name_for_program_module() {
 	  	RestAssured.baseURI = baseurl;
-	  	requestSpec = RestAssured.given();
+	  	requestSpec = RestAssured.given().log().all();
 	  	requestSpec.header("Content-Type", "application/json");
   }
 
@@ -459,19 +473,17 @@ public class ProgramSteps {
 	    	  	String pgmNameM = programName2;
 		        String pgmStatusM = null;
 		        String pgmDescM = null;
-	  
-				/*  AddProgramRequest addpgm;
-			    String pgmName =" " , pgmStatus = " ", pgmdesc= " ";
-			    addpgm = new AddProgramRequest(pgmName,pgmStatus,pgmdesc);
-			    resp = requestSpec.body(addpgm).put("/program/"+"JUL23-JAN-Turtle00"); 
-			   */
-			   JSONObject body = new JSONObject();
+				 AddProgramRequest addpgm;
+			    addpgm = new AddProgramRequest(pgmNameM,pgmStatusM,pgmDescM);
+			    resp = requestSpec.body(addpgm).put(ConfigReader.getProperty("pgm.putByName")+pgmNameM); 
+			   
+			  /* JSONObject body = new JSONObject();
 			    //body.put("programId", " ");
 				body.put("programName", " ");
 				 body.put("programDescription", pgmDescM);
 				 body.put("programStatus", pgmStatusM);
 			    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putByName")+pgmNameM);
-			    
+			    */
 			    //System.out.println("RESPONSE BODY__**>>"+resp.body());
 			    //String jsonString = resp.asString();
 			    //System.out.println("RESPONSE STRING--**>>"+jsonString);
@@ -496,7 +508,7 @@ public class ProgramSteps {
 			      	updatedId2 = programResponse.programId;
 			      	updatedName2 = programResponse.programName;
 				  System.out.println("Status code--->" + resp.statusCode());
-				  resp.then().assertThat().statusCode(200)
+				  resp.then().log().all().assertThat().statusCode(200)
 				  .contentType(ContentType.JSON)
 			        .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
 				  
@@ -504,11 +516,11 @@ public class ProgramSteps {
 				  break;
 			  case "putNameInvalid":
 				  System.out.println("Status code--->" + resp.statusCode());
-			      resp.then().assertThat().statusCode(404); // Not Found
+			      resp.then().log().all().assertThat().statusCode(404); // Not Found
 			  break;
 			  case "putNameMissing":
 				  System.out.println("Status code--->" + resp.statusCode());
-				  resp.then().assertThat().statusCode(400);  // BAD Response
+				  resp.then().log().all().assertThat().statusCode(400);  // BAD Response
 			  break;
 			  }
 			  LoggerLoad.logInfo("PUT By valid,invalid and missing ProgramName  request validated");
@@ -526,7 +538,7 @@ public class ProgramSteps {
 	public void given_endpoint_with_DELETE_By_ProgramName() {
 		
 		RestAssured.baseURI=baseurl;
-		requestSpec= RestAssured.given().header("Content-Type", "application/json");
+		requestSpec= RestAssured.given().log().all().header("Content-Type", "application/json");
 	}
 
 	@When("User sends Delete Request with valid or invalid ProgramName from {string} and {string} for Program Module")
@@ -567,14 +579,14 @@ public class ProgramSteps {
 				if(dataKey.equals("Delete_pgmNamevalid")) {
 					String jsonString =resp.asString();
 					System.out.println("Status--->"+resp.statusCode());
-					resp.then()
+					resp.then().log().all()
 					.assertThat()
 					.statusCode(200);		
 					assertEquals(jsonString.contains("deleted Successfully!"), true);
 				}else if(dataKey.equals("Delete_pgmNameinvalid")) {
 					String jsonString =resp.asString();
 					System.out.println("Status-->"+resp.statusCode());
-					resp.then()
+					resp.then().log().all()
 					.assertThat()
 					.statusCode(404);		
 					assertEquals(jsonString.contains("no record found"), true);
@@ -595,7 +607,7 @@ public class ProgramSteps {
 		public void given_endpoint_with_DELETE_By_ProgramId() {
 				
 			RestAssured.baseURI=baseurl;
-			requestSpec= RestAssured.given().header("Content-Type", "application/json");
+			requestSpec= RestAssured.given().log().all().header("Content-Type", "application/json");
 		}
 	 
 	@When("User sends DELETE Request with valid ProgramID")
@@ -623,7 +635,7 @@ public class ProgramSteps {
 			System.out.println("Status code--->" + resp.statusCode());
 			String jsonString =resp.asString();
 			System.out.println("Json String After DELETE Command--->"+jsonString);
-			resp.then()
+			resp.then().log().all()
 			.assertThat()
 			.statusCode(200);		
 			assertEquals(jsonString.contains("deleted Successfully!"), true);	
@@ -661,7 +673,7 @@ public class ProgramSteps {
 			System.out.println("Status code--->" + resp.statusCode());
 			String jsonString =resp.asString();
 			System.out.println("Json String After DELETE Command--->"+jsonString);
-			resp.then()
+			resp.then().log().all()
 			.assertThat()
 			.statusCode(404);		
 			assertEquals(jsonString.contains("no record found"), true);	
@@ -674,4 +686,3 @@ public class ProgramSteps {
 		}
 	}	
 }
-
