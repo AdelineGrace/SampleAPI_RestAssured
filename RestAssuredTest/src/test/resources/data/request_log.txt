@@ -1,0 +1,782 @@
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/saveprogram
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "programDescription": "Created for Assignment testing",
+    "programName": "SDET87610",
+    "programStatus": "Active"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/batches
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "batchDescription": "Created for Assignment testing",
+    "batchName": "Jul23-TestingTurtles-SDET-SDET01-71966",
+    "batchNoOfClasses": 2,
+    "batchStatus": "Active",
+    "programId": 17122
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/roleStatus
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "userComments": "Created for Assignment testing",
+    "userEduPg": "MS",
+    "userEduUg": "BE",
+    "userFirstName": "TestingTurtles_57165",
+    "userLastName": "TestUser",
+    "userLinkedinUrl": "www.linkedin.com/Test1234",
+    "userLocation": "USA",
+    "userMiddleName": "Testing",
+    "userPhoneNumber": 259091361,
+    "userRoleMaps": [
+        {
+            "roleId": "R01",
+            "userRoleStatus": "Active"
+        }
+    ],
+    "userTimeZone": "EST",
+    "userVisaStatus": "H4"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-40311",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-40311",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": null,
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-50471",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": null,
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": null,
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-06150",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-75169",
+    "batchId": null,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-67173",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": null,
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-71885",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": null,
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-19608",
+    "batchId": 9826,
+    "comments": "Testing for Assignment - past due date",
+    "createdBy": "U12174",
+    "dueDate": "2023-05-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-37939",
+    "batchId": 9826,
+    "comments": "Testing for Assignment - mentioned due date format",
+    "createdBy": "U12174",
+    "dueDate": "2023-08-01 10:00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/roleStatus
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "userComments": "Created for Assignment testing",
+    "userEduPg": "MS",
+    "userEduUg": "BE",
+    "userFirstName": "TestingTurtles_25388",
+    "userLastName": "TestUser",
+    "userLinkedinUrl": "www.linkedin.com/Test1234",
+    "userLocation": "USA",
+    "userMiddleName": "Testing",
+    "userPhoneNumber": 752496929,
+    "userRoleMaps": [
+        {
+            "roleId": "R03",
+            "userRoleStatus": "Active"
+        }
+    ],
+    "userTimeZone": "EST",
+    "userVisaStatus": "H4"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-50746",
+    "batchId": 9826,
+    "comments": "Testing for Assignment - valid values",
+    "createdBy": "U12178",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/U12178
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/roleStatus
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "userComments": "Created for Assignment testing",
+    "userEduPg": "MS",
+    "userEduUg": "BE",
+    "userFirstName": "TestingTurtles_13244",
+    "userLastName": "TestUser",
+    "userLinkedinUrl": "www.linkedin.com/Test1234",
+    "userLocation": "USA",
+    "userMiddleName": "Testing",
+    "userPhoneNumber": 963544842,
+    "userRoleMaps": [
+        {
+            "roleId": "R03",
+            "userRoleStatus": "Active"
+        }
+    ],
+    "userTimeZone": "EST",
+    "userVisaStatus": "H4"
+}
+Request method:	POST
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-14791",
+    "batchId": 9826,
+    "comments": "Testing for Assignment - valid values",
+    "createdBy": "U12179",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/U12179
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/batch/9826
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment Update",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-15893",
+    "batchId": 9826,
+    "comments": "Update",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/0
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-80305",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": null,
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-46492",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": null,
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": null,
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-58911",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-93105",
+    "batchId": null,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-31115",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": null,
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": "U12174",
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	PUT
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "assignmentDescription": "SDET SQL Assignment",
+    "assignmentName": "Jul23-TestingTurtles-SDET-SQL-81505",
+    "batchId": 9826,
+    "comments": "Testing for Assignment",
+    "createdBy": "U12174",
+    "dueDate": "2023-07-29T22:00:04.964+00:00",
+    "graderId": null,
+    "pathAttachment1": "pathfile1.json",
+    "pathAttachment2": "pathfile2.json",
+    "pathAttachment3": "pathfile3.json",
+    "pathAttachment4": "pathfile4.json",
+    "pathAttachment5": "pathfile5.json"
+}
+Request method:	DELETE
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/U12174
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	DELETE
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/batches/9826
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/deletebyprogid/17122
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	DELETE
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/5389
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request method:	GET
+Request URI:	https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/assignments/batch/9826
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
