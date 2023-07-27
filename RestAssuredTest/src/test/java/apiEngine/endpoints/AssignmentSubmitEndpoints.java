@@ -7,6 +7,7 @@ import apiEngine.routes.SubmissionRoutes;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import utilities.LoggerLoad;
 
 public class AssignmentSubmitEndpoints {
 	
@@ -88,6 +89,7 @@ public class AssignmentSubmitEndpoints {
 		RestAssured.baseURI = baseUrl;
 		RequestSpecification request = RestAssured.given();
 		Response response = request.get(SubmissionRoutes.getsubmissionByUserId(UserId));
+		LoggerLoad.logInfo(response.asPrettyString());
 		return response;
 		
 	}
@@ -99,8 +101,27 @@ public class AssignmentSubmitEndpoints {
 		request.header("Content-Type", "application/json");
 		
 		Response response = request.body(putsubmission).put(SubmissionRoutes.putResubmit(Submissionid));
-		
+		LoggerLoad.logInfo(response.asPrettyString());
 		return response;
+	}
+
+	public Response UpdategradeAssignment(PutSubmission putsubmission, int Submissionid) {
+		
+		{
+			
+			RestAssured.baseURI = baseUrl;
+			RequestSpecification request = RestAssured.given();
+			request.header("Content-Type", "application/json");
+			
+			Response response = request.body(putsubmission).put(SubmissionRoutes.putGradesubmission(Submissionid));
+			
+			LoggerLoad.logInfo(response.asPrettyString());
+			
+			return response;
+			
+		}
+	
+	
 	}
 		
 }

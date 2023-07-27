@@ -86,19 +86,19 @@ Feature: Assignment Submit module
     Then User receives Status with response body for put resubmit "<sheetName>" with "<dataKey>" in submission module
 
     Examples: 
-      | dataKey                             | sheetName  |
+      | dataKey                             | sheetName     |
       | Put_Submission_Valid                | putsubmission |
       | Put_Submission_Invalid              | putsubmission |
       
 
   @tag8_PutGradeBySubmissionId
   Scenario Outline: Check if user able to update a submission with submissionId and mandatory request body
-    Given User creates PUT Request for updating a grade in submission module in the LMS API submissionModule
+    Given User creates PUT Request for updating a grade in submission module in the LMS API submissionModule "<sheetName>" with "<dataKey>"
     When User sends PUT Request for Grade submission with mandatory and additional fields  "<sheetName>" with "<dataKey>"
     Then User receives Status with response body for put Grade "<sheetName>" with "<dataKey>" in submission module
 
     Examples: 
-      | dataKey                             | sheetName  |
+      | dataKey                                  | sheetName     |
       | Put_GradeSubmission_Valid                | putsubmission |
       | Put_GradeSubmission_Invalid              | putsubmission |
       
@@ -112,6 +112,6 @@ Feature: Assignment Submit module
     Then User receives response for DELETE Assignment Submit "<sheetName>" with "<dataKey>"
 
     Examples: 
-      | tsheetName        | dataKey                           |
+      | tsheetName       | dataKey                           |
       | assignmentSubmit | Delete_AssignmentSubmit_ValidId   |
       | assignmentSubmit | Delete_AssignmentSubmit_DeletedId |

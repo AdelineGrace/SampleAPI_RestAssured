@@ -19,12 +19,12 @@ public class PutSubmission {
 	public String gradedDateTime;
 	public String grade;
 
-	public PutSubmission(Integer submissionId,Integer assignmentId, String userId, Serializable subDesc2, String subComments,
+	public PutSubmission(Integer assignmentId, String userId, Serializable subDesc2, String subComments,
 			String subPathAttach1, String subPathAttach2, String subPathAttach3, String subPathAttach4,
 			String subPathAttach5, String subDateTime, String gradedBy, String gradedDateTime, String grade)
 	{
 	
-		this.submissionId = submissionId;
+		
 		this.assignmentId = assignmentId;
 		this.userId = userId;
 		this.subDesc = (String) subDesc2;
