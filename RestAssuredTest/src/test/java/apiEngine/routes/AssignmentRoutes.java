@@ -1,35 +1,37 @@
 package apiEngine.routes;
 
+import dataProviders.ConfigReader;
+
 public class AssignmentRoutes {
 	
 	public static String createAssignment()
 	{
-		return "/assignments";
+		return ConfigReader.getAssignmentPostUrl();
 	}
 	
 	public static String getAllAssignments()
 	{
-		return "/assignments";
+		return ConfigReader.getAssignmentGetAllUrl();
 	}
 	
 	public static String getAssignmentByAssignmentId(Integer assignmentId)
 	{
-		return "/assignments/" + assignmentId;
+		return ConfigReader.getAssignmentGetByAssignmentIdUrl() + assignmentId;
 	}
 	
 	public static String getAssignmentByBatchId(Integer batchId)
 	{
-		return "/assignments/batch/" + batchId;
+		return ConfigReader.getAssignmentGetByBatchIdUrl() + batchId;
 	}
 	
 	public static String deleteAssignmentById(Integer assignmentId)
 	{
-		return "/assignments/" + assignmentId;
+		return ConfigReader.getAssignmentDeleteByIdUrl() + assignmentId;
 	}
 	
 	public static String updateAssignmentById(Integer assignmentId)
 	{
-		return "/assignments/" + assignmentId;
+		return ConfigReader.getAssignmentPutAssignmentUrl() + assignmentId;
 	}
 
 }

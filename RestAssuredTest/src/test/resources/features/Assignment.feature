@@ -17,6 +17,10 @@ Feature: Assignment module
       | assignment | Post_Assignment_MissingBatchId               |
       | assignment | Post_Assignment_MissingCreatedBy             |
       | assignment | Post_Assignment_MissingGraderId              |
+      | assignment | Post_Assignment_PastDueDate                  |
+      | assignment | Post_Assignment_DueDateMentionedFormat       |
+      | assignment | Post_Assignment_CreatedByStudent             |
+      | assignment | Post_Assignment_CreatedByInactiveUser        |
 
   @GetAllAssignments
   Scenario: Check if user able to retrieve a record with valid LMS API

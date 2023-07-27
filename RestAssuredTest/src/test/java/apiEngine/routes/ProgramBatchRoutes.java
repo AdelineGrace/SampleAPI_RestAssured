@@ -1,19 +1,21 @@
 package apiEngine.routes;
 
+import dataProviders.ConfigReader;
+
 public class ProgramBatchRoutes {
 	
 	public static String createBatch()
 	{
-		return "/batches";
+		return ConfigReader.getBatchPostUrl();
 	}
 	
 	public static String getAllBatches(String dataKey)
 	{
 		String endpoint = null;
 		if("Invalid".equals(dataKey))
-			endpoint = "/batchesss";
+			endpoint = ConfigReader.getBatchGetAllUrl() + "ss";
 		else 
-			endpoint = "/batches";	
+			endpoint = ConfigReader.getBatchGetAllUrl();	
 
 		
 		System.out.println("endpoint in "+endpoint);
@@ -25,9 +27,9 @@ public class ProgramBatchRoutes {
 	{
 		String endpoint = null;
 		if("Invalid".equals(dataKey))
-			endpoint = "/batches/batchId/0000" ;
+			endpoint = ConfigReader.getBatchDeleteByIdUrl() + "0000" ;
 		else 
-			endpoint = "/batches/batchId/" + batchId;;	
+			endpoint = ConfigReader.getBatchDeleteByIdUrl() + batchId;;	
 		return endpoint;
 	}
 	
@@ -35,9 +37,9 @@ public class ProgramBatchRoutes {
 	{
 		String endpoint = null;
 		if("Invalid".equals(dataKey))
-			endpoint = "/batches/batchName/0000" ;
+			endpoint = ConfigReader.getBatchGetByBatchNameUrl() + "0000" ;
 		else 
-			endpoint ="/batches/batchName/" + batchName;
+			endpoint = ConfigReader.getBatchGetByBatchNameUrl() + batchName;
 		return endpoint;
 	}
 	
@@ -45,9 +47,9 @@ public class ProgramBatchRoutes {
 	{
 		String endpoint = null;
 		if("Invalid".equals(dataKey))
-			endpoint = "/batches/program/0000" ;
+			endpoint = ConfigReader.getBatchGetByProgramIdUrl() + "0000" ;
 		else 
-			endpoint ="/batches/program/" + programId;
+			endpoint = ConfigReader.getBatchGetByProgramIdUrl() + programId;
 		return endpoint;
 		
 	}
@@ -56,9 +58,9 @@ public class ProgramBatchRoutes {
 	{
 		String endpoint = null;
 		if("Put_Batch_Invalid".equals(dataKey))
-			endpoint = "/batches/0000" ;
+			endpoint = ConfigReader.getBatchPutBatchUrl() + "0000" ;
 		else 
-			endpoint = "/batches/" + batchId;;	
+			endpoint = ConfigReader.getBatchPutBatchUrl() + batchId;;	
 		return endpoint;
 		
 	}
@@ -67,15 +69,15 @@ public class ProgramBatchRoutes {
 	{
 		String endpoint = null;
 		if("Invalid".equals(dataKey))
-			endpoint = "/batches/0000" ;
+			endpoint = ConfigReader.getBatchDeleteByIdUrl() + "0000" ;
 		else 
-			endpoint ="/batches/" + batchId;
+			endpoint = ConfigReader.getBatchDeleteByIdUrl() + batchId;
 		return endpoint;
 	}
 	
 	public static String deleteBatchById(int batchId)
 	{
-		return "/batches/" + batchId;
+		return ConfigReader.getBatchDeleteByIdUrl() + batchId;
 	}
 
 }

@@ -38,6 +38,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import utilities.DynamicValues;
 import utilities.LoggerLoad;
+import utilities.RestAssuredRequestFilter;
 
 public class ProgramBatchSteps extends BaseStep {
 	
@@ -106,7 +107,7 @@ public class ProgramBatchSteps extends BaseStep {
 			
 
 			RestAssured.baseURI = baseUrl;
-			RequestSpecification request = RestAssured.given();
+			RequestSpecification request = RestAssured.given().filter(new RestAssuredRequestFilter());
 			request.header("Content-Type", "application/json");
 
 			excelDataMap = null;
@@ -264,7 +265,7 @@ public class ProgramBatchSteps extends BaseStep {
 
 	@Then("User receives Status Code  with response body for endpoint {string}")
 	public void user_receives_status_code_with_response_body_for_endpoint(String dataKey) {
-		response.then().log().all();
+		//response.then().log().all();
 		if(dataKey.equals("Valid")) {
 			response.then().statusCode(200);
 			JsonPath jsonPathEvaluator = response.jsonPath();
@@ -498,10 +499,12 @@ public class ProgramBatchSteps extends BaseStep {
 		response= response.then().log().all().extract().response();	
 		if(dataKey.equals("Valid")) {
 			response.then().statusCode(200);
+			Cleanup();
 		}else {
 			response.then().statusCode(404);
 			response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
 			System.out.println("FAIL");
+			Cleanup();
 		}
 	    
 	}
