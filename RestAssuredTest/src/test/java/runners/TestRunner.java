@@ -14,7 +14,15 @@ import io.cucumber.junit.CucumberOptions;
 					"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
 					}, //reporting purpose
 			monochrome=false,  //console output color
-			features = {"src/test/resources/features/Assignment.feature"}, //location of feature files
+			features = {"src/test/resources/features/ProgramModule.feature",
+					"src/test/resources/features/ProgamBatch.feature",
+					"src/test/resources/features/User.feature",
+					"src/test/resources/features/Assignment.feature",
+					"src/test/resources/features/AssignmentSubmit.feature",
+					}, //location of feature files
+					
+			
+
 			glue= "stepdefinitions" //location of step definition files
 		)
 public class TestRunner {
