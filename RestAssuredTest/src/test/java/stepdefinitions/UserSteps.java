@@ -211,7 +211,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception e) {
 			LoggerLoad.logInfo(e.getMessage());
 			e.printStackTrace();
-			
+
 		}
 	}
 
@@ -223,7 +223,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 	}
 
@@ -281,7 +281,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 	}
 
@@ -335,7 +335,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception e) {
 			LoggerLoad.logInfo(e.getMessage());
 			e.printStackTrace();
-			
+
 		}
 	}
 
@@ -352,7 +352,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 	}
 
@@ -411,7 +411,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 
 	}
@@ -444,7 +444,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception e) {
 			LoggerLoad.logInfo(e.getMessage());
 			e.printStackTrace();
-			
+
 		}
 	}
 
@@ -461,7 +461,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 	}
 
@@ -477,16 +477,17 @@ public class UserSteps extends BaseStep {
 						.statusCode(HttpStatus.SC_OK)
 						// Validate content type
 						.contentType(ContentType.TEXT);
-						// Validate json schema
-						/*.body(JsonSchemaValidator.matchesJsonSchema(
-								getClass().getClassLoader().getResourceAsStream("userjsonschema.json")));*/
+				// Validate json schema
+				/*
+				 * .body(JsonSchemaValidator.matchesJsonSchema(
+				 * getClass().getClassLoader().getResourceAsStream("userjsonschema.json")));
+				 */
 
-				
 				break;
 
 			case "Put_UserRole_Missing_RoleId":
 			case "Put_UserRole_Missing_RoleStatus":
-			
+
 				response.then().assertThat()
 						// Validate response status
 						.statusCode(HttpStatus.SC_BAD_REQUEST)
@@ -506,7 +507,6 @@ public class UserSteps extends BaseStep {
 						// Validate json schema
 						.body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader()
 								.getResourceAsStream("404getbatchbynameoridjsonschema.json")));
-				
 
 				break;
 
@@ -515,12 +515,13 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 	}
-    
+
 	@Given("User creates PUT User batch Request for the LMS API with fields from {string} with {string}")
-	public void user_creates_put_user_batch_request_for_the_lms_api_with_fields_from_with(String sheetName, String dataKey) {
+	public void user_creates_put_user_batch_request_for_the_lms_api_with_fields_from_with(String sheetName,
+			String dataKey) {
 		try {
 
 			RestAssured.baseURI = baseUrl;
@@ -539,9 +540,11 @@ public class UserSteps extends BaseStep {
 					if (!users.isEmpty()) {
 						userId = users.get(0);
 					}
-					
-					assignUserRoleProgramBatchStatus = new AssignUserRoleProgramBatchStatus(programId, excelDataMap.get("roleId"), userId, batchId, excelDataMap.get("userRoleStatus"));
-					LoggerLoad.logDebug("assignUserRoleProgramBatchStatus" + assignUserRoleProgramBatchStatus.toString());
+
+					assignUserRoleProgramBatchStatus = new AssignUserRoleProgramBatchStatus(programId,
+							excelDataMap.get("roleId"), userId, batchId, excelDataMap.get("userRoleStatus"));
+					LoggerLoad
+							.logDebug("assignUserRoleProgramBatchStatus" + assignUserRoleProgramBatchStatus.toString());
 					break;
 				}
 			}
@@ -549,7 +552,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception e) {
 			LoggerLoad.logInfo(e.getMessage());
 			e.printStackTrace();
-			
+
 		}
 	}
 
@@ -566,7 +569,7 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 	}
 
@@ -582,16 +585,16 @@ public class UserSteps extends BaseStep {
 						.statusCode(HttpStatus.SC_OK)
 						// Validate content type
 						.contentType(ContentType.TEXT);
-						// Validate json schema
-						/*.body(JsonSchemaValidator.matchesJsonSchema(
-								getClass().getClassLoader().getResourceAsStream("userjsonschema.json")));*/
+				// Validate json schema
+				/*
+				 * .body(JsonSchemaValidator.matchesJsonSchema(
+				 * getClass().getClassLoader().getResourceAsStream("userjsonschema.json")));
+				 */
 
-				
 				break;
 
 			case "Put_UserBatch_Missing":
-			
-			
+
 				response.then().assertThat()
 						// Validate response status
 						.statusCode(HttpStatus.SC_BAD_REQUEST)
@@ -611,7 +614,6 @@ public class UserSteps extends BaseStep {
 						// Validate json schema
 						.body(JsonSchemaValidator.matchesJsonSchema(getClass().getClassLoader()
 								.getResourceAsStream("404getbatchbynameoridjsonschema.json")));
-				
 
 				break;
 
@@ -620,114 +622,162 @@ public class UserSteps extends BaseStep {
 		} catch (Exception ex) {
 			LoggerLoad.logInfo(ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 	}
-	/*
-	 * @Given("User creates GET Request for the LMS API All User endpoint") public
-	 * void user_creates_get_request_for_the_lms_api_all_user_endpoint() {
-	 * RestAssured.baseURI = baseUrl; request = RestAssured.given(); }
-	 * 
-	 * @When("User sends HTTPS Request") public void user_sends_https_request() {
-	 * response = request.get(UserRoutes.getAllUsers());
-	 * //System.out.println("user routeaa"+ UserRoute.getAllUsers());
-	 * //System.out.println(response.asPrettyString());
-	 * 
-	 * 
-	 * }
-	 * 
-	 * @Then("User receives OK Status with response body containing all users")
-	 * public void user_receives_ok_status_with_response_body_containing_all_users()
-	 * { if(response.getStatusCode() == 200) { response.then().statusCode(200);
-	 * //System.out.println(response.getStatusCode());
-	 * //System.out.println(response.asPrettyString());
-	 * 
-	 * JsonPath jsonPathEvaluator = response.jsonPath(); List<User> userList =
-	 * jsonPathEvaluator.getList("", User.class);
-	 * //System.out.print(userList.get(0).userId);
-	 * 
-	 * //response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(
-	 * getClass().getClassLoader().getResourceAsStream("getusersjsonschema.json")));
-	 * } else {
-	 * 
-	 * } }
-	 * 
-	 * @Given("User creates GET Request for the LMS API endpoint with valid User ID"
-	 * ) public void
-	 * user_creates_get_request_for_the_lms_api_endpoint_with_valid_user_id() {
-	 * RestAssured.baseURI = baseUrl; request = RestAssured.given(); response =
-	 * request.get(UserRoutes.getAllUsers()); System.out.println("user routeaa"+
-	 * UserRoutes.getAllUsers()); System.out.println(response.asPrettyString()); }
-	 * 
-	 * /*@
-	 * Given("User creates GET Request for the LMS API endpoint with invalid User ID"
-	 * ) public void
-	 * user_creates_get_request_for_the_lms_api_endpoint_with_invalid_user_id() {
-	 * RestAssured.baseURI = baseUrl; request = RestAssured.given(); response =
-	 * request.get(UserRoute.getAllUsers()); System.out.println("user routeaa"+
-	 * UserRoute.getAllUsers()); System.out.println(response.asPrettyString()); }
-	 */
 
-	/*
-	 * @Given("User creates GET Request for the LMS API endpoint with {string} valid User ID"
-	 * ) public void
-	 * user_creates_get_request_for_the_lms_api_endpoint_with_valid_user_id(String
-	 * userId) { RestAssured.baseURI = baseUrl; request = RestAssured.given();
-	 * response = request.get(UserRoute.getUserWithInUserID(userId));
-	 * System.out.println("user routeaa"+ UserRoute.getAllUsers());
-	 * System.out.println(response.asPrettyString()); }
-	 */
+	@Given("User creates GET Request for the LMS API All User endpoint")
+	public void user_creates_get_request_for_the_lms_api_all_user_endpoint() {
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+	}
 
-	/*
-	 * @Given("User creates GET Request for the LMS API endpoint with {string} valid User ID"
-	 * ) public void
-	 * user_creates_get_request_for_the_lms_api_endpoint_with_valid_user_id(String
-	 * userId) { RestAssured.baseURI = baseUrl; request = RestAssured.given();
-	 * response = request.get(UserRoutes.getUserWithUserID(userId));
-	 * System.out.println("user routeaa"+ UserRoutes.getUserWithUserID(userId));
-	 * System.out.println(response.asPrettyString()); }
-	 * 
-	 * @Given("User creates GET Request for the LMS API endpoint with {string} invalid User ID"
-	 * ) public void
-	 * user_creates_get_request_for_the_lms_api_endpoint_with_invalid_user_id(String
-	 * userId) { RestAssured.baseURI = baseUrl; request = RestAssured.given();
-	 * response = request.get(UserRoutes.getUserWithUserID(userId)); errorStatusCode
-	 * = response.statusCode(); System.out.println("user routeaa"+
-	 * UserRoutes.getUserWithUserID(userId));
-	 * System.out.println(response.asPrettyString());; }
-	 * 
-	 * @Then("User receives {string} Not Found Status with message and boolean success details"
-	 * ) public void
-	 * user_receives_not_found_status_with_message_and_boolean_success_details(
-	 * String responseCode) { System.out.println("here stus" + errorStatusCode); if
-	 * (errorStatusCode == 404) {
-	 * //response.then().statusCode(Integer.parseInt(responseCode)); System.out.
-	 * println("Status code 404 received for GET all program with invalid URL"); }
-	 * else { System.out.println("There is something wrong");
-	 * 
-	 * } }
-	 * 
-	 * @Given("User creates GET Request for the LMS API All Staff endpoint") public
-	 * void user_creates_get_request_for_the_lms_api_all_staff_endpoint() {
-	 * RestAssured.baseURI = baseUrl; request = RestAssured.given(); response =
-	 * request.get(UserRoutes.getAllStaffUsers());
-	 * System.out.println("user routeaa"+ UserRoutes.getAllStaffUsers());
-	 * System.out.println(response.asPrettyString());
-	 * 
-	 * }
-	 * 
-	 * @Then("User receives {int} OK Status with response body") public void
-	 * user_receives_ok_status_with_response_body(Integer int1) { response =
-	 * request.get(UserRoutes.getAllStaffUsers()); int statusCode =
-	 * response.statusCode(); assertEquals(statusCode, 200);
-	 * System.out.println("Status Code" + response.statusCode()); }
-	 * 
-	 * @Given("User creates GET Request for the LMS API User Roles endpoint") public
-	 * void user_creates_get_request_for_the_lms_api_user_roles_endpoint() {
-	 * RestAssured.baseURI = baseUrl; request = RestAssured.given(); response =
-	 * request.get(UserRoutes.getAllUserWithRoles());
-	 * System.out.println("user routeaa"+ UserRoutes.getAllUserWithRoles());
-	 * System.out.println(response.asPrettyString()); }
-	 */
+	@When("User sends HTTPS Request")
+	public void user_sends_https_request() {
+		response = userEndpoints.GetAllUsers();
+	}
+
+	@Then("User receives OK Status with response body containing all users")
+	public void user_receives_ok_status_with_response_body_containing_all_users() {
+		try {
+			response.then().statusCode(200);
+			JsonPath jsonPathEvaluator = response.jsonPath();
+			List<User> userList = jsonPathEvaluator.getList("", User.class);
+			LoggerLoad.logDebug(userList.get(0).userId);
+			response.then().assertThat().body(JsonSchemaValidator
+					.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getallusersjsonschema.json")));
+		} catch (Exception ex) {
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+			Cleanup();
+		}
+	}
+
+	@Given("User creates GET User Request for the LMS API")
+	public void user_creates_get_user_request_for_the_lms_api() {
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+	}
+
+	@When("User sends HTTPS GET User Request with userId with {string}")
+	public void user_sends_https_get_user_request_with_user_id_with(String dataKey) {
+		String userId = "U7876";
+		if (!users.isEmpty()) {
+			userId = users.get(0);
+		}
+		response = userEndpoints.GetUsersById(userId, dataKey);
+	}
+
+	@Then("User receives Status Code  with response body for a userId with {string}")
+	public void user_receives_status_code_with_response_body_for_a_user_id_with(String dataKey) {
+		try {
+			response.then().log().all();
+			if (dataKey.equals("Valid")) {
+				response.then().statusCode(200);
+				response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(
+						getClass().getClassLoader().getResourceAsStream("getuserbyidjsonschema.json")));
+
+			} else if (dataKey.equals("Invalid")) {
+				if (response.statusCode() == 404 || response.statusCode() == 405) {
+
+					response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(
+							getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
+				}
+			} else {
+				assertTrue(false);
+			}
+		} catch (Exception ex) {
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+			Cleanup();
+		}
+	}
+
+	@Given("User creates GET Request for the LMS API All User with role endpoint")
+	public void user_creates_get_request_for_the_lms_api_all_user_with_role_endpoint() {
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+	}
+
+	@When("User sends HTTPS Request for User with role")
+	public void user_sends_https_request_for_user_with_role() {
+		response = userEndpoints.GetAllUsersWithRole();
+	}
+
+	@Then("User receives OK Status with response body containing all users with role")
+	public void user_receives_ok_status_with_response_body_containing_all_users_with_role() {
+		try {
+			response.then().log().all();
+			response.then().statusCode(200);
+			response.then().assertThat().body(JsonSchemaValidator
+					.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getuserbyidjsonschema.json")));
+		} catch (Exception ex) {
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+			Cleanup();
+		}
+	}
+
+	@Given("User creates GET Request for the LMS API all staff endpoint")
+	public void user_creates_get_request_for_the_lms_api_all_staff_endpoint() {
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+	}
+
+	@When("User sends HTTPS Request for all staff with role")
+	public void user_sends_https_request_for_all_staff_with_role() {
+		response = userEndpoints.GetAllStaff();
+	}
+
+	@Then("User receives OK Status with response body containing all staff user")
+	public void user_receives_ok_status_with_response_body_containing_all_staff_user() {
+		try {
+			response.then().log().all();
+			response.then().statusCode(200);
+			response.then().assertThat().body(JsonSchemaValidator
+					.matchesJsonSchema(getClass().getClassLoader().getResourceAsStream("getuserbyidjsonschema.json")));
+		} catch (Exception ex) {
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+			Cleanup();
+		}
+	}
+
+	@Given("User creates DELETE Request for the LMS API endpoint with {string} userId")
+	public void user_creates_delete_request_for_the_lms_api_endpoint_with_user_id(String string) {
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+	}
+
+	@When("User sends DELETE Request for {string} userId")
+	public void user_sends_delete_request_for_user_id(String dataKey) {
+		String userId = "U7876";
+		if (!users.isEmpty()) {
+			userId = users.get(0);
+		}
+		response = userEndpoints.deleteUser(userId, dataKey);
+	}
+
+	@Then("User receives Status with response body for {string} userId")
+	public void user_receives_status_with_response_body_for_user_id(String dataKey) {
+		try {
+			response = response.then().log().all().extract().response();
+			if (dataKey.equals("Valid")) {
+				response.then().statusCode(200);
+				Cleanup();
+			} else {
+				response.then().statusCode(404);
+				response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(
+						getClass().getClassLoader().getResourceAsStream("404getbatchbynameoridjsonschema.json")));
+				System.out.println("FAIL");
+				Cleanup();
+			}
+		} catch (Exception ex) {
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+			Cleanup();
+		}
+
+	}
 
 }

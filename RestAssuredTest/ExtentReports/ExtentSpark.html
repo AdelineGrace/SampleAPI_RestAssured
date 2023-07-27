@@ -35,7 +35,7 @@
 <a href="#"><span class="badge badge-primary">Extent Spark Report</span></a>
 </li>
 <li class="m-r-10">
-<a href="#"><span class="badge badge-primary">Jul 26, 2023 15:03:00</span></a>
+<a href="#"><span class="badge badge-primary">Jul 26, 2023 19:56:18</span></a>
 </li>
 </ul>
 </div>
@@ -66,13 +66,13 @@
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Started</p>
-<h3>Jul 26, 2023 15:03:00</h3>
+<h3>Jul 26, 2023 19:56:18</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Ended</p>
-<h3>Jul 26, 2023 15:03:32</h3>
+<h3>Jul 26, 2023 19:56:31</h3>
 </div></div>
 </div>
 <div class="col-md-3">
@@ -162,7 +162,7 @@
 </div></div>
 <script>
 var timeline = {
-"Assignment module":30.052
+"Assignment module":11.615
 };
 </script>
 <div class="row">
@@ -172,6 +172,22 @@ var timeline = {
 <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
 <thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead><tbody>
 <tr>
+<td>@GetAllAssignments</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>@Assignment</td>
+<td>23</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
 <td>@CreateAssignment</td>
 <td>8</td>
 <td>0</td>
@@ -180,31 +196,7 @@ var timeline = {
 <td>100%</td>
 </tr>
 <tr>
-<td>@GetAssignmentByDeletedBatchID</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>@GetAssignmentByAssignmentID</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-</tr>
-<tr>
 <td>@GetAssignmentByBatchID</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>@GetAssignmentByDeletedAssignmentID</td>
 <td>2</td>
 <td>0</td>
 <td>0</td>
@@ -220,6 +212,14 @@ var timeline = {
 <td>100%</td>
 </tr>
 <tr>
+<td>@GetAssignmentByDeletedAssignmentID</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
 <td>@UpdateAssignment</td>
 <td>8</td>
 <td>0</td>
@@ -228,16 +228,16 @@ var timeline = {
 <td>100%</td>
 </tr>
 <tr>
-<td>@Assignment</td>
-<td>23</td>
+<td>@GetAssignmentByAssignmentID</td>
+<td>2</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>100%</td>
 </tr>
 <tr>
-<td>@GetAllAssignments</td>
-<td>1</td>
+<td>@GetAssignmentByDeletedBatchID</td>
+<td>2</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -288,7 +288,7 @@ eventsCount: 5,
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tag"></i></a>
 <ul id="tag-toggle" class="dropdown-menu dropdown-md p-v-0">
-<a class="dropdown-item" href="#">@CreateAssignment</a><a class="dropdown-item" href="#">@GetAssignmentByDeletedBatchID</a><a class="dropdown-item" href="#">@GetAssignmentByAssignmentID</a><a class="dropdown-item" href="#">@GetAssignmentByBatchID</a><a class="dropdown-item" href="#">@GetAssignmentByDeletedAssignmentID</a><a class="dropdown-item" href="#">@DeleteAssignmentByAssignmentID</a><a class="dropdown-item" href="#">@UpdateAssignment</a><a class="dropdown-item" href="#">@Assignment</a><a class="dropdown-item" href="#">@GetAllAssignments</a>
+<a class="dropdown-item" href="#">@GetAllAssignments</a><a class="dropdown-item" href="#">@Assignment</a><a class="dropdown-item" href="#">@CreateAssignment</a><a class="dropdown-item" href="#">@GetAssignmentByBatchID</a><a class="dropdown-item" href="#">@DeleteAssignmentByAssignmentID</a><a class="dropdown-item" href="#">@GetAssignmentByDeletedAssignmentID</a><a class="dropdown-item" href="#">@UpdateAssignment</a><a class="dropdown-item" href="#">@GetAssignmentByAssignmentID</a><a class="dropdown-item" href="#">@GetAssignmentByDeletedBatchID</a>
 </ul>
 </li>
 </ul>
@@ -301,7 +301,7 @@ eventsCount: 5,
           <div class="test-detail">
             <p class="name">Assignment module</p>
             <p class="text-sm">
-              <span>3:03:02 PM</span> / <span>00:00:30:052</span>
+              <span>7:56:20 PM</span> / <span>00:00:11:615</span>
               <span class="badge pass-bg log float-right">Pass</span>
             </p>
           </div>
@@ -310,9 +310,9 @@ eventsCount: 5,
 <div class="p-v-10">
 <div class="info">
 <h5 class="test-status text-pass">Assignment module</h5>
-<span class='badge badge-success'>07.26.2023 3:03:02 PM</span>
-<span class='badge badge-danger'>07.26.2023 3:03:32 PM</span>
-<span class='badge badge-default'>00:00:30:052</span>
+<span class='badge badge-success'>07.26.2023 7:56:20 PM</span>
+<span class='badge badge-danger'>07.26.2023 7:56:31 PM</span>
+<span class='badge badge-default'>00:00:11:615</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
 <span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
 <span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
@@ -943,15 +943,15 @@ eventsCount: 5,
 <li class="test-item">
 <div class="test-detail">
 <span class="meta">
-<span class='badge log pass-bg'>8</span>
+<span class='badge log pass-bg'>1</span>
 </span>
-<p class="name">@CreateAssignment</p>
-<p class="duration text-sm">8 tests</p>
+<p class="name">@GetAllAssignments</p>
+<p class="duration text-sm">1 tests</p>
 </div>
 <div class="test-contents d-none">
 <div class="info">
-<h4>@CreateAssignment</h4>
-<span status="pass" class='badge log pass-bg'>8 passed</span>
+<h4>@GetAllAssignments</h4>
+<span status="pass" class='badge log pass-bg'>1 passed</span>
 </div>
 <table class='table table-sm mt-4'>
 <thead>
@@ -964,417 +964,11 @@ eventsCount: 5,
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:02 PM</td>
+<td>19:56:27 PM</td>
 <td>
-<a href="#" class="linked" test-id='1' id='3'>Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</a>
+<a href="#" class="linked" test-id='1' id='35'>Check if user able to retrieve a record with valid LMS API</a>
 <div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:11 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='7'>Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:14 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='11'>Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:14 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='15'>Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:15 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='19'>Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:16 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='23'>Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:17 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='27'>Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:17 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='31'>Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</li>
-<li class="test-item">
-<div class="test-detail">
-<span class="meta">
-<span class='badge log pass-bg'>2</span>
-</span>
-<p class="name">@GetAssignmentByDeletedBatchID</p>
-<p class="duration text-sm">2 tests</p>
-</div>
-<div class="test-contents d-none">
-<div class="info">
-<h4>@GetAssignmentByDeletedBatchID</h4>
-<span status="pass" class='badge log pass-bg'>2 passed</span>
-</div>
-<table class='table table-sm mt-4'>
-<thead>
-<tr>
-<th class="status-col">Status</th>
-<th class="timestamp-col">Timestamp</th>
-<th>TestName</th>
-</tr>
-</thead>
-<tbody>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:31 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:32 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</li>
-<li class="test-item">
-<div class="test-detail">
-<span class="meta">
-<span class='badge log pass-bg'>2</span>
-</span>
-<p class="name">@GetAssignmentByAssignmentID</p>
-<p class="duration text-sm">2 tests</p>
-</div>
-<div class="test-contents d-none">
-<div class="info">
-<h4>@GetAssignmentByAssignmentID</h4>
-<span status="pass" class='badge log pass-bg'>2 passed</span>
-</div>
-<table class='table table-sm mt-4'>
-<thead>
-<tr>
-<th class="status-col">Status</th>
-<th class="timestamp-col">Timestamp</th>
-<th>TestName</th>
-</tr>
-</thead>
-<tbody>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:20 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:21 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</li>
-<li class="test-item">
-<div class="test-detail">
-<span class="meta">
-<span class='badge log pass-bg'>2</span>
-</span>
-<p class="name">@GetAssignmentByBatchID</p>
-<p class="duration text-sm">2 tests</p>
-</div>
-<div class="test-contents d-none">
-<div class="info">
-<h4>@GetAssignmentByBatchID</h4>
-<span status="pass" class='badge log pass-bg'>2 passed</span>
-</div>
-<table class='table table-sm mt-4'>
-<thead>
-<tr>
-<th class="status-col">Status</th>
-<th class="timestamp-col">Timestamp</th>
-<th>TestName</th>
-</tr>
-</thead>
-<tbody>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:20 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:21 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</li>
-<li class="test-item">
-<div class="test-detail">
-<span class="meta">
-<span class='badge log pass-bg'>2</span>
-</span>
-<p class="name">@GetAssignmentByDeletedAssignmentID</p>
-<p class="duration text-sm">2 tests</p>
-</div>
-<div class="test-contents d-none">
-<div class="info">
-<h4>@GetAssignmentByDeletedAssignmentID</h4>
-<span status="pass" class='badge log pass-bg'>2 passed</span>
-</div>
-<table class='table table-sm mt-4'>
-<thead>
-<tr>
-<th class="status-col">Status</th>
-<th class="timestamp-col">Timestamp</th>
-<th>TestName</th>
-</tr>
-</thead>
-<tbody>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:31 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:32 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</li>
-<li class="test-item">
-<div class="test-detail">
-<span class="meta">
-<span class='badge log pass-bg'>2</span>
-</span>
-<p class="name">@DeleteAssignmentByAssignmentID</p>
-<p class="duration text-sm">2 tests</p>
-</div>
-<div class="test-contents d-none">
-<div class="info">
-<h4>@DeleteAssignmentByAssignmentID</h4>
-<span status="pass" class='badge log pass-bg'>2 passed</span>
-</div>
-<table class='table table-sm mt-4'>
-<thead>
-<tr>
-<th class="status-col">Status</th>
-<th class="timestamp-col">Timestamp</th>
-<th>TestName</th>
-</tr>
-</thead>
-<tbody>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:28 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='82'>Check if user able to delete a record with valid and invalid Assignment ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:30 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='86'>Check if user able to delete a record with valid and invalid Assignment ID</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</li>
-<li class="test-item">
-<div class="test-detail">
-<span class="meta">
-<span class='badge log pass-bg'>8</span>
-</span>
-<p class="name">@UpdateAssignment</p>
-<p class="duration text-sm">8 tests</p>
-</div>
-<div class="test-contents d-none">
-<div class="info">
-<h4>@UpdateAssignment</h4>
-<span status="pass" class='badge log pass-bg'>8 passed</span>
-</div>
-<table class='table table-sm mt-4'>
-<thead>
-<tr>
-<th class="status-col">Status</th>
-<th class="timestamp-col">Timestamp</th>
-<th>TestName</th>
-</tr>
-</thead>
-<tbody>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:21 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='49'>Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:22 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='53'>Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:23 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='57'>Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:23 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='61'>Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:24 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='65'>Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:25 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='69'>Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:26 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='73'>Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</span>
-</div>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:27 PM</td>
-<td>
-<a href="#" class="linked" test-id='1' id='77'>Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</a>
-<div class="">
-<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</span>
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid LMS API</span>
 </div>
 </td>
 </tr>
@@ -1406,7 +1000,7 @@ eventsCount: 5,
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:02 PM</td>
+<td>19:56:20 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='3'>Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</a>
 <div class="">
@@ -1416,7 +1010,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:11 PM</td>
+<td>19:56:24 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='7'>Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</a>
 <div class="">
@@ -1426,7 +1020,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:14 PM</td>
+<td>19:56:25 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='11'>Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</a>
 <div class="">
@@ -1436,7 +1030,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:14 PM</td>
+<td>19:56:26 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='15'>Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</a>
 <div class="">
@@ -1446,7 +1040,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:15 PM</td>
+<td>19:56:26 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='19'>Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</a>
 <div class="">
@@ -1456,7 +1050,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:16 PM</td>
+<td>19:56:26 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='23'>Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</a>
 <div class="">
@@ -1466,7 +1060,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:17 PM</td>
+<td>19:56:26 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='27'>Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</a>
 <div class="">
@@ -1476,7 +1070,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:17 PM</td>
+<td>19:56:27 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='31'>Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</a>
 <div class="">
@@ -1486,7 +1080,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:18 PM</td>
+<td>19:56:27 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='35'>Check if user able to retrieve a record with valid LMS API</a>
 <div class="">
@@ -1496,7 +1090,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:20 PM</td>
+<td>19:56:28 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
 <div class="">
@@ -1506,7 +1100,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:21 PM</td>
+<td>19:56:28 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
 <div class="">
@@ -1516,7 +1110,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:21 PM</td>
+<td>19:56:29 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='49'>Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</a>
 <div class="">
@@ -1526,7 +1120,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:22 PM</td>
+<td>19:56:29 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='53'>Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</a>
 <div class="">
@@ -1536,7 +1130,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:23 PM</td>
+<td>19:56:29 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='57'>Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</a>
 <div class="">
@@ -1546,7 +1140,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:23 PM</td>
+<td>19:56:29 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='61'>Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</a>
 <div class="">
@@ -1556,7 +1150,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:24 PM</td>
+<td>19:56:30 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='65'>Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</a>
 <div class="">
@@ -1566,7 +1160,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:25 PM</td>
+<td>19:56:30 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='69'>Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</a>
 <div class="">
@@ -1576,7 +1170,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:26 PM</td>
+<td>19:56:30 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='73'>Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</a>
 <div class="">
@@ -1586,7 +1180,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:27 PM</td>
+<td>19:56:30 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='77'>Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</a>
 <div class="">
@@ -1596,7 +1190,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:28 PM</td>
+<td>19:56:30 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='82'>Check if user able to delete a record with valid and invalid Assignment ID</a>
 <div class="">
@@ -1606,7 +1200,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:30 PM</td>
+<td>19:56:31 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='86'>Check if user able to delete a record with valid and invalid Assignment ID</a>
 <div class="">
@@ -1616,7 +1210,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:31 PM</td>
+<td>19:56:31 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
 <div class="">
@@ -1626,7 +1220,7 @@ eventsCount: 5,
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:32 PM</td>
+<td>19:56:31 PM</td>
 <td>
 <a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
 <div class="">
@@ -1641,15 +1235,15 @@ eventsCount: 5,
 <li class="test-item">
 <div class="test-detail">
 <span class="meta">
-<span class='badge log pass-bg'>1</span>
+<span class='badge log pass-bg'>8</span>
 </span>
-<p class="name">@GetAllAssignments</p>
-<p class="duration text-sm">1 tests</p>
+<p class="name">@CreateAssignment</p>
+<p class="duration text-sm">8 tests</p>
 </div>
 <div class="test-contents d-none">
 <div class="info">
-<h4>@GetAllAssignments</h4>
-<span status="pass" class='badge log pass-bg'>1 passed</span>
+<h4>@CreateAssignment</h4>
+<span status="pass" class='badge log pass-bg'>8 passed</span>
 </div>
 <table class='table table-sm mt-4'>
 <thead>
@@ -1662,11 +1256,417 @@ eventsCount: 5,
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>15:03:18 PM</td>
+<td>19:56:20 PM</td>
 <td>
-<a href="#" class="linked" test-id='1' id='35'>Check if user able to retrieve a record with valid LMS API</a>
+<a href="#" class="linked" test-id='1' id='3'>Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</a>
 <div class="">
-<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid LMS API</span>
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Valid" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:24 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='7'>Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_Existing" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='11'>Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentName" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='15'>Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingDueDate" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='19'>Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingAssignmentDescription" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='23'>Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingBatchId" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='27'>Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingCreatedBy" endpoint and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:27 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='31'>Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to add a record with "Post_Assignment_MissingGraderId" endpoint and request body</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByBatchID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByBatchID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@DeleteAssignmentByAssignmentID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@DeleteAssignmentByAssignmentID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:30 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='82'>Check if user able to delete a record with valid and invalid Assignment ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='86'>Check if user able to delete a record with valid and invalid Assignment ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to delete a record with valid and invalid Assignment ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByDeletedAssignmentID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByDeletedAssignmentID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>8</span>
+</span>
+<p class="name">@UpdateAssignment</p>
+<p class="duration text-sm">8 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@UpdateAssignment</h4>
+<span status="pass" class='badge log pass-bg'>8 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:29 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='49'>Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_ValidId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:29 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='53'>Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_InvalidId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:29 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='57'>Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentName", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:29 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='61'>Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingDueDate", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:30 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='65'>Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingAssignmentDescription", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:30 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='69'>Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingBatchId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:30 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='73'>Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingCreatedBy", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:30 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='77'>Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to update a record with "Put_Assignment_MissingGraderId", AssignmentId and request body</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByAssignmentID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByAssignmentID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='40'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='44'>Check if user able to retrieve a record with valid Assignment or Batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with valid Assignment or Batch ID</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">@GetAssignmentByDeletedBatchID</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>@GetAssignmentByDeletedBatchID</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='91'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
+</div>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>19:56:31 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='95'>Check if user able to retrieve a record with invalid Assignment or batch ID</a>
+<div class="">
+<span class="badge badge-default">Assignment module.Check if user able to retrieve a record with invalid Assignment or batch ID</span>
 </div>
 </td>
 </tr>

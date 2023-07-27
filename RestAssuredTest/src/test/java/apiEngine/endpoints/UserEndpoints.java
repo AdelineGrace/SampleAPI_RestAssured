@@ -83,4 +83,52 @@ public class UserEndpoints {
 		
 		return response;
 	}
+	
+	public Response GetAllUsers() {
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		
+		Response response = request.get(UserRoutes.getAllUsers());
+		request.given().log().all(true);
+		
+		return response;
+	}
+	public Response GetUsersById(String userId, String dataKey) {
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		
+		Response response = request.get(UserRoutes.getUserById(userId,dataKey));
+		request.given().log().all(true);
+		
+		return response;
+	}
+	public Response GetAllUsersWithRole() {
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		
+		Response response = request.get(UserRoutes.getAllUserWithRoles());
+		request.given().log().all(true);
+		
+		return response;
+	}
+	public Response GetAllStaff() {
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		
+		Response response = request.get(UserRoutes.getAllStaffUsers());
+		request.given().log().all(true);
+		
+		return response;
+		
+	}
+	
+	public Response deleteUser(String userId, String dataKey) {
+		RestAssured.baseURI = baseUrl;
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		Response response = request.delete(UserRoutes.deleteUserById(userId,dataKey));
+		return response;
+		
+	}
+	
 }
