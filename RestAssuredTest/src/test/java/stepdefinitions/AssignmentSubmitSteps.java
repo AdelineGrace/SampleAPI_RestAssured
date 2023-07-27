@@ -209,7 +209,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			}
 			
 			RestAssured.baseURI = baseUrl;
-			RequestSpecification request = RestAssured.given();
+			RequestSpecification request = RestAssured.given().log().all();
 			request.header("Content-Type", "application/json");
 
 			Integer reqAssignmentId = null; 
@@ -274,7 +274,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			switch(dataKey)
 			{
 				case "Post_AssignmentSubmit_Valid" : 
-					response.then().assertThat()
+					response.then().log().all().assertThat()
 						// Validate response status
 						.statusCode(HttpStatus.SC_CREATED)
 						// Validate content type
@@ -309,7 +309,7 @@ public class AssignmentSubmitSteps extends BaseStep
 					
 				default : 
 					LoggerLoad.logInfo(response.jsonPath().prettyPrint());
-					response.then().assertThat()
+					response.then().log().all().assertThat()
 						// Validate response status
 						.statusCode(HttpStatus.SC_BAD_REQUEST)
 						// Validate json schema
@@ -344,7 +344,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try
 		{
 			RestAssured.baseURI = baseUrl;
-			request = RestAssured.given();
+			request = RestAssured.given().log().all();
 			LoggerLoad.logInfo("GET all assignments request created");
 		} 
 		catch (Exception ex) 
@@ -376,7 +376,7 @@ public class AssignmentSubmitSteps extends BaseStep
 	    
 		try
 		{
-			response.then().assertThat()
+			response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_OK)
 				// Validate content type
@@ -400,7 +400,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try
 		{
 			RestAssured.baseURI = baseUrl;
-			request = RestAssured.given();
+			request = RestAssured.given().log().all();
 			LoggerLoad.logInfo("Get assignments by Id request created");
 		} 
 		catch (Exception ex) 
@@ -448,7 +448,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			if(response.statusCode()==200) {
 				
 				response.asPrettyString();
-				response.then().assertThat()
+				response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_OK)
 				// Validate content type
@@ -459,7 +459,7 @@ public class AssignmentSubmitSteps extends BaseStep
 				
 				
 			}else if(response.statusCode()==404)
-			response.then().assertThat()
+			response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_NOT_FOUND)
 				// Validate content type
@@ -483,7 +483,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try
 		{
 			RestAssured.baseURI = baseUrl;
-			request = RestAssured.given();
+			request = RestAssured.given().log().all();
 			LoggerLoad.logInfo("Get request by studentId");
 		} 
 		catch (Exception ex) 
@@ -532,7 +532,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			if(response.statusCode()==200) {
 				
 				response.asPrettyString();
-				response.then().assertThat()
+				response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_OK)
 				// Validate content type
@@ -543,7 +543,7 @@ public class AssignmentSubmitSteps extends BaseStep
 				
 				
 			}else if(response.statusCode()==404)
-			response.then().assertThat()
+			response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_NOT_FOUND)
 				// Validate content type
@@ -571,7 +571,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try
 		{
 			RestAssured.baseURI = baseUrl;
-			request = RestAssured.given();
+			request = RestAssured.given().log().all();
 			LoggerLoad.logInfo("Get request by BatchId");
 		} 
 		catch (Exception ex) 
@@ -618,7 +618,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			if(response.statusCode()==200) {
 				
 				response.asPrettyString();
-				response.then().assertThat()
+				response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_OK)
 				// Validate content type
@@ -629,7 +629,7 @@ public class AssignmentSubmitSteps extends BaseStep
 				
 				
 			}else if(response.statusCode()==404)
-			response.then().assertThat()
+			response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_NOT_FOUND)
 				// Validate content type
@@ -656,7 +656,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try
 		{
 			RestAssured.baseURI = baseUrl;
-			request = RestAssured.given();
+			request = RestAssured.given().log().all();
 			LoggerLoad.logInfo("Get request by BatchId");
 		} 
 		catch (Exception ex) 
@@ -706,7 +706,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			if(response.statusCode()==200) {
 				
 				response.asPrettyString();
-				response.then().assertThat()
+				response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_OK)
 				// Validate content type
@@ -717,7 +717,7 @@ public class AssignmentSubmitSteps extends BaseStep
 				
 				
 			}else if(response.statusCode()==404)
-			response.then().assertThat()
+			response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_NOT_FOUND)
 				// Validate content type
@@ -742,7 +742,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try
 		{
 			RestAssured.baseURI = baseUrl;
-			request = RestAssured.given();
+			request = RestAssured.given().log().all();
 			LoggerLoad.logInfo("Get request by BatchId");
 		} 
 		catch (Exception ex) 
@@ -789,7 +789,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			if(response.statusCode()==200) {
 				
 				response.asPrettyString();
-				response.then().assertThat()
+				response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_OK)
 				// Validate content type
@@ -800,7 +800,7 @@ public class AssignmentSubmitSteps extends BaseStep
 				
 				
 			}else if(response.statusCode()==404)
-			response.then().assertThat()
+			response.then().log().all().assertThat()
 				// Validate response status
 				.statusCode(HttpStatus.SC_NOT_FOUND)
 				// Validate content type
@@ -825,7 +825,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try 
 		{	
 			RestAssured.baseURI = baseUrl;
-			RequestSpecification request = RestAssured.given();
+			RequestSpecification request = RestAssured.given().log().all();
 			request.header("Content-Type", "application/json");
 			
 			
@@ -955,7 +955,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			try 
 			{	
 				RestAssured.baseURI = baseUrl;
-				RequestSpecification request = RestAssured.given();
+				RequestSpecification request = RestAssured.given().log().all();
 				request.header("Content-Type", "application/json");
 				
 				
@@ -1098,7 +1098,7 @@ public class AssignmentSubmitSteps extends BaseStep
 		try
 		{
 			RestAssured.baseURI = baseUrl;
-			request = RestAssured.given();
+			request = RestAssured.given().log().all();
 			
 			LoggerLoad.logInfo("DELETE assignment submit by id request for scenario " + string + " created");
 		} 
@@ -1136,7 +1136,7 @@ public class AssignmentSubmitSteps extends BaseStep
 			switch(dataKey)
 			{
 				case "Delete_AssignmentSubmit_ValidId" :
-					response.then().assertThat()
+					response.then().log().all().assertThat()
 						// Validate response status
 						.statusCode(HttpStatus.SC_OK)
 						// Validate content type
@@ -1153,7 +1153,7 @@ public class AssignmentSubmitSteps extends BaseStep
 					break;
 				
 				case "Delete_AssignmentSubmit_DeletedId" :
-					response.then().assertThat()
+					response.then().log().all().assertThat()
 						// Validate response status
 						.statusCode(HttpStatus.SC_NOT_FOUND)
 						// Validate content type
