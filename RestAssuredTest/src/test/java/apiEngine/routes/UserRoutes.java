@@ -1,33 +1,37 @@
 package apiEngine.routes;
 
+import dataProviders.ConfigReader;
+
 public class UserRoutes {
 	
 	public static String createUser()
 	{
-		return "/users/users/roleStatus";
+		return ConfigReader.getUserPostUrl();
 	}
 	
 	public static String getAllUsers()
 	{
-		return "/users/users";
+		return ConfigReader.getUserGetAllUrl();
 	}
 	
 	public static String getUserWithUserID(String userId)
 	{
-		return "/users/users/" + userId;
+		return ConfigReader.getUserGetByUserIdUrl() + userId;
 	}
+	
 	public static String getAllStaffUsers()
 	{
-		return "/users/users/getAllStaff";
+		return ConfigReader.getUserGetAllStaffUrl();
 	}
+	
 	public static String getAllUserWithRoles()
 	{
-		return "/users/users/roles";
+		return ConfigReader.getUserGetAllUsersWithRolesUrl();
 	}
 	
 	public static String deleteUserById(String userId)
 	{
-		return "/users/users/" + userId;
+		return ConfigReader.getUserDeleteByIdUrl() + userId;
 	}
 
 }

@@ -46,182 +46,24 @@ public class AssignmentSteps extends BaseStep {
 	static int programId;
 	static int batchId;
 	static String userId;
+	static String studentUserId;
+	static String inactiveUserId;
 	static int assignmentId;
 	static Assignment assignmentAdded;
 
-	public void SetupPreRequisites() 
-	{
-
-		try 
-		{
-			excelDataMap = null;
-			AddProgramRequest programReq = null;
-			AddBatchRequest batchReq = null;
-			AddUserRequest userReq = null;
-
-			// create program
-			excelDataMap = ExcelReader.getData("Post_Program_Assignment", "program");
-			if (null != excelDataMap && excelDataMap.size() > 0) 
-			{
-				programReq = new AddProgramRequest(excelDataMap.get("programName") + DynamicValues.SerialNumber(),
-						excelDataMap.get("programStatus"), excelDataMap.get("programDescription"));
-			}
-
-			response = programEndpoints.CreateProgram(programReq);
-			if(response.statusCode() == 201)
-			{
-				program = response.getBody().as(Program.class);
-				programId = program.programId;
-				LoggerLoad.logInfo("Program created with id- " + programId);
-			}
-			else
-			{
-				LoggerLoad.logInfo("Program not created for assignment module");
-			}
-
-			// create batch
-			excelDataMap = ExcelReader.getData("Post_Batch_Assignment", "batch");
-			if (null != excelDataMap && excelDataMap.size() > 0) 
-			{
-				batchReq = new AddBatchRequest(excelDataMap.get("BatchName") + DynamicValues.SerialNumber(), 
-						excelDataMap.get("BatchStatus"), excelDataMap.get("BatchDescription"), 
-						Integer.parseInt(excelDataMap.get("NoOfClasses")), programId);
-			}
-
-			response = batchEndpoints.CreateBatch(batchReq);
-			if(response.statusCode() == 201)
-			{
-				batch = response.getBody().as(Batch.class);
-				batchId = batch.batchId;
-				LoggerLoad.logInfo("Program batch created with id- " + batchId);
-			}
-			else
-			{
-				LoggerLoad.logInfo("Program Batch not created for assignment module");
-			}
-
-			// create user
-			excelDataMap = ExcelReader.getData("Post_User_Assignment", "user");
-			if (null != excelDataMap && excelDataMap.size() > 0) 
-			{
-				userReq = new AddUserRequest(excelDataMap.get("userFirstName") + DynamicValues.SerialNumber(),
-						excelDataMap.get("userLastName"), excelDataMap.get("userMiddleName"),
-						excelDataMap.get("userComments"), excelDataMap.get("userEduPg"), excelDataMap.get("userEduUg"),
-						excelDataMap.get("userLinkedinUrl"), excelDataMap.get("userLocation"),
-						DynamicValues.PhoneNumber(), excelDataMap.get("roleId"), excelDataMap.get("userRoleStatus"),
-						excelDataMap.get("userTimeZone"), excelDataMap.get("userVisaStatus"));
-			}
-			
-			response = userEndpoints.CreateUser(userReq);
-			if(response.statusCode() == 201)
-			{
-				user = response.getBody().as(User.class);
-				userId = user.userId;
-				LoggerLoad.logInfo("User created with id- " + userId);
-			}
-			else
-			{
-				LoggerLoad.logInfo("User not created for assignment module");
-			}
-
-		} 
-		catch (Exception ex) 
-		{
-			LoggerLoad.logInfo(ex.getMessage());
-			ex.printStackTrace();
-		}
-
-	}
-
-	public void Cleanup() 
-	{
-		// delete user
-		response = userEndpoints.DeleteUserById(userId);
-		if(response.statusCode() == 200)
-			LoggerLoad.logInfo("User deleted with id- " + userId);
-		else
-			LoggerLoad.logInfo("User not deleted for assignment module");
-
-		// delete batch
-		response = batchEndpoints.DeleteBatchById(batchId);
-		if(response.statusCode() == 200)
-			LoggerLoad.logInfo("Program batch deleted with id- " + batchId);
-		else
-			LoggerLoad.logInfo("Program batch not deleted for assignment module");
-		
-		// delete program
-		response = programEndpoints.DeleteProgramById(programId);
-		if(response.statusCode() == 200)
-			LoggerLoad.logInfo("Program deleted with id- " + programId);
-		else
-			LoggerLoad.logInfo("Program not deleted for assignment module");
-	}
-
+	// Post assignment
 	@Given("User creates POST Assignment Request for the LMS API with fields from {string} with {string}")
 	public void user_creates_post_assignment_request_for_the_lms_api_with_fields_from_with(String sheetName, String dataKey) 
 	{
 		try 
 		{
-			// create program, batch and user for creating new assignment
-			if (dataKey.equals("Post_Assignment_Valid")) 
-			{
-				SetupPreRequisites();
-			}
+			// create program, batch and user
+			Setup(dataKey);
 			
-			RestAssured.baseURI = baseUrl;
-			RequestSpecification request = RestAssured.given();
-			request.header("Content-Type", "application/json");
+			// Create post request object
+			addAssignmentReq = CreateAssignmentRequest(sheetName, dataKey);
 
-			String assignmentName = null, assignmentDescription = null, dueDate = null, comments = null, 
-					createdBy = null, gradedBy = null, pathAttachment1 = null, pathAttachment2 = null, 
-					pathAttachment3 = null, pathAttachment4 = null, pathAttachment5 = null;
-			
-			Integer reqBatchid = null;
-			
-			excelDataMap = ExcelReader.getData(dataKey, sheetName);
-
-			if (excelDataMap != null && excelDataMap.size() > 0) 
-			{
-				if(dataKey.equals("Post_Assignment_Existing"))
-				{
-					assignmentName = assignmentAdded.assignmentName;
-				}
-				else if(dataKey.equals("Post_Assignment_MissingAssignmentName"))
-				{
-					assignmentName = null;
-				}
-				else
-				{
-					assignmentName = excelDataMap.get("assignmentName") + DynamicValues.SerialNumber();
-				}
-				if(!dataKey.equals("Post_Assignment_MissingBatchId"))
-				{
-					reqBatchid = batchId;
-				}
-				if(!dataKey.equals("Post_Assignment_MissingCreatedBy"))
-				{
-					createdBy = userId;
-				}
-				if(!dataKey.equals("Post_Assignment_MissingGraderId"))
-				{
-					gradedBy = userId;
-				}
-				if(!excelDataMap.get("assignmentDescription").isBlank())
-					assignmentDescription = excelDataMap.get("assignmentDescription");
-				if(!excelDataMap.get("dueDate").isBlank())
-					dueDate = excelDataMap.get("dueDate");
-				comments = excelDataMap.get("comments");
-				pathAttachment1 = excelDataMap.get("pathAttachment1");
-				pathAttachment2 = excelDataMap.get("pathAttachment2");
-				pathAttachment3 = excelDataMap.get("pathAttachment3");
-				pathAttachment4 = excelDataMap.get("pathAttachment4");
-				pathAttachment5 = excelDataMap.get("pathAttachment5");
-			}
-			
-			addAssignmentReq = new AddAssignmentRequest(assignmentName, assignmentDescription, reqBatchid, comments, createdBy,
-					dueDate, gradedBy, pathAttachment1, pathAttachment2, pathAttachment3,pathAttachment4, pathAttachment5);
-			
-			LoggerLoad.logInfo("Assignment POST request created for- " + dataKey);
+			LoggerLoad.logInfo("Assignment POST request object created for- " + dataKey);
 		} 
 		catch (Exception ex) 
 		{
@@ -229,7 +71,9 @@ public class AssignmentSteps extends BaseStep {
 			ex.printStackTrace();
 		}
 	}
+	
 
+	
 	@When("User sends HTTP POST Assignment Request for {string}")
 	public void user_sends_http_post_assignment_request(String dataKey) 
 	{
@@ -302,6 +146,36 @@ public class AssignmentSteps extends BaseStep {
 					
 					break;
 					
+				case "Post_Assignment_CreatedByStudent" : 
+					response.then().assertThat()
+						// Validate response status
+						.statusCode(HttpStatus.SC_NOT_FOUND)
+						// Validate json schema
+						.body(JsonSchemaValidator.matchesJsonSchema(
+							getClass().getClassLoader().getResourceAsStream("400statuscodejsonschema.json")));
+					
+					// Validate error json
+					jsonPathEvaluator = response.jsonPath();
+					assertEquals(excelDataMap.get("message") + studentUserId + " ", jsonPathEvaluator.get("message"));
+					assertEquals(excelDataMap.get("success"), Boolean.toString(jsonPathEvaluator.get("success")));
+					
+					break;
+					
+				case "Post_Assignment_CreatedByInactiveUser" : 
+					response.then().assertThat()
+						// Validate response status
+						.statusCode(HttpStatus.SC_NOT_FOUND)
+						// Validate json schema
+						.body(JsonSchemaValidator.matchesJsonSchema(
+							getClass().getClassLoader().getResourceAsStream("400statuscodejsonschema.json")));
+					
+					// Validate error json
+					jsonPathEvaluator = response.jsonPath();
+					assertEquals(excelDataMap.get("message") + inactiveUserId + " ", jsonPathEvaluator.get("message"));
+					assertEquals(excelDataMap.get("success"), Boolean.toString(jsonPathEvaluator.get("success")));
+					
+					break;
+					
 				default : 
 					response.then().assertThat()
 						// Validate response status
@@ -317,6 +191,25 @@ public class AssignmentSteps extends BaseStep {
 					
 					break;
 			}
+			
+//			// if assignment is created for negative scenario
+//			if(!dataKey.equals("Post_Assignment_Valid") && response.statusCode() == 201)
+//			{
+//				LoggerLoad.logInfo("Assignment created for negative scenario- " + dataKey);
+//				Assignment assignmentResponse = response.getBody().as(Assignment.class);
+//				response = assignmentEndpoints.DeleteAssignmentById(assignmentResponse.assignmentId);
+//				if(response.statusCode() == 200)
+//				{
+//					LoggerLoad.logInfo("Deleted assignment id " + assignmentResponse.assignmentId + "for- " + dataKey);
+//				}
+//			}
+			
+			// for student user, the setup needs to be deleted
+			if(dataKey.equals("Post_Assignment_CreatedByStudent"))
+				DeleteStudentUser();
+			// for inactive user, the setup needs to be deleted
+			if(dataKey.equals("Post_Assignment_CreatedByInactiveUser"))
+				DeleteInactiveUser();
 			
 			LoggerLoad.logInfo("Assignment POST response validated for- " + dataKey);
 		} 
@@ -849,4 +742,327 @@ public class AssignmentSteps extends BaseStep {
 		}
 	}
 
+	private void Setup(String scenario)
+	{
+
+		// for valid scenario, create program, batcha and assignment
+		if (scenario.equals("Post_Assignment_Valid")) 
+		{
+			CreateAssignmentPreRequisites();
+		}
+		// create student user 
+		if (scenario.equals("Post_Assignment_CreatedByStudent")) 
+		{
+			CreateStudentUser();
+		}
+		// create inactive user
+		if (scenario.equals("Post_Assignment_CreatedByInactiveUser")) 
+		{
+			CreateInactiveUser();
+		}
+	}
+
+	private AddAssignmentRequest CreateAssignmentRequest(String sheetName, String dataKey)
+	{
+		try
+		{
+			String assignmentName = null, assignmentDescription = null, dueDate = null, comments = null, 
+					createdBy = null, gradedBy = null, pathAttachment1 = null, pathAttachment2 = null, 
+					pathAttachment3 = null, pathAttachment4 = null, pathAttachment5 = null;
+			
+			Integer reqBatchid = null;
+			
+			excelDataMap = ExcelReader.getData(dataKey, sheetName);
+	
+			if (excelDataMap != null && excelDataMap.size() > 0) 
+			{
+				if(dataKey.equals("Post_Assignment_Existing"))
+				{
+					assignmentName = assignmentAdded.assignmentName;
+				}
+				else if(!excelDataMap.get("assignmentName").isBlank())
+				{
+					assignmentName = excelDataMap.get("assignmentName") + DynamicValues.SerialNumber();
+				}
+				
+				if(!dataKey.equals("Post_Assignment_MissingBatchId"))
+				{
+					reqBatchid = batchId;
+				}
+				if(dataKey.equals("Post_Assignment_MissingCreatedBy"))
+				{
+					createdBy = null;
+				}
+				else if(dataKey.equals("Post_Assignment_CreatedByStudent"))
+				{
+					createdBy = studentUserId;
+				}
+				else if(dataKey.equals("Post_Assignment_CreatedByInactiveUser"))
+				{
+					createdBy = inactiveUserId;
+				}
+				else
+				{
+					createdBy = userId;
+				}
+				if(!dataKey.equals("Post_Assignment_MissingGraderId"))
+				{
+					gradedBy = userId;
+				}
+				if(!excelDataMap.get("assignmentDescription").isBlank())
+					assignmentDescription = excelDataMap.get("assignmentDescription");
+				if(!excelDataMap.get("dueDate").isBlank())
+					dueDate = excelDataMap.get("dueDate");
+				comments = excelDataMap.get("comments");
+				pathAttachment1 = excelDataMap.get("pathAttachment1");
+				pathAttachment2 = excelDataMap.get("pathAttachment2");
+				pathAttachment3 = excelDataMap.get("pathAttachment3");
+				pathAttachment4 = excelDataMap.get("pathAttachment4");
+				pathAttachment5 = excelDataMap.get("pathAttachment5");
+			}
+			
+			addAssignmentReq = new AddAssignmentRequest(assignmentName, assignmentDescription, reqBatchid, comments, createdBy,
+					dueDate, gradedBy, pathAttachment1, pathAttachment2, pathAttachment3,pathAttachment4, pathAttachment5);
+		}
+		catch (Exception ex) 
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+		
+		return addAssignmentReq;
+	}
+	
+	private void CreateAssignmentPreRequisites() 
+	{
+
+		try 
+		{
+			excelDataMap = null;
+			AddProgramRequest programReq = null;
+			AddBatchRequest batchReq = null;
+			AddUserRequest userReq = null;
+
+			// create program
+			excelDataMap = ExcelReader.getData("Post_Program_Assignment", "program");
+			if (null != excelDataMap && excelDataMap.size() > 0) 
+			{
+				programReq = new AddProgramRequest(excelDataMap.get("programName") + DynamicValues.SerialNumber(),
+						excelDataMap.get("programStatus"), excelDataMap.get("programDescription"));
+			}
+
+			response = programEndpoints.CreateProgram(programReq);
+			if(response.statusCode() == 201)
+			{
+				program = response.getBody().as(Program.class);
+				programId = program.programId;
+				LoggerLoad.logInfo("Program created with id- " + programId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("Program not created for assignment module");
+			}
+
+			// create batch
+			excelDataMap = ExcelReader.getData("Post_Batch_Assignment", "batch");
+			if (null != excelDataMap && excelDataMap.size() > 0) 
+			{
+				batchReq = new AddBatchRequest(excelDataMap.get("BatchName") + DynamicValues.SerialNumber(), 
+						excelDataMap.get("BatchStatus"), excelDataMap.get("BatchDescription"), 
+						Integer.parseInt(excelDataMap.get("NoOfClasses")), programId);
+			}
+
+			response = batchEndpoints.CreateBatch(batchReq);
+			if(response.statusCode() == 201)
+			{
+				batch = response.getBody().as(Batch.class);
+				batchId = batch.batchId;
+				LoggerLoad.logInfo("Program batch created with id- " + batchId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("Program Batch not created for assignment module");
+			}
+
+			// create user
+			excelDataMap = ExcelReader.getData("Post_User_Assignment", "user");
+			
+			if (null != excelDataMap && excelDataMap.size() > 0) 
+			{
+				userReq = new AddUserRequest(excelDataMap.get("userFirstName") + DynamicValues.SerialNumber(),
+						excelDataMap.get("userLastName"), excelDataMap.get("userMiddleName"),
+						excelDataMap.get("userComments"), excelDataMap.get("userEduPg"), excelDataMap.get("userEduUg"),
+						excelDataMap.get("userLinkedinUrl"), excelDataMap.get("userLocation"),
+						DynamicValues.PhoneNumber(), excelDataMap.get("roleId"), excelDataMap.get("userRoleStatus"),
+						excelDataMap.get("userTimeZone"), excelDataMap.get("userVisaStatus"));
+			}
+			
+			response = userEndpoints.CreateUser(userReq);
+			if(response.statusCode() == 201)
+			{
+				user = response.getBody().as(User.class);
+				userId = user.userId;
+				LoggerLoad.logInfo("User created with id- " + userId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("User not created for assignment module");
+			}
+
+		} 
+		catch (Exception ex) 
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+
+	}
+
+	private void CreateStudentUser()
+	{
+		try
+		{
+			AddUserRequest userReq = null;
+			
+			// create user
+			excelDataMap = ExcelReader.getData("Post_User_Student_Assignment", "user");
+						
+			if (null != excelDataMap && excelDataMap.size() > 0) 
+			{
+				userReq = new AddUserRequest(excelDataMap.get("userFirstName") + DynamicValues.SerialNumber(),
+						excelDataMap.get("userLastName"), excelDataMap.get("userMiddleName"),
+						excelDataMap.get("userComments"), excelDataMap.get("userEduPg"), excelDataMap.get("userEduUg"),
+						excelDataMap.get("userLinkedinUrl"), excelDataMap.get("userLocation"),
+						DynamicValues.PhoneNumber(), excelDataMap.get("roleId"), excelDataMap.get("userRoleStatus"),
+						excelDataMap.get("userTimeZone"), excelDataMap.get("userVisaStatus"));
+			}
+						
+			response = userEndpoints.CreateUser(userReq);
+			if(response.statusCode() == 201)
+			{
+				user = response.getBody().as(User.class);
+				studentUserId = user.userId;
+				LoggerLoad.logInfo("Student User created with id- " + studentUserId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("Student User not created for assignment module");
+			}
+		}
+		catch(Exception ex)
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	private void CreateInactiveUser()
+	{
+		try
+		{
+			AddUserRequest userReq = null;
+			
+			// create user
+			excelDataMap = ExcelReader.getData("Post_User_Student_Assignment", "user");
+						
+			if (null != excelDataMap && excelDataMap.size() > 0) 
+			{
+				userReq = new AddUserRequest(excelDataMap.get("userFirstName") + DynamicValues.SerialNumber(),
+						excelDataMap.get("userLastName"), excelDataMap.get("userMiddleName"),
+						excelDataMap.get("userComments"), excelDataMap.get("userEduPg"), excelDataMap.get("userEduUg"),
+						excelDataMap.get("userLinkedinUrl"), excelDataMap.get("userLocation"),
+						DynamicValues.PhoneNumber(), excelDataMap.get("roleId"), excelDataMap.get("userRoleStatus"),
+						excelDataMap.get("userTimeZone"), excelDataMap.get("userVisaStatus"));
+			}
+						
+			response = userEndpoints.CreateUser(userReq);
+			if(response.statusCode() == 201)
+			{
+				user = response.getBody().as(User.class);
+				inactiveUserId = user.userId;
+				LoggerLoad.logInfo("Inactive User created with id- " + inactiveUserId);
+			}
+			else
+			{
+				LoggerLoad.logInfo("Inactive User not created for assignment module");
+			}
+		}
+		catch(Exception ex)
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	private void Cleanup() 
+	{
+		try
+		{
+			// delete user
+			response = userEndpoints.DeleteUserById(userId);
+			if(response.statusCode() == 200)
+				LoggerLoad.logInfo("User deleted with id- " + userId);
+			else
+				LoggerLoad.logInfo("User not deleted for assignment module");
+	
+			// delete batch
+			response = batchEndpoints.DeleteBatchById(batchId);
+			if(response.statusCode() == 200)
+				LoggerLoad.logInfo("Program batch deleted with id- " + batchId);
+			else
+				LoggerLoad.logInfo("Program batch not deleted for assignment module");
+			
+			// delete program
+			response = programEndpoints.DeleteProgramById(programId);
+			if(response.statusCode() == 200)
+				LoggerLoad.logInfo("Program deleted with id- " + programId);
+			else
+				LoggerLoad.logInfo("Program not deleted for assignment module");
+		}
+		catch(Exception ex)
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+
+	private void DeleteStudentUser()
+	{
+		try
+		{
+			// delete user
+			response = userEndpoints.DeleteUserById(studentUserId);
+			if(response.statusCode() == 200)
+				LoggerLoad.logInfo("Student User deleted with id- " + studentUserId);
+			else
+				LoggerLoad.logInfo("Student User not deleted for assignment module");
+		}
+		catch(Exception ex)
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+
+	private void DeleteInactiveUser()
+	{
+		try
+		{
+			// delete user
+			response = userEndpoints.DeleteUserById(inactiveUserId);
+			if(response.statusCode() == 200)
+				LoggerLoad.logInfo("Inactive User deleted with id- " + inactiveUserId);
+			else
+				LoggerLoad.logInfo("Inactive User not deleted for assignment module");
+		}
+		catch(Exception ex)
+		{
+			LoggerLoad.logInfo(ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+	
+	
 }

@@ -10,4 +10,6 @@ public class Hooks {
 	{
 	   ConfigReader.loadProperty();
 	}
+	
+	
 }
