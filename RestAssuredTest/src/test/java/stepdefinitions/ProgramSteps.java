@@ -3,6 +3,7 @@ package stepdefinitions;
 import static org.junit.Assert.assertEquals;
 
 import apiEngine.model.request.AddProgramRequest;
+import apiEngine.model.response.Assignment;
 import apiEngine.model.response.Program;
 import dataProviders.ExcelReader;
 import io.cucumber.java.en.Given;
@@ -17,6 +18,7 @@ import io.restassured.response.ResponseBody;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,8 @@ import java.util.Map;
 import org.apache.http.HttpStatus;
 //import io.restassured.path.json.exception.*;
 import org.json.simple.JSONObject;
+
+import utilities.DynamicValues;
 import utilities.LoggerLoad;
 import dataProviders.ConfigReader;
 
@@ -33,29 +37,36 @@ public class ProgramSteps {
   RequestSpecification requestSpec;
   Response resp;
   ValidatableResponse valid_resp;
-
+  static int programId1, programId2;
+  static String programName1 , programName2;
+  static int updatedId1, updatedId2;
+  static String updatedName1 , updatedName2;
+ 
+  
   
   ////////////////////// Post ///////////////////////////
   @Given( "User creates POST Request with fields {string} and {string} from excel" )
-  public void user_creates_post_request_for_lms_api_endpoint( String dataKey,String sheetName) throws Exception {
+  public void user_creates_post_request_for_lms_api_endpoint( String dataKey,String sheetName) throws Exception ,IOException {
     try {
 	      AddProgramRequest program;
+	      String existingname = programName1;
 	      Map<String, String> excelDataMap = null;
 	      excelDataMap = ExcelReader.getData(dataKey, sheetName);
-	      
-	      if (null != excelDataMap && excelDataMap.size() > 0) {
-	        String pgmName = excelDataMap.get("ProgramName");
-	        String pgmStatus = excelDataMap.get("ProgramStatus");
-	        String pgmDesc = excelDataMap.get("ProgramDesc");
-		        if (pgmName.isBlank()) {
-		          pgmName = " ";
-		          program = new AddProgramRequest(pgmName, pgmStatus, pgmDesc);
-		        } else if (pgmStatus.isBlank()) {
-		          pgmStatus = " ";
-		          program = new AddProgramRequest(pgmName, pgmStatus, pgmDesc);
-		        } else {
-		          program = new AddProgramRequest(pgmName, pgmStatus, pgmDesc);
-		        }
+	      String pgmName= null, pgmStatus = null, pgmDesc= null;
+	      if (null != excelDataMap && excelDataMap.size() > 0) 
+	      {	
+	    	 
+	          if(!excelDataMap.get("ProgramName").isBlank())
+	        	  pgmName = excelDataMap.get("ProgramName");
+	          if(!excelDataMap.get("ProgramName").isBlank())
+	        	  pgmStatus = excelDataMap.get("ProgramStatus");
+	          pgmDesc = excelDataMap.get("ProgramDesc");
+	          if (dataKey.equals("postExist")) {
+	        	  program = new AddProgramRequest(existingname , pgmStatus, pgmDesc);     
+	    	  }
+	          else {     
+	        	  program = new AddProgramRequest(pgmName + DynamicValues.SerialNumber(), pgmStatus, pgmDesc);
+	          }  
 	
 	        RestAssured.baseURI = baseurl;
 	        this.requestSpec =
@@ -101,6 +112,10 @@ public class ProgramSteps {
 				              .getClassLoader()
 				              .getResourceAsStream("getPgmbyIdjsonschema.json")));
 				      	LoggerLoad.logInfo("Program POST request created");
+				      	Program programResponse = resp.getBody().as(Program.class);
+				      	programId1 = programResponse.programId;
+				      	programName1 = programResponse.programName;
+						//assignmentAdded = assignmentResponse;
 				break;
 				case "postNew1":
 					System.out.println("Status code--->" + resp.statusCode());
@@ -110,6 +125,9 @@ public class ProgramSteps {
 				              .getClassLoader()
 				              .getResourceAsStream("getPgmbyIdjsonschema.json")));
 				      	LoggerLoad.logInfo("Program POST request created");
+				      	Program programResponse2 = resp.getBody().as(Program.class);
+				      	programId2 = programResponse2.programId;
+				      	programName2 = programResponse2.programName;
 				break;     	
 				case "postExist":
 					System.out.println("Status code--->" + resp.statusCode());
@@ -137,7 +155,7 @@ public class ProgramSteps {
 
   ///////************Get all**********************
 
-  @Given("User creates GET Request for the LMS API endpoint for Program Module")
+  @Given("User creates GET ALL Request for the LMS API endpoint for Program Module")
   public void user_creates_get_request_for_the_lms_api_endpoint_for_program_module() {
 	  try
 		{
@@ -158,7 +176,7 @@ public class ProgramSteps {
     this.resp = requestSpec.when().get(ConfigReader.getProperty("pgm.getall"));
   }
 
-  @Then("User receives 200 OK Status with response body.")
+  @Then("User receives 200 OK Status with response body for Program Module")
   public void user_receives_ok_status_with_response_body() {
 		try
 		{
@@ -176,7 +194,7 @@ public class ProgramSteps {
   }
 
   ////*******Get One Pgm by Id************
-  @Given("User creates GET Request for the LMS API endpoint for valid")
+  @Given("User creates GET BY ID Request for the LMS API endpoint for Program Module")
   public void user_creates_get_request_for_the_lms_api_endpoint_for_valid() {
 	  
 	  RestAssured.baseURI = baseurl;
@@ -184,14 +202,15 @@ public class ProgramSteps {
     
   }
 
-  @When("User sends HTTPS Request with valid or invalid  Program Id from {string} and {string} Program Module.")
-  public void user_sends_https_request_with_valid( String DataKey, String sheetName) {
+  @When("User sends HTTPS Request with valid or invalid  Program Id from {string}  Program Module.")
+  public void user_sends_https_request_with_valid( String DataKey) {
 	  try
 	  {
 		  switch(DataKey) {
 			  case "Get_Id_valid":
-				  	Integer pgmidV = Integer.parseInt(ConfigReader.getProperty("pgm.getbyid_valid"));
-			  		resp = requestSpec.when().get(ConfigReader.getProperty("pgm.getbyId") + pgmidV );
+				  	//Integer pgmidV = Integer.parseInt(ConfigReader.getProperty("pgm.getbyid_valid"));
+				  Integer pgmid = programId1;
+			  		resp = requestSpec.when().get(ConfigReader.getProperty("pgm.getbyId") + pgmid );
 			  break;
 			  case "Get_Id_invalid":
 				  Integer pgmidI = 0;
@@ -245,27 +264,17 @@ public class ProgramSteps {
     		excelDataMap = ExcelReader.getData(dataKey, sheetName);
     
     		if (null != excelDataMap && excelDataMap.size() > 0) {
-    			String pgmName = excelDataMap.get("ProgramName");
+    			
+    			String pgmName = programName1;
     			String pgmStatus = excelDataMap.get("ProgramStatus");
     			String pgmDesc = excelDataMap.get("ProgramDesc");
-				Integer putPgmId ;
-			    AddProgramRequest addpgm;
-			    resp = requestSpec.when().get(ConfigReader.getProperty("pgm.getall"));
-			    JsonPath jsonPathEvaluator = resp.jsonPath();
-			    List<Program> allpgms = jsonPathEvaluator.getList("", Program.class);
-			    for (Program pro : allpgms) 
-			    { // To fetch the PGM Id using PGM Name.**
-			      if (pro.programName.equals(ConfigReader.getProperty("pgm.putByidName"))) 
-			      {
-			        Integer getPgmId = pro.programId;
-			        putPgmId = getPgmId;
-			        System.out.println("ID FOR PUT Valid->" + getPgmId);
-			        addpgm = new AddProgramRequest(pgmName,pgmStatus,pgmDesc);
-			        resp = requestSpec.body(addpgm).put(ConfigReader.getProperty("pgm.putById") + putPgmId); 
+			        
+			        System.out.println("ID FOR PUT Valid->" + programId1+"---"+pgmName);
+			        AddProgramRequest addpgm = new AddProgramRequest(pgmName + DynamicValues.SerialNumber(),pgmStatus,pgmDesc);
+			        resp = requestSpec.body(addpgm).put(ConfigReader.getProperty("pgm.putById") + programId1); 
 			          
-			      }
-			    }
-		    }
+			 }
+		    
 		    LoggerLoad.logInfo("PUT By Valid Program Id request created");
 	  }
 	  catch (Exception ex) 
@@ -294,7 +303,7 @@ public class ProgramSteps {
 				    //resp = requestSpec.body(pgmresp).put("/putprogram/"+getPgmId);
 				    JSONObject body = new JSONObject();
 				    //body.put("programId", getPgmId);
-				    body.put("programName", pgmName);
+				    body.put("programName", pgmName + DynamicValues.SerialNumber());
 				    body.put("programDescription", pgmDesc);
 				    body.put("programStatus", pgmStatus);
 				    //System.out.println(body);
@@ -318,7 +327,7 @@ public class ProgramSteps {
 		      excelDataMap = ExcelReader.getData(dataKey, sheetName);
 		      
 		      if (null != excelDataMap && excelDataMap.size() > 0) {
-		        String pgmName = excelDataMap.get("ProgramName");
+		        String pgmName = null;
 		        String pgmStatus = excelDataMap.get("ProgramStatus");
 		        String pgmDesc = excelDataMap.get("ProgramDesc");
 		        Integer pgmId = null;
@@ -326,11 +335,11 @@ public class ProgramSteps {
 				    //pgmresp = new AddProgramRequest("JUL-23-RESTAPI-Turtle01_New","InActive","JUL-23-RESTAPI-Turtle01_DESC_New");
 				    //resp = requestSpec.body(pgmresp).put("/putprogram/"+getPgmId);
 				    JSONObject body = new JSONObject();
-				    body.put("programId",pgmId);
+				   // body.put("programId",pgmId);
 				    body.put("programName", pgmName);
 				    body.put("programDescription", pgmDesc);
 				    //System.out.println(body);
-				    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putById") + ConfigReader.getProperty("pgm.putbyidMissing"));
+				    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putById") + programId1);
 		      }
 		      LoggerLoad.logInfo("PUT By Missing field with  Program Id request created");
 	      }
@@ -347,10 +356,15 @@ public class ProgramSteps {
 	  switch(KeyOption)
 	  {
 	  case "putIdValid":
+		  Program programResponse = resp.getBody().as(Program.class);
+	      	updatedId1 = programResponse.programId;
+	      	updatedName1 = programResponse.programName;
 		  System.out.println("**Status Code-->" + resp.statusCode());
-		  resp.then().assertThat().statusCode(200);
-		  //.contentType(ContentType.JSON);
-	       // .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
+		  resp.then().assertThat().statusCode(200)
+		  .contentType(ContentType.JSON)
+	        .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
+		 
+		  
 	  break;
 	  case "putIdInvalid":
 		  System.out.println("**Status Code-->" + resp.statusCode());
@@ -358,7 +372,7 @@ public class ProgramSteps {
 	  break;
 	  case "putIdMissing":
 		  System.out.println("**Status Code-->" + resp.statusCode());
-	    resp.then().assertThat().statusCode(500);  
+	    resp.then().assertThat().statusCode(400);  
 	  break;
 	  }
 	  LoggerLoad.logInfo("PUT By valid,invalid and missing field Program Id request validated");
@@ -380,21 +394,20 @@ public class ProgramSteps {
 	      excelDataMap = ExcelReader.getData(dataKey, sheetName);
 	      
 	      if (null != excelDataMap && excelDataMap.size() > 0) {
-	    	  	String pgmName = excelDataMap.get("ProgramName");
+	    	  	String pgmName = programName2;
 		        String pgmStatus = excelDataMap.get("ProgramStatus");
 		        String pgmDesc = excelDataMap.get("ProgramDesc");
-					        String valipgmName = "JUL-23-RESTAPI-Turtle02";
-				/*  AddProgramRequest addpgm;  
-			    addpgm =new AddProgramRequest( "JUL-23-RESTAPI-Turtle02_New", "InActive","JUL-23-RESTAPI-Turtle02_DESC_New");
-			    resp = requestSpec.body(addpgm).put("/program/" + valipgmName); */
+					
+				  AddProgramRequest addpgm;  
+			    addpgm =new AddProgramRequest( pgmName +  DynamicValues.SerialNumber(), pgmStatus,pgmDesc);
+			    resp = requestSpec.body(addpgm).put(ConfigReader.getProperty("pgm.putByName") + pgmName); 
 			    
-			    JSONObject body = new JSONObject();
-			    body.put("programName", "JUL-23-RESTAPI-Turtle02_New");
-			    body.put("programStatus", "InActive");
-			    body.put("programDescription", "JUL-23-RESTAPI-Turtle02_DESC_New");
-			
+			   /* JSONObject body = new JSONObject();
+			    body.put("programName", pgmName +  DynamicValues.SerialNumber());
+			    body.put("programDescription", pgmDesc);
+			    body.put("programStatus", pgmStatus);
 			    System.out.println(body);
-			    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putByName") + valipgmName);
+			    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putByName") + pgmName); */
 			    
 			    System.out.println("Update By Name valid-->" + resp.asString());
 	      }
@@ -422,9 +435,8 @@ public class ProgramSteps {
 		        String pgmDesc = excelDataMap.get("ProgramDesc");
 	  
 		        AddProgramRequest addpgm;
-		        String invalid_name = "HelloWorld";
-		        addpgm = new AddProgramRequest( invalid_name, "InActive", "JUL-23-RESTAPI-Turtle02_invalid" );
-		        resp = requestSpec.body(addpgm).put(ConfigReader.getProperty("pgm.putByName") + invalid_name);
+		        addpgm = new AddProgramRequest( pgmName,pgmStatus, pgmDesc );
+		        resp = requestSpec.body(addpgm).put(ConfigReader.getProperty("pgm.putByName") + pgmName);
 		        
 	      }
 	      LoggerLoad.logInfo("PUT By InValid Program Name request created");
@@ -444,9 +456,9 @@ public class ProgramSteps {
 	      excelDataMap = ExcelReader.getData(dataKey, sheetName);
 	      
 	      if (null != excelDataMap && excelDataMap.size() > 0) {
-	    	  	String pgmNameE = excelDataMap.get("ProgramName");
-		        String pgmStatusE = excelDataMap.get("ProgramStatus");
-		        String pgmDescE = excelDataMap.get("ProgramDesc");
+	    	  	String pgmNameM = programName2;
+		        String pgmStatusM = null;
+		        String pgmDescM = null;
 	  
 				/*  AddProgramRequest addpgm;
 			    String pgmName =" " , pgmStatus = " ", pgmdesc= " ";
@@ -456,9 +468,9 @@ public class ProgramSteps {
 			   JSONObject body = new JSONObject();
 			    //body.put("programId", " ");
 				body.put("programName", " ");
-				 body.put("programDescription", " ");
-				 body.put("programDescription", " ");
-			    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putByName")+"JUL23-JAN-Turtle00");
+				 body.put("programDescription", pgmDescM);
+				 body.put("programStatus", pgmStatusM);
+			    resp = requestSpec.body(body).put(ConfigReader.getProperty("pgm.putByName")+pgmNameM);
 			    
 			    //System.out.println("RESPONSE BODY__**>>"+resp.body());
 			    //String jsonString = resp.asString();
@@ -480,18 +492,23 @@ public class ProgramSteps {
 			  switch(KeyOption)
 			  {
 			  case "putNameValid":
+				  Program programResponse = resp.getBody().as(Program.class);
+			      	updatedId2 = programResponse.programId;
+			      	updatedName2 = programResponse.programName;
 				  System.out.println("Status code--->" + resp.statusCode());
-				  resp.then().assertThat().statusCode(200);
-				  //.contentType(ContentType.JSON);
-			       // .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
-			  break;
+				  resp.then().assertThat().statusCode(200)
+				  .contentType(ContentType.JSON)
+			        .body(JsonSchemaValidator.matchesJsonSchema( getClass().getClassLoader().getResourceAsStream("getPgmbyIdjsonschema.json")));
+				  
+				  
+				  break;
 			  case "putNameInvalid":
 				  System.out.println("Status code--->" + resp.statusCode());
 			      resp.then().assertThat().statusCode(404); // Not Found
 			  break;
 			  case "putNameMissing":
 				  System.out.println("Status code--->" + resp.statusCode());
-				  resp.then().assertThat().statusCode(500);  // BAD Response
+				  resp.then().assertThat().statusCode(400);  // BAD Response
 			  break;
 			  }
 			  LoggerLoad.logInfo("PUT By valid,invalid and missing ProgramName  request validated");
@@ -521,7 +538,7 @@ public class ProgramSteps {
 		      {
 		      
 		      case "Delete_pgmNamevalid":		    	  
-			    	  String pgmNamevalid = excelDataMap.get("ProgramName");
+			    	 String pgmNamevalid = updatedName1;
 					//String deletePgmName= pgmName;
 					System.out.println("PGMName for DELETE->"+pgmNamevalid);
 					resp= requestSpec.delete(ConfigReader.getProperty("pgm.deleteByNme")+pgmNamevalid);    ////capture response from Delete request		    
@@ -583,25 +600,26 @@ public class ProgramSteps {
 	 
 	@When("User sends DELETE Request with valid ProgramID")
 	public void user_sends_delete_request_with_valid_ProgramID() {
-		
-		Integer getPgmId=0;
-		resp = requestSpec.when().get(ConfigReader.getProperty("pgm.getall"));		
-		
-			JsonPath jsonPathEvaluator = resp.jsonPath();				
-			List<Program> allpgms = jsonPathEvaluator.getList("", Program.class);
-			for(Program pro : allpgms)
+			try
 			{
-				if(pro.programName.equalsIgnoreCase("JUL-23-RESTAPI-Turtle02_New")) {
-					getPgmId= pro.programId;
+					Integer getPgmId = updatedId2;
 					System.out.println("ID FOR DELETE->"+getPgmId);
-					System.out.println("PgmName FOR DELETE->"+pro.programName);
+					System.out.println("PgmName FOR DELETE->"+updatedName2);
 					resp= requestSpec.delete(ConfigReader.getProperty("pgm.deletebyId")+getPgmId);					
-				}			
-			}
+							
+			
 			LoggerLoad.logInfo("DELETE by valid Program Id response created");
+			}
+			catch (Exception ex) 
+			{
+					LoggerLoad.logInfo(ex.getMessage());
+					ex.printStackTrace();
+			}
 	}
 	@Then("User receives status for valid  Programid for ProgramModule")
 	public void user_receives_status_as_with_valid_Programid() {
+		try
+		{
 			System.out.println("Status code--->" + resp.statusCode());
 			String jsonString =resp.asString();
 			System.out.println("Json String After DELETE Command--->"+jsonString);
@@ -610,9 +628,17 @@ public class ProgramSteps {
 			.statusCode(200);		
 			assertEquals(jsonString.contains("deleted Successfully!"), true);	
 			LoggerLoad.logInfo("DELETE by valid Program Id response validated");
+		}
+		catch (Exception ex) 
+		{
+				LoggerLoad.logInfo(ex.getMessage());
+				ex.printStackTrace();
+		}
 	}
 	@When("User sends DELETE Request with invalid ProgramID")
 	public void user_sends_delete_request_with_invalid_ProgramID() {
+		try
+		{
 			Integer getPgmId=20;
 			//System.out.println("static id-->"+PgmIDForDelete);
 			// resp = requestSpec.queryParam("programName", "JUL-23-RESTAPI-Turtle02").when().get("/allPrograms");
@@ -620,11 +646,18 @@ public class ProgramSteps {
 			System.out.println("ID FOR DELETE->"+getPgmId);
 			resp= requestSpec.delete(ConfigReader.getProperty("pgm.deletebyId")+getPgmId);
 			LoggerLoad.logInfo("DELETE by invalid Program Id response created");
+		}
+		catch (Exception ex) 
+		{
+				LoggerLoad.logInfo(ex.getMessage());
+				ex.printStackTrace();
+		}
 	}
 
 	@Then("User receives status for invalid  Programid for ProgramModule")
 	public void user_receives_status_as_with_Programid_invalid() {
-			
+		try
+		{
 			System.out.println("Status code--->" + resp.statusCode());
 			String jsonString =resp.asString();
 			System.out.println("Json String After DELETE Command--->"+jsonString);
@@ -633,6 +666,12 @@ public class ProgramSteps {
 			.statusCode(404);		
 			assertEquals(jsonString.contains("no record found"), true);	
 			LoggerLoad.logInfo("DELETE by invalid Program Id response validate");
+		}
+		catch (Exception ex) 
+		{
+				LoggerLoad.logInfo(ex.getMessage());
+				ex.printStackTrace();
+		}
 	}	
 }
 
